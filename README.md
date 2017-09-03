@@ -6,13 +6,14 @@ The purpose of this tool is to train a machine to read, write, edit and publish 
 It is also to be the python implementation of wordsum-java
 
 ## Use Cases Being Developed:
-1. Using a CNN to classify dialog of a character modelled by wordsum.
+1. Using a CNN to classify dialog of a character modeled by wordsum.
 
 2. Using word2vec to plot story plot.
 
 
 ## Tools:
 Python3 3.5
+
 TensorFlow 1.3
 
 
@@ -30,7 +31,7 @@ data/ is a directory to contain any test data or output data before it is put
 data/model/ is a directory to output model checkout points before they are put in to
         containers.
 
-data/test/ is a dictory of wordsum modelled test data. The file hierarchy may get
+data/test/ is a directory of wordsum modeled test data. The file hierarchy may get
         deeper as more test are had.
 
 doc/ is a directory for documents.
@@ -90,6 +91,4 @@ There is not testing right now because there is not much to test right now.
 1. Test requirements.txt
 
 2. Test everything...
-
-
 

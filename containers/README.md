@@ -16,7 +16,9 @@ A container with a standard user wordsum that has a root directory call 'models'
 This should allow for the distribution of the models too.
 
 Automation steps define in these steps (TODO: automate):
+
 	1. https://www.digitalocean.com/community/tutorials/how-to-work-with-docker-data-volumes-on-ubuntu-14-04
+
 	2. https://stackoverflow.com/questions/44480740/how-to-saving-a-docker-container-state
 
 ## Dockerfile.worsum (underconstriction)
