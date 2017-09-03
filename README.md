@@ -1,35 +1,45 @@
 # wordsum-python
 
-
-se:
+## Purpose:
 The purpose of this tool is to train a machine to read, write, edit and publish fiction stories.
 
+It is also to be the python implementation of wordsum-java
 
-Tools:
+## Use Cases Being Developed:
+1. Using a CNN to classify dialog of a character modelled by wordsum.
+
+2. Using word2vec to plot story plot.
+
+
+## Tools:
 Python3 3.5
 TensorFlow 1.3
 
 
-Source Structure:
+## Source Structure:
 
-README.md
-LICENCE
-setup.py
-requirements.txt
-wordsum/
-tests/
-data
-data/test
-doc/README.md
-containers/README.md
+wordsum/ is root level of the source. It is intended that the source structure will
+        loosely mirror wordsum-java, it will for now be shallow and allow to
+        see where the code writes.
 
+tests/ is root level of the tests for the wordsum python code.
 
+data/ is a directory to contain any test data or output data before it is put
+        into a container image for archive.
 
+data/model/ is a directory to output model checkout points before they are put in to
+        containers.
 
+data/test/ is a dictory of wordsum modelled test data. The file hierarchy may get
+        deeper as more test are had.
 
-# Local Setup
+doc/ is a directory for documents.
 
-## Local Setup on MacOS with Python3 and virtualenv:
+containers/ is a directory containing the Dockerfiles.
+
+## Local Setup:
+
+### Local Setup on MacOS with Python3 and virtualenv:
 
 1. git clone <source>
 
@@ -54,7 +64,7 @@ containers/README.md
 11. wait for Tensorflow to say 'Hi'. If it doesn't then something is wrong.
 
 
-## Local Setup on Ubuntu with Python3 and virtualenv:
+### Local Setup on Ubuntu with Python3 and virtualenv:
 
 1. git clone <source>
 
@@ -73,8 +83,13 @@ containers/README.md
 8. wait for TensorFlow to say 'Hi'. If it doesn't then something is wrong.
 
 
+## Testing:
+There is not testing right now because there is not much to test right now.
+
+## ToDo:
+1. Test requirements.txt
+
+2. Test everything...
 
 
 
-
-Testing:
