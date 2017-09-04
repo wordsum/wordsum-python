@@ -58,7 +58,7 @@ containers/ is a directory containing the Dockerfiles.
 
 8. source ./bin/activate
 
-9. pip3 install --upgrade tensorflow
+9. pip3 install -r requirements.txt
 
 10. python tensor_install_test.py
 
@@ -77,7 +77,7 @@ containers/ is a directory containing the Dockerfiles.
 
 5. source ./bin/activate
 
-6. pip3 install --upgrade tensorflow
+6. pip3 install -r requirements.txt
 
 7. python tensor_install_test.py
 
@@ -88,7 +88,4 @@ containers/ is a directory containing the Dockerfiles.
 There is not testing right now because there is not much to test right now.
 
 ## ToDo:
-1. Test requirements.txt
-
-2. Test everything...
-
+1. Test everything...
