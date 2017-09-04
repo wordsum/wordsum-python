@@ -1,0 +1,19 @@
+# Misc.
+*~
+*.swp
+build/
+.idea/
+*.iml
+*.iml*
+.jar
+*.autosave
+
+
+
+# Python virutalenv
+bin/*
+include/*
+lib/*
+pip-selfcheck.json
+
+
