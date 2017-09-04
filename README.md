@@ -5,14 +5,15 @@ The purpose of this tool is to train a machine to read, write, edit and publish 
 
 It is also to be the python implementation of wordsum-java
 
-## Use Cases Being Developed:
-1. Using a CNN to classify dialog of a character modeled by wordsum.
+## Models Being Developed:
+1. Using word2vec to model plot.
 
-2. Using word2vec to plot story plot.
+2. Using a CNN to classify dialog of a character modeled by wordsum.
 
+3. Using an LSTM to model syntax (so one could train and create the regex to parse text for wordsum text model).
 
 ## Tools:
-Python3 3.5
+Python3 3.6.1
 
 TensorFlow 1.3
 
