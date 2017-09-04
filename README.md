@@ -60,7 +60,7 @@ containers/ is a directory containing the Dockerfiles.
 
 9. pip3 install -r requirements.txt
 
-10. python tensor_install_test.py
+10. python3 test/test_tensor_install.py
 
 11. wait for Tensorflow to say 'Hi'. If it doesn't then something is wrong.
 
@@ -79,7 +79,7 @@ containers/ is a directory containing the Dockerfiles.
 
 6. pip3 install -r requirements.txt
 
-7. python tensor_install_test.py
+7. python3 test/test_tensor_install.py
 
 8. wait for TensorFlow to say 'Hi'. If it doesn't then something is wrong.
 
