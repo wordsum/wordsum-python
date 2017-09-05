@@ -8,7 +8,7 @@ build/
 *.jar
 *.autosave
 *.zip
-
+*.png
 
 # Python virutalenv
 bin/*

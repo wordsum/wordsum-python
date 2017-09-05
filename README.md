@@ -42,7 +42,7 @@ containers/ is a directory containing the Dockerfiles.
 ## Local Setup:
 
 ### Local Setup on MacOS with Python3 and virtualenv:
-
+TODO: TEST MAC STEPS AGAIN!
 1. git clone <source>
 
 2. cd <source>
@@ -53,7 +53,7 @@ containers/ is a directory containing the Dockerfiles.
 
 5. (if brew and python3 not installed) ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-6. (if python3 not installed) brew install python3
+6. (if python3 not installed) brew install python3 --with-tcl-tk
 
 7. virtualenv --system-site-packages -p python3 .
 
@@ -72,7 +72,7 @@ containers/ is a directory containing the Dockerfiles.
 
 2. cd <source>
 
-3. (if pip and virtualenv not installed) sudo apt-get install python3-pip python3-dev python-virtualenv
+3. (if pip and virtualenv not installed) sudo apt-get install python3-pip python3-dev python-virtualenv python3.6-tk
 
 4. virtualenv --system-site-packages -p python3 .
 
