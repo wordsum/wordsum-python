@@ -26,7 +26,6 @@ import zipfile
 
 import numpy as np
 import urllib
-import range
 import tensorflow as tf
 
 # Step 1: Download the data.
