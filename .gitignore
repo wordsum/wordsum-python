@@ -5,9 +5,9 @@ build/
 .idea/
 *.iml
 *.iml*
-.jar
+*.jar
 *.autosave
-
+*.zip
 
 
 # Python virutalenv
