@@ -203,13 +203,17 @@ with tf.Session(graph=graph) as session:
     # We must initialize all variables before we use them.
     init.run()
     print('Initialized')
+    print('Number of steps:', num_steps)
 
     average_loss = 0
     for step in range(num_steps):
+        print("Step", step)
         batch_inputs, batch_labels = generate_batch(
             batch_size, num_skips, skip_window)
         feed_dict = {train_inputs: batch_inputs, train_labels: batch_labels}
 
+        print("Batch inputs:", batch_inputs)
+        print("Feed dictionary", feed_dict)
         # We perform one update step by evaluating the optimizer op (including it
         # in the list of returned values for session.run()
         _, loss_val = session.run([optimizer, loss], feed_dict=feed_dict)
