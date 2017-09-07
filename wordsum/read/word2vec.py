@@ -60,36 +60,8 @@ def read_data(filename):
         data = tf.compat.as_str(f.read(f.namelist()[0])).split()
     return data
 '''
-
 # Default now I'll start local
-filename = "text8"
-
-'''
-Chapter 0001 after these operations performed
-sed -i 's/\\n\\n/ /g' 0001.txt
-sed -i 's/\\u0027//g' 0001.txt
-sed -i 's/\\u003c/ /g' 0001.txt
-sed -i 's/\\u003e//g' 0001.txt
-sed -i 's/|//g' 0001.txt
-sed -i 's/,,//g' 0001.txt
-sed -i 's/...//g' 0001.txt
-sed -i 's/\.\.\.//g' 0001.txt
-sed -i 's/\.//g' 0001.txt
-sed -i 's/,//g' 0001.txt
-sed -i 's/://g' 0001.txt
-sed -i 's/;//g' 0001.txt
-sed -i 's/?//g' 0001.txt
-sed -i 's/.*/\L&/g' 0001.txt
-'''
-filename = "0001.txt"
-
-f = open(filename, encoding='utf-8')
-
-vocabulary = tf.compat.as_str(f.read()).split()
-print('Data size', len(vocabulary))
-
-# Step 2: Build the dictionary and replace rare words with UNK token.
-vocabulary_size = 500
+#filename = "text8"
 
 
 def build_dataset(words, n_words):
@@ -112,16 +84,6 @@ def build_dataset(words, n_words):
     reversed_dictionary = dict(zip(dictionary.values(), dictionary.keys()))
     return data, count, dictionary, reversed_dictionary
 
-
-data, count, dictionary, reverse_dictionary = build_dataset(vocabulary,
-                                                            vocabulary_size)
-del vocabulary  # Hint to reduce memory.
-print('Most common words (+UNK)', count[:5])
-print('Sample data', data[:10], [reverse_dictionary[i] for i in data[:10]])
-
-data_index = 0
-
-# Step 3: Function to generate a training batch for the skip-gram model.
 def generate_batch(batch_size, num_skips, skip_window):
     global data_index
     assert batch_size % num_skips == 0
@@ -157,6 +119,59 @@ def generate_batch(batch_size, num_skips, skip_window):
     return batch, labels
 
 
+def plot_with_labels(low_dim_embs, labels, filename='tsne.png'):
+    assert low_dim_embs.shape[0] >= len(labels), 'More labels than embeddings'
+    plt.figure(figsize=(18, 18))  # in inches
+    for i, label in enumerate(labels):
+        x, y = low_dim_embs[i, :]
+        print("Label:", label, " X: ", x, " Y:", y)
+        plt.scatter(x, y)
+        plt.annotate(label,
+                     xy=(x, y),
+                     xytext=(5, 2),
+                     textcoords='offset points',
+                     ha='right',
+                     va='bottom')
+
+    plt.savefig(filename)
+
+
+'''
+Chapter 0001 after these operations performed
+sed -i 's/\\n\\n/ /g' 0001.txt
+sed -i 's/\\u0027//g' 0001.txt
+sed -i 's/\\u003c/ /g' 0001.txt
+sed -i 's/\\u003e//g' 0001.txt
+sed -i 's/|//g' 0001.txt
+sed -i 's/,,//g' 0001.txt
+sed -i 's/...//g' 0001.txt
+sed -i 's/\.\.\.//g' 0001.txt
+sed -i 's/\.//g' 0001.txt
+sed -i 's/,//g' 0001.txt
+sed -i 's/://g' 0001.txt
+sed -i 's/;//g' 0001.txt
+sed -i 's/?//g' 0001.txt
+sed -i 's/.*/\L&/g' 0001.txt
+'''
+filename = "0001.txt"
+
+f = open(filename, encoding='utf-8')
+
+vocabulary = tf.compat.as_str(f.read()).split()
+print('Data size', len(vocabulary))
+
+# Step 2: Build the dictionary and replace rare words with UNK token.
+vocabulary_size = 500
+
+data, count, dictionary, reverse_dictionary = build_dataset(vocabulary,
+                                                            vocabulary_size)
+del vocabulary  # Hint to reduce memory.
+#print('Most common words (+UNK)', count[:5])
+#print('Sample data', data[:10], [reverse_dictionary[i] for i in data[:10]])
+
+data_index = 0
+
+# Step 3: Function to generate a training batch for the skip-gram model.
 batch, labels = generate_batch(batch_size=8, num_skips=2, skip_window=1)
 for i in range(8):
     print(batch[i], reverse_dictionary[batch[i]],
@@ -164,8 +179,8 @@ for i in range(8):
 
 # Step 4: Build and train a skip-gram model.
 
-batch_size = 32
-embedding_size = 32  # Dimension of the embedding vector.
+batch_size = 128
+embedding_size = 128  # Dimension of the embedding vector.
 skip_window = 1  # How many words to consider left and right.
 num_skips = 2  # How many times to reuse an input to generate a label.
 
@@ -265,31 +280,15 @@ with tf.Session(graph=graph) as session:
     final_embeddings = normalized_embeddings.eval()
 
 # Step 6: Visualize the embeddings.
-
-
-def plot_with_labels(low_dim_embs, labels, filename='tsne.png'):
-    assert low_dim_embs.shape[0] >= len(labels), 'More labels than embeddings'
-    plt.figure(figsize=(18, 18))  # in inches
-    for i, label in enumerate(labels):
-        x, y = low_dim_embs[i, :]
-        print("Label:", label, " X: ", x, " Y:", y)
-        plt.scatter(x, y)
-        plt.annotate(label,
-                     xy=(x, y),
-                     xytext=(5, 2),
-                     textcoords='offset points',
-                     ha='right',
-                     va='bottom')
-
-    plt.savefig(filename)
-
-
-
 tsne = TSNE(perplexity=30, n_components=2, init='pca', n_iter=5000, method='exact')
 plot_only = 500
 low_dim_embs = tsne.fit_transform(final_embeddings[:plot_only, :])
 labels = [reverse_dictionary[i] for i in range(plot_only)]
 plot_with_labels(low_dim_embs, labels)
+
+
+
+
 
 
 
