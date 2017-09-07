@@ -29,22 +29,21 @@ import matplotlib.pyplot as plt
 
 def build_dataset(words, n_words):
     """Process raw inputs into a dataset."""
-    count = []
-    count.extend(collections.Counter(words).most_common(n_words))
+    count = [['UNK', -1]]
+    count.extend(collections.Counter(words).most_common(n_words - 1))
     dictionary = dict()
     for word, _ in count:
         dictionary[word] = len(dictionary)
     data = list()
-    #unk_count = 0
+    unk_count = 0
     for word in words:
         if word in dictionary:
             index = dictionary[word]
         else:
-            print("I don't have enough data to need to optimize.")
             index = 0  # dictionary['UNK']
-            #unk_count += 1
+            unk_count += 1
         data.append(index)
-    #count[0][1] = unk_count
+    count[0][1] = unk_count
     reversed_dictionary = dict(zip(dictionary.values(), dictionary.keys()))
     return data, count, dictionary, reversed_dictionary
 
@@ -125,7 +124,7 @@ vocabulary = tf.compat.as_str(f.read()).split()
 print('Data size', len(vocabulary))
 
 # Step 2: Build the dictionary and replace rare words with UNK token.
-vocabulary_size = 500
+vocabulary_size = 1000
 
 data, count, dictionary, reverse_dictionary = build_dataset(vocabulary,
                                                             vocabulary_size)
@@ -136,7 +135,7 @@ del vocabulary  # Hint to reduce memory.
 data_index = 0
 
 # Step 3: Function to generate a training batch for the skip-gram model.
-batch, labels = generate_batch(batch_size=8, num_skips=2, skip_window=1)
+batch, labels = generate_batch(batch_size=8, num_skips=2, skip_window=3)
 for i in range(8):
     print(batch[i], reverse_dictionary[batch[i]],
           '->', labels[i, 0], reverse_dictionary[labels[i, 0]])
@@ -145,7 +144,7 @@ for i in range(8):
 
 batch_size = 128
 embedding_size = 128  # Dimension of the embedding vector.
-skip_window = 2  # How many words to consider left and right.
+skip_window = 3  # How many words to consider left and right.
 num_skips = 2  # How many times to reuse an input to generate a label.
 
 # We pick a random validation set to sample nearest neighbors. Here we limit the
