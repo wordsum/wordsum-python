@@ -30,6 +30,8 @@ import tensorflow as tf
 from sklearn.manifold import TSNE
 import matplotlib.pyplot as plt
 
+'''
+Keep for now but delete soon.
 # Step 1: Download the data.
 url = 'http://mattmahoney.net/dc/'
 
@@ -48,7 +50,7 @@ def maybe_download(filename, expected_bytes):
     return filename
 
 
-filename = maybe_download('text8.zip', 5813)
+filename = maybe_download('text8.zip', 31344016)
 
 
 # Read the data into a list of strings.
@@ -57,13 +59,37 @@ def read_data(filename):
     with zipfile.ZipFile(filename) as f:
         data = tf.compat.as_str(f.read(f.namelist()[0])).split()
     return data
+'''
 
+# Default now I'll start local
+filename = "text8"
 
-vocabulary = read_data(filename)
+'''
+Chapter 0001 after these operations performed
+sed -i 's/\\n\\n/ /g' 0001.txt
+sed -i 's/\\u0027//g' 0001.txt
+sed -i 's/\\u003c/ /g' 0001.txt
+sed -i 's/\\u003e//g' 0001.txt
+sed -i 's/|//g' 0001.txt
+sed -i 's/,,//g' 0001.txt
+sed -i 's/...//g' 0001.txt
+sed -i 's/\.\.\.//g' 0001.txt
+sed -i 's/\.//g' 0001.txt
+sed -i 's/,//g' 0001.txt
+sed -i 's/://g' 0001.txt
+sed -i 's/;//g' 0001.txt
+sed -i 's/?//g' 0001.txt
+sed -i 's/.*/\L&/g' 0001.txt
+'''
+filename = "0001.txt"
+
+f = open(filename, encoding='utf-8')
+
+vocabulary = tf.compat.as_str(f.read()).split()
 print('Data size', len(vocabulary))
 
 # Step 2: Build the dictionary and replace rare words with UNK token.
-vocabulary_size = 50000
+vocabulary_size = 500
 
 
 def build_dataset(words, n_words):
@@ -89,7 +115,7 @@ def build_dataset(words, n_words):
 
 data, count, dictionary, reverse_dictionary = build_dataset(vocabulary,
                                                             vocabulary_size)
-#del vocabulary  # Hint to reduce memory.
+del vocabulary  # Hint to reduce memory.
 print('Most common words (+UNK)', count[:5])
 print('Sample data', data[:10], [reverse_dictionary[i] for i in data[:10]])
 
@@ -120,7 +146,8 @@ def generate_batch(batch_size, num_skips, skip_window):
             batch[i * num_skips + j] = buffer[skip_window]
             labels[i * num_skips + j, 0] = buffer[target]
         if data_index == len(data):
-            buffer[:] = data[:span]
+            for word in data[:span]:
+                buffer.append(word)
             data_index = span
         else:
             buffer.append(data[data_index])
@@ -137,8 +164,8 @@ for i in range(8):
 
 # Step 4: Build and train a skip-gram model.
 
-batch_size = 128
-embedding_size = 128  # Dimension of the embedding vector.
+batch_size = 32
+embedding_size = 32  # Dimension of the embedding vector.
 skip_window = 1  # How many words to consider left and right.
 num_skips = 2  # How many times to reuse an input to generate a label.
 
@@ -203,17 +230,14 @@ with tf.Session(graph=graph) as session:
     # We must initialize all variables before we use them.
     init.run()
     print('Initialized')
-    print('Number of steps:', num_steps)
 
     average_loss = 0
     for step in range(num_steps):
-        print("Step", step)
+        #print("Step", step)
         batch_inputs, batch_labels = generate_batch(
             batch_size, num_skips, skip_window)
         feed_dict = {train_inputs: batch_inputs, train_labels: batch_labels}
 
-        print("Batch inputs:", batch_inputs)
-        print("Feed dictionary", feed_dict)
         # We perform one update step by evaluating the optimizer op (including it
         # in the list of returned values for session.run()
         _, loss_val = session.run([optimizer, loss], feed_dict=feed_dict)
@@ -266,6 +290,8 @@ plot_only = 500
 low_dim_embs = tsne.fit_transform(final_embeddings[:plot_only, :])
 labels = [reverse_dictionary[i] for i in range(plot_only)]
 plot_with_labels(low_dim_embs, labels)
+
+
 
 
 
