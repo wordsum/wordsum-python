@@ -29,21 +29,22 @@ import matplotlib.pyplot as plt
 
 def build_dataset(words, n_words):
     """Process raw inputs into a dataset."""
-    count = [['UNK', -1]]
-    count.extend(collections.Counter(words).most_common(n_words - 1))
+    count = []
+    count.extend(collections.Counter(words).most_common(n_words))
     dictionary = dict()
     for word, _ in count:
         dictionary[word] = len(dictionary)
     data = list()
-    unk_count = 0
+    #unk_count = 0
     for word in words:
         if word in dictionary:
             index = dictionary[word]
         else:
+            print("I don't have enough data to need to optimize.")
             index = 0  # dictionary['UNK']
-            unk_count += 1
+            #unk_count += 1
         data.append(index)
-    count[0][1] = unk_count
+    #count[0][1] = unk_count
     reversed_dictionary = dict(zip(dictionary.values(), dictionary.keys()))
     return data, count, dictionary, reversed_dictionary
 
@@ -144,7 +145,7 @@ for i in range(8):
 
 batch_size = 128
 embedding_size = 128  # Dimension of the embedding vector.
-skip_window = 1  # How many words to consider left and right.
+skip_window = 2  # How many words to consider left and right.
 num_skips = 2  # How many times to reuse an input to generate a label.
 
 # We pick a random validation set to sample nearest neighbors. Here we limit the
