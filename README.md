@@ -86,7 +86,8 @@ TODO: TEST MAC STEPS AGAIN!
 
 
 ## Testing:
-There is not testing right now because there is not much to test right now.
+1  cd <source>
+2. pytest test/test_etl4vec.py
 
 ## ToDo:
 1. Test everything...
