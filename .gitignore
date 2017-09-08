@@ -9,7 +9,10 @@ build/
 *.autosave
 *.zip
 *.png
+.cache/
 
+# Python stuff
+*__pycache__*
 # Python virutalenv
 bin/*
 include/*
