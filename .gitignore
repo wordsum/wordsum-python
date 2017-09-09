@@ -19,4 +19,5 @@ include/*
 lib/*
 pip-selfcheck.json
 
-
+# don't add models to this base.
+data/models
