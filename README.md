@@ -80,9 +80,11 @@ TODO: TEST MAC STEPS AGAIN!
 
 6. pip3 install -r requirements.txt
 
-7. python3 test/test_tensor_install.py
+7. python3 -m spacy.en.download all
 
-8. wait for TensorFlow to say 'Hi'. If it doesn't then something is wrong.
+8. python3 test/test_tensor_install.py
+
+9. wait for TensorFlow to say 'Hi'. If it doesn't then something is wrong.
 
 
 ## Testing:
