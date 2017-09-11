@@ -1,7 +1,7 @@
 '''
 Tests to test gensim.
 '''
-import wordsum.read.gensim2vec as gensim2vec
+import wordsum.read.utils.gensim2vec as gensim2vec
 
 
 def test_train_sentences():
