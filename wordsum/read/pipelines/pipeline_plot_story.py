@@ -3,16 +3,24 @@ Pipeline to plot story per chapter then as an entire book and use the distance o
 the story.
 
 '''
-# Get the wordsum model of the chapter and return the narrator strings.
+import wordsum.read.utils.gensim2vec as gensim2vec
+import wordsum.read.utils.etl4vec as etl4vec
+import logging
+import json
 
 
-# ETL the strings here or before. I need to reason when to ETL. Should I make it a flag.
+def process(file, path_model_dump):
+    logging.debug("pipeline_plot_story: Beginning.")
+
+    with open(file) as data_file:
+        text_model = json.load(data_file)
+
+    story = etl4vec.get_text_model_narrator_paragraphs(text_model)
+
+    etl4vec.replace_punctuation_story(story)
+
+    return story
 
 
-# Input the data into word
 
 
-# Save the model locally
-
-
-# Save to container and push as an option.
