@@ -6,38 +6,47 @@ import logging
 
 
 '''
-groom_string4vec = returns groom str_obj.
-
-Groom the known marks outputted by wordsum-java.
-
-Remove marks until I can reason how to include them into
-a version of word2vec. For now, the marks attaching to letters
-decrease accuracy as it will prevent the Counting of all the same
-words altered with a period or comma.
-
-There's is a better way using a list and iterating over it, or a map
-but right now I can move on.
+Replace punctuation.
 '''
-def groom_string4vec(str_obj):
-    logging.debug("Grooming :", str_obj)
+def replace_punctuation_sentence(sentence):
+    logging.debug("Grooming :", sentence)
+
+    list_replace_no_space = ['\\u0027','\\u003c','\\u003e','|','.',',',':',';','?','<','>']
+
+    for item in list_replace_no_space:
+        sentence = sentence.replace(item, '')
+
+    list_replace = ['\\n','...']
+
+    for item in list_replace:
+        sentence = sentence.replace(item, ' ')
+
+    sentence = sentence.lower()
+
+    return sentence
 
 
-    str_obj=str_obj.replace("\\n", " ")
-    str_obj=str_obj.replace("...", " ")
-    str_obj=str_obj.replace("\\u0027", "")
-    str_obj=str_obj.replace("\\u003c", "")
-    str_obj=str_obj.replace("\\u003e", "")
-    str_obj=str_obj.replace("|", "")
-    str_obj=str_obj.replace(".", "")
-    str_obj=str_obj.replace(",", "")
-    str_obj=str_obj.replace(":","")
-    str_obj=str_obj.replace(";","")
-    str_obj=str_obj.replace("?","")
+'''
+Replace punctuation in a paragraph
+'''
+def replace_punctuation_paragraph(paragraph):
+    logging.debug('replacing patterns in paragraph.')
 
-    str_obj=str_obj.lower()
+    for i, s in enumerate(paragraph):
+        paragraph[i] = replace_punctuation_sentence(s)
 
-    return str_obj
+    return paragraph
 
+'''
+Replace punctuation in a story
+'''
+def replace_punctuation_story(story):
+    logging.debug("replace punctuation in story.")
+
+    for i, p in enumerate(story):
+        story[i] = replace_punctuation_paragraph(p)
+
+    return story
 
 '''
 Get and check the file state is it has all the data for the word2vec.

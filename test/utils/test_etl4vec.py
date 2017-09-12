@@ -3,10 +3,22 @@ Tests for wordsum.read.etl4vec
 '''
 
 import json
-
 import pytest
 import wordsum.read.utils.etl4vec
 import os
+
+TEST_PARAGRAPH = ['This leads to a paragraph\\n\\nThis leads TO\\u0027 and\\u003c or this ',
+               '\\u003eand talking To the| for comma ,,Mistake in misunderstanding this...Or. OR,',
+               ' when to end the sentence: to point right here in a series; another series?']
+
+RETURN_PARAGRAPH = ['this leads to a paragraph  this leads to and or this ',
+                  'and talking to the for comma mistake in misunderstanding this or or'
+                  ' when to end the sentence to point right here in a series another series']
+
+TEST_STORY = [TEST_PARAGRAPH, TEST_PARAGRAPH]
+
+RETURN_STORY = [RETURN_PARAGRAPH, RETURN_PARAGRAPH]
+
 
 
 @pytest.fixture
@@ -21,23 +33,36 @@ def test_text_model():
     return test_text_model
 
 
-def test_groom_string4vec():
+def test_replace_punctuation_sentence():
 
-    test_string = ("This leads to a paragraph\\n\\nThis leads TO\\u0027 and\\u003c or this "
-                  "\\u003eand talking To the| for comma ,,Mistake in misunderstanding this...Or. OR,"
-                  " when to end the sentence: to point right here in a series; another series?"
-    )
 
-    groomed_string = ("this leads to a paragraph  this leads to and or this and talking to the for comma mistake in "
-                  "misunderstanding this or or when to end the sentence to point right here in a series another series")
+    sentence = wordsum.read.utils.etl4vec.replace_punctuation_sentence(TEST_PARAGRAPH[0])
 
-    return_string = wordsum.read.utils.etl4vec.groom_string4vec(test_string)
+    print("THE RETURN:", sentence)
+    print("THE ORIGINAL:", TEST_PARAGRAPH[0])
 
-    print("THE RETURN:", return_string)
-    print("THE ORIGINAL:", test_string)
+    assert TEST_PARAGRAPH[0] != sentence
+    assert RETURN_PARAGRAPH[0] == sentence
 
-    assert test_string != return_string
-    assert groomed_string == return_string
+
+def test_replace_punctuation_paragraph():
+
+
+    wordsum.read.utils.etl4vec.replace_punctuation_paragraph(TEST_PARAGRAPH)
+
+    print("THE RETURN:", RETURN_PARAGRAPH)
+    print("THE ORIGINAL:", TEST_PARAGRAPH)
+
+    assert TEST_PARAGRAPH[0] == RETURN_PARAGRAPH[0]
+
+
+def test_replace_punctuation_story():
+
+    wordsum.read.utils.etl4vec.replace_punctuation_story(TEST_STORY)
+
+    assert TEST_PARAGRAPH[0][0] == RETURN_PARAGRAPH[0][0]
+
+
 
 def test_get_file_state_value():
 
