@@ -12,6 +12,6 @@ def test_train_sentences():
 
     print(model.wv['A'])
 
-    assert  model!=None
+    assert  model!= None
 
 

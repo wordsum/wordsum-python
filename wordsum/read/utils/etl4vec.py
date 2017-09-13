@@ -3,6 +3,7 @@ Functions to read a wordsum text model and create data for word2vec.py and begin
 to create teh story model.
 '''
 import logging
+import itertools
 
 
 '''
@@ -92,6 +93,19 @@ def list_sentences_in_story(story):
 
     return story
 
+
+'''
+Make a list with all story lists into one.
+'''
+def list_story_lists(story):
+    logging.debug("list_story lists")
+
+    if story is not None:
+        story_list = list(itertools.chain.from_iterable(story))
+
+    return story_list
+
+
 '''
 G E T    D A T A   F R O M   W O R D S U M
 '''
@@ -154,5 +168,6 @@ def get_paragraph_model_dialog_sentences(paragraph_model):
             paragraph.append(sentence_model['sentence'])
 
     return paragraph
+
 
 

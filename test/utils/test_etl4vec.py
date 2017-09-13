@@ -41,6 +41,15 @@ TEST_LIST_STORY = [['this leads to a paragraph  this leads to and or this ',
                     'and talking to the for comma mistake in misunderstanding this or or'
                     ' when to end the sentence to point right here in a series another series']]
 
+
+TEST_LISTS_STORY = [[['this', 'leads', 'to', 'a', 'paragraph', 'this', 'leads', 'to', 'and', 'or', 'this'],
+                     ['and', 'talking', 'to', 'the', 'for', 'comma', 'mistake', 'in', 'misunderstanding', 'this', 'or',
+                      'or', 'when', 'to', 'end', 'the', 'sentence', 'to', 'point', 'right', 'here', 'in', 'a', 'series', 'another', 'series']],
+                    [['this', 'leads', 'to', 'a', 'paragraph', 'this', 'leads', 'to', 'and', 'or', 'this'],
+                     ['and', 'talking', 'to', 'the', 'for', 'comma', 'mistake', 'in', 'misunderstanding', 'this', 'or',
+                      'or', 'when', 'to', 'end', 'the', 'sentence', 'to', 'point', 'right', 'here', 'in', 'a', 'series', 'another', 'series']]]
+
+
 TEST_SENTENCE_LIST_COMPARE = ['this', 'leads', 'to', 'a', 'paragraph', 'this', 'leads', 'to', 'and', 'or', 'this']
 
 
@@ -109,6 +118,13 @@ def test_list_sentences_in_story():
     print("AFTER FUNCTION:", TEST_LIST_STORY)
 
     assert TEST_SENTENCE_LIST_COMPARE == TEST_LIST_STORY[0][0]
+
+
+def test_list_story_lists():
+
+    story_list = wordsum.read.utils.etl4vec.list_story_lists(TEST_LISTS_STORY)
+
+    assert TEST_LISTS_STORY[0][0] == story_list[0]
 
 '''
 T E S T S   T O   G E T   F I  L E   S T A T E   D A T A

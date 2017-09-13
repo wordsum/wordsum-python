@@ -11,8 +11,7 @@ def test_process():
 
     story = pipeline_plot_story.process(TEST_FILE, TEST_LOCAL_MODEL_DUMP)
 
-
-    assert "towel around neck is" == story[0][0]
+    assert ['towel', 'around', 'neck', 'is'] == story[0]
 
 
 
