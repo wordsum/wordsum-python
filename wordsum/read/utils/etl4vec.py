@@ -6,6 +6,10 @@ import logging
 
 
 '''
+R E P L A C E   P U N C T U A T I O N   I N   S T O R Y
+'''
+
+'''
 Replace punctuation.
 '''
 def replace_punctuation_sentence(sentence):
@@ -16,7 +20,7 @@ def replace_punctuation_sentence(sentence):
     for item in list_replace_no_space:
         sentence = sentence.replace(item, '')
 
-    list_replace = ['\\n','...']
+    list_replace = ['\\n','...',' - ']
 
     for item in list_replace:
         sentence = sentence.replace(item, ' ')
@@ -24,22 +28,6 @@ def replace_punctuation_sentence(sentence):
     sentence = sentence.lower()
 
     return sentence
-
-'''
-list sentence, so it is easier to vector or put into a neural netowrk.
-'''
-def list_sentence(string_sentence):
-    logging.debug("list_sentence")
-
-    if string_sentence is not None:
-        words = string_sentence.split()
-        words = [x.strip(' ') for x in words]
-    else:
-        words = None
-
-    return words
-
-
 
 '''
 Replace punctuation in a paragraph
@@ -63,6 +51,50 @@ def replace_punctuation_story(story):
 
     return story
 
+'''
+L I S T   S E N T E N C E    I N   S T O R Y
+'''
+
+'''
+list sentence, so it is easier to vector or put into a neural netowrk.
+'''
+def list_sentence(string_sentence):
+    logging.debug("list_sentence")
+
+    if string_sentence is not None:
+        words = string_sentence.split()
+        words = [x.strip(' ') for x in words]
+    else:
+        words = None
+
+    return words
+
+'''
+list sentence string in the paragraph array.
+'''
+def list_sentences_in_paragraph(paragraph):
+    logging.debug('list_sentence_in_paragraph')
+
+    for i, s in enumerate(paragraph):
+        paragraph[i] = list_sentence(s)
+
+    return paragraph
+
+
+'''
+list sentence in a the story array.
+'''
+def list_sentences_in_story(story):
+    logging.debug('list_sentence_in_story')
+
+    for i, p in enumerate(story):
+        story[i] = list_sentences_in_paragraph(p)
+
+    return story
+
+'''
+G E T    D A T A   F R O M   W O R D S U M
+'''
 '''
 Get and check the file state is it has all the data for the word2vec.
 '''
