@@ -15,6 +15,8 @@ RETURN_PARAGRAPH = ['this leads to a paragraph  this leads to and or this ',
                   'and talking to the for comma mistake in misunderstanding this or or'
                   ' when to end the sentence to point right here in a series another series']
 
+RETURN_LIST = ['this', 'leads', 'to', 'a', 'paragraph', 'this', 'leads', 'to', 'and', 'or', 'this']
+
 TEST_STORY = [TEST_PARAGRAPH, TEST_PARAGRAPH]
 
 RETURN_STORY = [RETURN_PARAGRAPH, RETURN_PARAGRAPH]
@@ -35,7 +37,6 @@ def test_text_model():
 
 def test_replace_punctuation_sentence():
 
-
     sentence = wordsum.read.utils.etl4vec.replace_punctuation_sentence(TEST_PARAGRAPH[0])
 
     print("THE RETURN:", sentence)
@@ -44,9 +45,16 @@ def test_replace_punctuation_sentence():
     assert TEST_PARAGRAPH[0] != sentence
     assert RETURN_PARAGRAPH[0] == sentence
 
+def test_list_sentence():
+
+    words = wordsum.read.utils.etl4vec.list_sentence(RETURN_PARAGRAPH[0])
+
+    print("THE RETURN:", words)
+
+    assert RETURN_LIST == words
+
 
 def test_replace_punctuation_paragraph():
-
 
     wordsum.read.utils.etl4vec.replace_punctuation_paragraph(TEST_PARAGRAPH)
 
@@ -61,7 +69,6 @@ def test_replace_punctuation_story():
     wordsum.read.utils.etl4vec.replace_punctuation_story(TEST_STORY)
 
     assert TEST_PARAGRAPH[0][0] == RETURN_PARAGRAPH[0][0]
-
 
 
 def test_get_file_state_value():

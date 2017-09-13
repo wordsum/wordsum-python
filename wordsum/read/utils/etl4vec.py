@@ -25,6 +25,21 @@ def replace_punctuation_sentence(sentence):
 
     return sentence
 
+'''
+list sentence, so it is easier to vector or put into a neural netowrk.
+'''
+def list_sentence(string_sentence):
+    logging.debug("list_sentence")
+
+    if string_sentence is not None:
+        words = string_sentence.split()
+        words = [x.strip(' ') for x in words]
+    else:
+        words = None
+
+    return words
+
+
 
 '''
 Replace punctuation in a paragraph
@@ -92,6 +107,7 @@ def get_paragraph_model_narrator_sentences(paragraph_model):
             paragraph.append(sentence_model['sentence'])
 
     return paragraph
+
 
 '''
 Get the the narrator sentence from a paragraph.
