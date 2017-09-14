@@ -1,12 +1,5 @@
 import gensim
 import logging
-import os
-
-
-PATH_SCRIPT=os.path.dirname(os.path.realpath(__file__))
-PATH_TRAIN=os.path.join(PATH_SCRIPT, '../../data/train/')
-PATH_MODEL=os.path.join(PATH_SCRIPT, '../../data/model/')
-
 
 
 '''
@@ -18,7 +11,7 @@ def train_sentences(sentences):
     logging.debug("sentences: ", sentences)
 
     if not sentences is None:
-        model = gensim.models.Word2Vec(sentences, min_count=1)
+        model = gensim.models.Word2Vec(sentences, size=100, window=5, min_count=5, workers=4)
     else:
         print("No sentences")
         model = None
@@ -29,10 +22,21 @@ def train_sentences(sentences):
 '''
 save the model locally to later use.
 '''
-def save_model(model, path):
+def save_model_binary(model, path, file):
 
     if not model is None:
-        model.save(path)
+        model.save(path + file + ".bin")
+    else:
+        print("No model to save.")
+
+
+'''
+save the model to text file.
+'''
+def save_model_text(model, path, file):
+
+    if not model is None:
+        model.wv.save_word2vec_format(fname=path + "/" + file + ".txt", fvocab=None, binary=False)
     else:
         print("No model to save.")
 
