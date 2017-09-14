@@ -8,10 +8,11 @@ import wordsum.read.utils.etl4vec as etl4vec
 import logging
 import json
 import os
+import wordsum.read.pipelines.utilities as utilities
 
 
 PATH_SCRIPT=os.path.dirname(os.path.realpath(__file__))
-PATH_MODEL=os.path.join(PATH_SCRIPT, '../../../data/models/gensim')
+
 
 def process(file, path_model_dump):
     logging.debug("pipeline_plot_story: Beginning.")
@@ -33,9 +34,17 @@ def process(file, path_model_dump):
     # Reduce the lists of lists to a list of lists.
     story_list = etl4vec.list_story_lists(story)
 
+    # Get the origin file.
+    file_basename = utilities.get_file_basename(file)
+
+    # Create the model.
     model = gensim2vec.train_sentences(story_list)
 
-    gensim2vec.save_model(model, PATH_MODEL)
+    # Save the model to binary.
+    gensim2vec.save_model_binary(model, path_model_dump, file_basename)
+
+    #  Save the text version.
+    gensim2vec.save_model_text(model, path_model_dump, file_basename)
 
     return story_list
 

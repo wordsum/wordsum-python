@@ -1,5 +1,3 @@
-import pytest
-import json
 import os
 import wordsum.read.pipelines.pipeline_plot_story as pipeline_plot_story
 
