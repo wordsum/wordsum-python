@@ -11,7 +11,7 @@
 # and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
 
 import os
-import wordsum.read.pipelines.pipeline_plot_story as pipeline_plot_story
+import wordsum.read.pipelines.pipeline_model_story_plot as pipeline_plot_story
 
 TEST_FILE = os.path.realpath('./') + '/data/train/plot/0001.json'
 TEST_LOCAL_MODEL_DUMP  = os.path.realpath('./') + '/data/models/'
