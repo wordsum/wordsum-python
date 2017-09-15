@@ -59,11 +59,13 @@ TODO: TEST MAC STEPS AGAIN!
 
 8. source ./bin/activate
 
-9. pip3 install -r requirements.txt
+9. export PYTHONHASHSEED=0
 
-10. python3 test/test_tensor_install.py
+10. pip3 install -r requirements.txt
 
-11. wait for Tensorflow to say 'Hi'. If it doesn't then something is wrong.
+11. python3 test/test_tensor_install.py
+
+12. wait for Tensorflow to say 'Hi'. If it doesn't then something is wrong.
 
 
 ### Local Setup on Ubuntu with Python3 and virtualenv:
@@ -78,13 +80,15 @@ TODO: TEST MAC STEPS AGAIN!
 
 5. source ./bin/activate
 
-6. pip3 install -r requirements.txt
+6. export PYTHONHASHSEED=0
 
-7. python3 -m spacy.en.download all
+7. pip3 install -r requirements.txt
 
-8. python3 test/test_tensor_install.py
+8. python3 -m spacy.en.download all
 
-9. wait for TensorFlow to say 'Hi'. If it doesn't then something is wrong.
+9. python3 test/test_tensor_install.py
+
+10. wait for TensorFlow to say 'Hi'. If it doesn't then something is wrong.
 
 
 ## Testing:
