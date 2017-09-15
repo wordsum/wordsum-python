@@ -1,3 +1,15 @@
+# Open Story License
+#
+# Story: wordsum-python
+# Writer: Kalab J. Oster(TM)
+# Copyright Holders: Kalab J. Oster(TM)
+# copyright (C) 2017 Kalab J. Oster(TM)
+#
+# Permission is granted by the Copyright Holders for humans or other intelligent agents to read, write, edit, publish and critique the Story
+# if the humans or intelligent agents keep this Open Story License with the Story,
+# and if the Story you tell remains free,
+# and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
+
 import gensim
 import logging
 
@@ -11,7 +23,7 @@ def train_sentences(sentences):
     logging.debug("sentences: ", sentences)
 
     if not sentences is None:
-        model = gensim.models.Word2Vec(sentences, size=100, window=5, min_count=5, workers=4)
+        model = gensim.models.Word2Vec(sentences, size=10, window=5, min_count=5, workers=4)
     else:
         print("No sentences")
         model = None
