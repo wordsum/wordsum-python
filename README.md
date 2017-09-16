@@ -6,7 +6,7 @@ The purpose of this tool is to train a machine to read, write, edit and publish 
 It is also to be the python implementation of wordsum-java
 
 ## Models Being Developed:
-1. Using word2vec to model plot.
+1. Using word2vec to model plot. (I have pipeline to visual plot, so setting aside to study while coding 2)
 
 2. Using a CNN to classify dialog of a character modeled by wordsum.
 
@@ -38,6 +38,10 @@ data/test/ is a directory of wordsum modeled test data. The file hierarchy may g
 doc/ is a directory for documents.
 
 containers/ is a directory containing the Dockerfiles.
+
+## Model Versioning
+
+(Work in progress)
 
 ## Local Setup:
 
