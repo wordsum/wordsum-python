@@ -20,7 +20,11 @@ The rights to copy and use The Detective Store story's data for open source data
 copyright &copy; Word Prostitute&reg; All Story Rights Reserved.
 
 
+## Publications
 
+Amazon: https://www.amazon.com/The-Detective-Store-ebook/dp/B001U8917Y
+
+Word Prostitute&reg;: http://books.goods.wordprostitute.com/The_Detective_Store/0000.html
 
 
 
