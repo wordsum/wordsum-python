@@ -10,8 +10,12 @@
 # and if the Story you tell remains free,
 # and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
 
+from sklearn.manifold import TSNE
+import matplotlib.pyplot as plt
 import os
 import logging
+import gensim
+import pandas as pd
 
 def get_file_basename(path_file):
     logging.debug("get_file_basename")
@@ -25,5 +29,25 @@ def get_file_basename(path_file):
     return file_base
 
 
+def vector_story_model_plot(path_model):
 
+    model = gensim.models.Word2Vec.load(path_model)
+    vocab = list(model.wv.vocab)
+    X = model[vocab]
+    tsne = TSNE(n_components=2, random_state=0)
+    X_tsne = tsne.fit_transform(X)
+
+    df = pd.concat([pd.DataFrame(X_tsne),
+                    pd.Series(vocab)],
+                   axis=1)
+
+    df.columns = ['x', 'y', 'word']
+
+    fig = plt.figure()
+    ax = fig.add_subplot(1, 1, 1)
+
+    ax.scatter(df['x'], df['y'])
+    for i, txt in enumerate(df['word']):
+        ax.annotate(txt, (df['x'].iloc[i], df['y'].iloc[i]))
+    plt.show()
 
