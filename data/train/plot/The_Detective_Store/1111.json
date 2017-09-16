@@ -1,0 +1,1041 @@
+{
+  "file": "/gitbox/Word/Prostitute/Product/Goods/Words/The_Detective_Store/1111.wpml",
+  "version": "0.0.5",
+  "gitSha": "30edb575085b45266571fd12f3b14e086963ece2",
+  "localDateTime": "2017-09-16T11:27:08.179",
+  "copyright": "",
+  "writers": [
+    "Kalab J. Oster"
+  ],
+  "editors": [
+    "Kalab J. Oster"
+  ],
+  "publishers": [
+    "Word Prostitute®"
+  ],
+  "fileState": "I think, say, \u003cIt\u0027s the United States of America.\u003e \n\nThe tap glows white.\n\nI put head in tap.\n",
+  "wordCount": 18,
+  "paragraphStates": [
+    {
+      "paragraph": "I think, say, \u003cIt\u0027s the United States of America.\u003e",
+      "wordCount": 9,
+      "order": 1,
+      "sentenceCount": 1,
+      "dialog": true,
+      "sentenceStates": [
+        {
+          "sentence": "I think, say, DIALOG_OBJECT_1",
+          "wordCount": 3,
+          "orderParagraph": 1,
+          "tense": [
+            "Present",
+            "Present"
+          ],
+          "nlpState": {
+            "sentence": "I think, say, DIALOG_OBJECT_1",
+            "coreAnnotations": [
+              {
+                "pos": "PRP",
+                "text": "I",
+                "net": "O"
+              },
+              {
+                "pos": "VBP",
+                "text": "think",
+                "net": "O"
+              },
+              {
+                "pos": ",",
+                "text": ",",
+                "net": "O"
+              },
+              {
+                "pos": "VBP",
+                "text": "say",
+                "net": "O"
+              },
+              {
+                "pos": ",",
+                "text": ",",
+                "net": "O"
+              },
+              {
+                "pos": "NN",
+                "text": "DIALOG_OBJECT_1",
+                "net": "O"
+              }
+            ],
+            "typedDependency": [
+              {
+                "reln": {
+                  "string": "root(ROOT-0, think-2)",
+                  "name": "root",
+                  "tag": "root"
+                },
+                "dep": {
+                  "index": "2",
+                  "lemma": "think",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "think"
+                },
+                "gov": {
+                  "index": "0"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "subj",
+                  "string": "nsubj(think-2, I-1)",
+                  "name": "nominal subject",
+                  "tag": "nsubj"
+                },
+                "dep": {
+                  "index": "1",
+                  "lemma": "I",
+                  "ner": "O",
+                  "tag": "PRP",
+                  "word": "I"
+                },
+                "gov": {
+                  "index": "2",
+                  "lemma": "think",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "think"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "dep",
+                  "string": "punct(think-2, ,-3)",
+                  "name": "punctuation",
+                  "tag": "punct"
+                },
+                "dep": {
+                  "index": "3",
+                  "lemma": ",",
+                  "ner": "O",
+                  "tag": ",",
+                  "word": ","
+                },
+                "gov": {
+                  "index": "2",
+                  "lemma": "think",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "think"
+                }
+              },
+              {
+                "reln": {
+                  "string": "dep(think-2, say-4)",
+                  "name": "dependent",
+                  "tag": "dep"
+                },
+                "dep": {
+                  "index": "4",
+                  "lemma": "say",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "say"
+                },
+                "gov": {
+                  "index": "2",
+                  "lemma": "think",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "think"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "dep",
+                  "string": "punct(think-2, ,-5)",
+                  "name": "punctuation",
+                  "tag": "punct"
+                },
+                "dep": {
+                  "index": "5",
+                  "lemma": ",",
+                  "ner": "O",
+                  "tag": ",",
+                  "word": ","
+                },
+                "gov": {
+                  "index": "2",
+                  "lemma": "think",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "think"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "comp",
+                  "string": "xcomp(think-2, DIALOG_OBJECT_1-6)",
+                  "name": "xclausal complement",
+                  "tag": "xcomp"
+                },
+                "dep": {
+                  "index": "6",
+                  "lemma": "dialog_object_1",
+                  "ner": "O",
+                  "tag": "NN",
+                  "word": "DIALOG_OBJECT_1"
+                },
+                "gov": {
+                  "index": "2",
+                  "lemma": "think",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "think"
+                }
+              }
+            ],
+            "pennTreebankState": {
+              "treeBranchesMap": {
+                "s_node_1_node_2_node": {
+                  "NNP": "DIALOG_OBJECT_1"
+                },
+                "s_node_1_node_1_node_1_node": {
+                  "VB": "say"
+                },
+                "s_node_0_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_1_node_2_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_1_node_1_node_2_node": {
+                  "COMMA": ","
+                },
+                "s_node_0_node": {
+                  "PRP": "I"
+                },
+                "s_node_1_node_0_node": {
+                  "VBP": "think"
+                },
+                "s_node_1_node_1_node_0_node": {
+                  "COMMA": ","
+                },
+                "s_node_1_node_1_leaf": {
+                  "phrase": "PRN"
+                },
+                "s_node_1_leaf": {
+                  "phrase": "VP"
+                },
+                "s_node_1_node_1_node_1_leaf": {
+                  "phrase": "INTJ"
+                }
+              }
+            }
+          },
+          "punctuationState": {
+            "sentence": "I think, say, DIALOG_OBJECT_1"
+          },
+          "jazzyState": {
+            "text": "I think, say, DIALOG_OBJECT_1",
+            "misspelledWords": {}
+          },
+          "dialogState": {
+            "dialog": false,
+            "dialogBegin": false,
+            "dialogEnd": false,
+            "dialogContinue": false
+          },
+          "completeSentence": false
+        },
+        {
+          "sentence": "\u003cIt\u0027s the United States of America.\u003e",
+          "wordCount": 6,
+          "orderParagraph": 1,
+          "tense": [
+            "Present"
+          ],
+          "nlpState": {
+            "sentence": "It\u0027s the United States of America.",
+            "coreAnnotations": [
+              {
+                "pos": "PRP",
+                "text": "It",
+                "net": "O"
+              },
+              {
+                "pos": "VBZ",
+                "text": "\u0027s",
+                "net": "O"
+              },
+              {
+                "pos": "DT",
+                "text": "the",
+                "net": "O"
+              },
+              {
+                "pos": "NNP",
+                "text": "United",
+                "net": "LOCATION"
+              },
+              {
+                "pos": "NNPS",
+                "text": "States",
+                "net": "LOCATION"
+              },
+              {
+                "pos": "IN",
+                "text": "of",
+                "net": "LOCATION"
+              },
+              {
+                "pos": "NNP",
+                "text": "America",
+                "net": "LOCATION"
+              },
+              {
+                "pos": ".",
+                "text": ".",
+                "net": "O"
+              }
+            ],
+            "typedDependency": [
+              {
+                "reln": {
+                  "string": "root(ROOT-0, States-5)",
+                  "name": "root",
+                  "tag": "root"
+                },
+                "dep": {
+                  "index": "5",
+                  "lemma": "States",
+                  "ner": "LOCATION",
+                  "tag": "NNPS",
+                  "word": "States"
+                },
+                "gov": {
+                  "index": "0"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "subj",
+                  "string": "nsubj(States-5, It-1)",
+                  "name": "nominal subject",
+                  "tag": "nsubj"
+                },
+                "dep": {
+                  "index": "1",
+                  "lemma": "it",
+                  "ner": "O",
+                  "tag": "PRP",
+                  "word": "It"
+                },
+                "gov": {
+                  "index": "5",
+                  "lemma": "States",
+                  "ner": "LOCATION",
+                  "tag": "NNPS",
+                  "word": "States"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "aux",
+                  "string": "cop(States-5, \u0027s-2)",
+                  "name": "copula",
+                  "tag": "cop"
+                },
+                "dep": {
+                  "index": "2",
+                  "lemma": "be",
+                  "ner": "O",
+                  "tag": "VBZ",
+                  "word": "\u0027s"
+                },
+                "gov": {
+                  "index": "5",
+                  "lemma": "States",
+                  "ner": "LOCATION",
+                  "tag": "NNPS",
+                  "word": "States"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "mod",
+                  "string": "det(States-5, the-3)",
+                  "name": "determiner",
+                  "tag": "det"
+                },
+                "dep": {
+                  "index": "3",
+                  "lemma": "the",
+                  "ner": "O",
+                  "tag": "DT",
+                  "word": "the"
+                },
+                "gov": {
+                  "index": "5",
+                  "lemma": "States",
+                  "ner": "LOCATION",
+                  "tag": "NNPS",
+                  "word": "States"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "mod",
+                  "string": "compound(States-5, United-4)",
+                  "name": "compound modifier",
+                  "tag": "compound"
+                },
+                "dep": {
+                  "index": "4",
+                  "lemma": "United",
+                  "ner": "LOCATION",
+                  "tag": "NNP",
+                  "word": "United"
+                },
+                "gov": {
+                  "index": "5",
+                  "lemma": "States",
+                  "ner": "LOCATION",
+                  "tag": "NNPS",
+                  "word": "States"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "nmod",
+                  "string": "nmod:of(States-5, America-7)",
+                  "name": "nmod_preposition",
+                  "tag": "nmod:of"
+                },
+                "dep": {
+                  "index": "7",
+                  "lemma": "America",
+                  "ner": "LOCATION",
+                  "tag": "NNP",
+                  "word": "America"
+                },
+                "gov": {
+                  "index": "5",
+                  "lemma": "States",
+                  "ner": "LOCATION",
+                  "tag": "NNPS",
+                  "word": "States"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "dep",
+                  "string": "punct(States-5, .-8)",
+                  "name": "punctuation",
+                  "tag": "punct"
+                },
+                "dep": {
+                  "index": "8",
+                  "lemma": ".",
+                  "ner": "O",
+                  "tag": ".",
+                  "word": "."
+                },
+                "gov": {
+                  "index": "5",
+                  "lemma": "States",
+                  "ner": "LOCATION",
+                  "tag": "NNPS",
+                  "word": "States"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "mod",
+                  "string": "case(America-7, of-6)",
+                  "name": "case marker",
+                  "tag": "case"
+                },
+                "dep": {
+                  "index": "6",
+                  "lemma": "of",
+                  "ner": "LOCATION",
+                  "tag": "IN",
+                  "word": "of"
+                },
+                "gov": {
+                  "index": "7",
+                  "lemma": "America",
+                  "ner": "LOCATION",
+                  "tag": "NNP",
+                  "word": "America"
+                }
+              }
+            ],
+            "pennTreebankState": {
+              "treeBranchesMap": {
+                "s_node_0_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_1_node_1_node_0_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_2_node": {
+                  "PERIOD": "."
+                },
+                "s_node_1_node_1_node_0_node_2_node": {
+                  "NNPS": "States"
+                },
+                "s_node_1_node_1_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_1_leaf": {
+                  "phrase": "VP"
+                },
+                "s_node_1_node_1_node_1_leaf": {
+                  "phrase": "PP"
+                },
+                "s_node_1_node_1_node_1_node_0_node": {
+                  "IN": "of"
+                },
+                "s_node_1_node_1_node_0_node_0_node": {
+                  "DT": "the"
+                },
+                "s_node_1_node_1_node_1_node_1_node": {
+                  "NNP": "America"
+                },
+                "s_node_0_node": {
+                  "PRP": "It"
+                },
+                "s_node_1_node_0_node": {
+                  "VBZ": "\u0027s"
+                },
+                "s_node_1_node_1_node_1_node_1_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_1_node_1_node_0_node_1_node": {
+                  "NNP": "United"
+                }
+              }
+            }
+          },
+          "punctuationState": {
+            "periodState": {
+              "periodStates": {
+                "INITIAL": "([A-Z]\\.)+[\\.]{0,1}",
+                "ELLIPSIS": "([A-Za-z]*\\.\\.\\.[A-Za-z]*)+[\\\\.|\\\\!|\\\\?]{0,1}",
+                "MARK": ".",
+                "PERIOD": "[a-zA-Z0-9]+\\.$"
+              },
+              "patterns": {
+                "ANTI": [
+                  "America.\u003e"
+                ]
+              }
+            },
+            "sentence": "\u003cIt\u0027s the United States of America.\u003e"
+          },
+          "jazzyState": {
+            "text": "\u003cIt\u0027s the United States of America.\u003e",
+            "misspelledWords": {}
+          },
+          "dialogState": {
+            "sentence": "\u003cIt\u0027s the United States of America.\u003e",
+            "originOfDialogFromOrderParagraph": 1,
+            "dialogMark": [
+              "(\u003c[A-Za-z].*)|(\u003c\\.+[A-Za-z].*)|([A-Za-z].*\\s\u003c[A-Za-z].*)",
+              "(\u003c\\|\\.*[A-Za-z].*,\u003e [A-Za-z].*)|(\u003c\\.*[A-Za-z].*,\u003e [A-Za-z].*)|(\u003c\\|[A-Za-z].*,\u003e [A-Za-z].*)|(\u003c[A-Za-z].*,\u003e [A-Za-z].*)|([A-Za-z].*,\u003e [A-Za-z].*)|(\u003c[A-Za-z].*\u003e)|(\u003c\\.+[A-Za-z].*\u003e)|([A-Za-z].*\\s\u003c[A-Za-z].*\u003e)|(\u003c\\|[A-Za-z].*\u003e)|(\u003c\\|\\.+[A-Za-z].*\u003e)|([A-Za-z].*\\s\u003c\\|[A-Za-z].*\u003e)|([A-Za-z].*\\s\u003c\\|\\.+[A-Za-z].*\u003e)|([A-Za-z].*\u003e)",
+              "(\u003c[A-Za-z].*)|(\u003c\\.+[A-Za-z].*)|([A-Za-z].*\\s\u003c[A-Za-z].*)",
+              "(\u003c\\|\\.*[A-Za-z].*,\u003e [A-Za-z].*)|(\u003c\\.*[A-Za-z].*,\u003e [A-Za-z].*)|(\u003c\\|[A-Za-z].*,\u003e [A-Za-z].*)|(\u003c[A-Za-z].*,\u003e [A-Za-z].*)|([A-Za-z].*,\u003e [A-Za-z].*)|(\u003c[A-Za-z].*\u003e)|(\u003c\\.+[A-Za-z].*\u003e)|([A-Za-z].*\\s\u003c[A-Za-z].*\u003e)|(\u003c\\|[A-Za-z].*\u003e)|(\u003c\\|\\.+[A-Za-z].*\u003e)|([A-Za-z].*\\s\u003c\\|[A-Za-z].*\u003e)|([A-Za-z].*\\s\u003c\\|\\.+[A-Za-z].*\u003e)|([A-Za-z].*\u003e)"
+            ],
+            "dialogNplToken": "\u0027\u0027",
+            "telepathicBeginRegex": "(\u003e[A-Za-z].*)|(\u003e\\.+[A-Za-z].*)|([A-Za-z].*\\s\u003e[A-Za-z].*)",
+            "telepathicContinueRegex": "(\u003e\\|[A-Za-z].*)|(\u003e\\|\\.+[A-Za-z].*)|([A-Za-z].*\\s\u003e\\|[A-Za-z].*)|([A-Za-z].*\\s\u003e\\|\\.+[A-Za-z].*)",
+            "telepathicEndRegex": "(\u003e\\.+[A-Za-z].*,\u003c [A-Za-z].*)|(\u003e\\|\\.+[A-Za-z].*,\u003c [A-Za-z].*)|(\u003e\\|[A-Za-z].*,\u003c [A-Za-z].*)|(\u003e[A-Za-z].*,\u003c [A-Za-z].*)|([A-Za-z].*,\u003c [A-Za-z].*)|(\u003e[A-Za-z].*\u003c)|(\u003e\\.+[A-Za-z].*\u003c)|(\u003e\\|\\.+[A-Za-z].*\u003c)|([A-Za-z].*\\s\u003e[A-Za-z].*\u003c)|(\u003e\\|[A-Za-z].*\u003c)|(\u003e\\|\\.+[A-Za-z].*\u003c)|([A-Za-z].*\\s\u003e\\|[A-Za-z].*\u003c)|([A-Za-z].*\\s\u003e\\|\\.+[A-Za-z].*\u003c)|([A-Za-z].*\u003c)",
+            "internalBeginRegex": "(\u003c[A-Za-z].*)|(\u003c\\.+[A-Za-z].*)|([A-Za-z].*\\s\u003c[A-Za-z].*)",
+            "internalContinueRegex": "(\u003c\\|[A-Za-z].*)|(\u003c\\|\\.+[A-Za-z].*)|([A-Za-z].*\\s\u003c\\|[A-Za-z].*)|([A-Za-z].*\\s\u003c\\|\\.+[A-Za-z].*)",
+            "internalEndRegex": "(\u003c\\|\\.*[A-Za-z].*,\u003e [A-Za-z].*)|(\u003c\\.*[A-Za-z].*,\u003e [A-Za-z].*)|(\u003c\\|[A-Za-z].*,\u003e [A-Za-z].*)|(\u003c[A-Za-z].*,\u003e [A-Za-z].*)|([A-Za-z].*,\u003e [A-Za-z].*)|(\u003c[A-Za-z].*\u003e)|(\u003c\\.+[A-Za-z].*\u003e)|([A-Za-z].*\\s\u003c[A-Za-z].*\u003e)|(\u003c\\|[A-Za-z].*\u003e)|(\u003c\\|\\.+[A-Za-z].*\u003e)|([A-Za-z].*\\s\u003c\\|[A-Za-z].*\u003e)|([A-Za-z].*\\s\u003c\\|\\.+[A-Za-z].*\u003e)|([A-Za-z].*\u003e)",
+            "audioBeginRegex": "(,,[A-Za-z].*)|(,,\\.+[A-Za-z].*)|([A-Za-z].*\\s,,[A-Za-z].*)",
+            "audioContinueRegex": "(\u0027\u0027[A-Za-z].*)|(\u0027\u0027\\.+[A-Za-z].*)|([A-Za-z].*\\s\u0027\u0027[A-Za-z].*)|([A-Za-z].*\\s\u0027\u0027\\.+[A-Za-z].*)",
+            "audioEndRegex": "(,,[A-Za-z].*\u0027\u0027)|(,,\\.+[A-Za-z].*\u0027\u0027)|([A-Za-z].*\\s,,[A-Za-z].*\u0027\u0027)|(\u0027\u0027[A-Za-z].*\u0027\u0027)|(\u0027\u0027\\.+[A-Za-z].*\u0027\u0027)|([A-Za-z].*\\s\u0027\u0027[A-Za-z].*\u0027\u0027)|([A-Za-z].*,\u0027\u0027 [A-Za-z].*)|([A-Za-z].*\u0027\u0027)",
+            "telepathicBeginUnicode": "u003E",
+            "telepathicContinueUnicode": "u003Eu007C",
+            "telepathicEndUnicode": "u003C",
+            "internalBeginUnicode": "u003C",
+            "internalContinueUnicode": "u003Cu007C",
+            "internalEndUnicode": "u003E",
+            "audioBeginUnicode": "u002Cu002C",
+            "audioContinueUnicode": "u0027u0027",
+            "audioEndUnicode": "u0027u0027",
+            "telepathicBeginMark": "\u003e",
+            "telepathicContinueMark": "\u003e|",
+            "telepathicEndMark": "\u003c",
+            "internalBeginMark": "\u003c",
+            "internalContinueMark": "\u003c|",
+            "internalEndMark": "\u003e",
+            "audioBeginMark": ",,",
+            "audioContinueMark": "\u0027\u0027",
+            "audioEndMark": "\u0027\u0027",
+            "dialog": true,
+            "dialogBegin": true,
+            "dialogEnd": true,
+            "dialogContinue": false
+          },
+          "completeSentence": false
+        }
+      ]
+    },
+    {
+      "paragraph": "The tap glows white.",
+      "wordCount": 4,
+      "order": 2,
+      "sentenceCount": 1,
+      "dialog": false,
+      "sentenceStates": [
+        {
+          "sentence": "The tap glows white.",
+          "wordCount": 4,
+          "orderParagraph": 1,
+          "tense": [
+            "Present"
+          ],
+          "nlpState": {
+            "sentence": "The tap glows white.",
+            "coreAnnotations": [
+              {
+                "pos": "DT",
+                "text": "The",
+                "net": "O"
+              },
+              {
+                "pos": "NN",
+                "text": "tap",
+                "net": "O"
+              },
+              {
+                "pos": "VBZ",
+                "text": "glows",
+                "net": "O"
+              },
+              {
+                "pos": "JJ",
+                "text": "white",
+                "net": "O"
+              },
+              {
+                "pos": ".",
+                "text": ".",
+                "net": "O"
+              }
+            ],
+            "typedDependency": [
+              {
+                "reln": {
+                  "string": "root(ROOT-0, glows-3)",
+                  "name": "root",
+                  "tag": "root"
+                },
+                "dep": {
+                  "index": "3",
+                  "lemma": "glow",
+                  "ner": "O",
+                  "tag": "VBZ",
+                  "word": "glows"
+                },
+                "gov": {
+                  "index": "0"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "mod",
+                  "string": "det(tap-2, The-1)",
+                  "name": "determiner",
+                  "tag": "det"
+                },
+                "dep": {
+                  "index": "1",
+                  "lemma": "the",
+                  "ner": "O",
+                  "tag": "DT",
+                  "word": "The"
+                },
+                "gov": {
+                  "index": "2",
+                  "lemma": "tap",
+                  "ner": "O",
+                  "tag": "NN",
+                  "word": "tap"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "subj",
+                  "string": "nsubj(glows-3, tap-2)",
+                  "name": "nominal subject",
+                  "tag": "nsubj"
+                },
+                "dep": {
+                  "index": "2",
+                  "lemma": "tap",
+                  "ner": "O",
+                  "tag": "NN",
+                  "word": "tap"
+                },
+                "gov": {
+                  "index": "3",
+                  "lemma": "glow",
+                  "ner": "O",
+                  "tag": "VBZ",
+                  "word": "glows"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "comp",
+                  "string": "xcomp(glows-3, white-4)",
+                  "name": "xclausal complement",
+                  "tag": "xcomp"
+                },
+                "dep": {
+                  "index": "4",
+                  "lemma": "white",
+                  "ner": "O",
+                  "tag": "JJ",
+                  "word": "white"
+                },
+                "gov": {
+                  "index": "3",
+                  "lemma": "glow",
+                  "ner": "O",
+                  "tag": "VBZ",
+                  "word": "glows"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "dep",
+                  "string": "punct(glows-3, .-5)",
+                  "name": "punctuation",
+                  "tag": "punct"
+                },
+                "dep": {
+                  "index": "5",
+                  "lemma": ".",
+                  "ner": "O",
+                  "tag": ".",
+                  "word": "."
+                },
+                "gov": {
+                  "index": "3",
+                  "lemma": "glow",
+                  "ner": "O",
+                  "tag": "VBZ",
+                  "word": "glows"
+                }
+              }
+            ],
+            "pennTreebankState": {
+              "treeBranchesMap": {
+                "s_node_0_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_1_node_1_node": {
+                  "JJ": "white"
+                },
+                "s_node_2_node": {
+                  "PERIOD": "."
+                },
+                "s_node_0_node_1_node": {
+                  "NN": "tap"
+                },
+                "s_node_1_node_0_node": {
+                  "VBZ": "glows"
+                },
+                "s_node_1_node_1_leaf": {
+                  "phrase": "ADJP"
+                },
+                "s_node_0_node_0_node": {
+                  "DT": "The"
+                },
+                "s_node_1_leaf": {
+                  "phrase": "VP"
+                }
+              }
+            }
+          },
+          "punctuationState": {
+            "periodState": {
+              "periodStates": {
+                "INITIAL": "([A-Z]\\.)+[\\.]{0,1}",
+                "ELLIPSIS": "([A-Za-z]*\\.\\.\\.[A-Za-z]*)+[\\\\.|\\\\!|\\\\?]{0,1}",
+                "MARK": ".",
+                "PERIOD": "[a-zA-Z0-9]+\\.$"
+              },
+              "patterns": {
+                "PERIOD": [
+                  "white."
+                ]
+              }
+            },
+            "sentence": "The tap glows white."
+          },
+          "jazzyState": {
+            "text": "The tap glows white.",
+            "misspelledWords": {}
+          },
+          "dialogState": {
+            "dialog": false,
+            "dialogBegin": false,
+            "dialogEnd": false,
+            "dialogContinue": false
+          },
+          "completeSentence": false
+        }
+      ]
+    },
+    {
+      "paragraph": "I put head in tap.",
+      "wordCount": 5,
+      "order": 3,
+      "sentenceCount": 1,
+      "dialog": false,
+      "sentenceStates": [
+        {
+          "sentence": "I put head in tap.",
+          "wordCount": 5,
+          "orderParagraph": 1,
+          "tense": [
+            "Present"
+          ],
+          "nlpState": {
+            "sentence": "I put head in tap.",
+            "coreAnnotations": [
+              {
+                "pos": "PRP",
+                "text": "I",
+                "net": "O"
+              },
+              {
+                "pos": "VBP",
+                "text": "put",
+                "net": "O"
+              },
+              {
+                "pos": "NN",
+                "text": "head",
+                "net": "O"
+              },
+              {
+                "pos": "IN",
+                "text": "in",
+                "net": "O"
+              },
+              {
+                "pos": "NN",
+                "text": "tap",
+                "net": "O"
+              },
+              {
+                "pos": ".",
+                "text": ".",
+                "net": "O"
+              }
+            ],
+            "typedDependency": [
+              {
+                "reln": {
+                  "string": "root(ROOT-0, put-2)",
+                  "name": "root",
+                  "tag": "root"
+                },
+                "dep": {
+                  "index": "2",
+                  "lemma": "put",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "put"
+                },
+                "gov": {
+                  "index": "0"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "subj",
+                  "string": "nsubj(put-2, I-1)",
+                  "name": "nominal subject",
+                  "tag": "nsubj"
+                },
+                "dep": {
+                  "index": "1",
+                  "lemma": "I",
+                  "ner": "O",
+                  "tag": "PRP",
+                  "word": "I"
+                },
+                "gov": {
+                  "index": "2",
+                  "lemma": "put",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "put"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "obj",
+                  "string": "dobj(put-2, head-3)",
+                  "name": "direct object",
+                  "tag": "dobj"
+                },
+                "dep": {
+                  "index": "3",
+                  "lemma": "head",
+                  "ner": "O",
+                  "tag": "NN",
+                  "word": "head"
+                },
+                "gov": {
+                  "index": "2",
+                  "lemma": "put",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "put"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "dep",
+                  "string": "punct(put-2, .-6)",
+                  "name": "punctuation",
+                  "tag": "punct"
+                },
+                "dep": {
+                  "index": "6",
+                  "lemma": ".",
+                  "ner": "O",
+                  "tag": ".",
+                  "word": "."
+                },
+                "gov": {
+                  "index": "2",
+                  "lemma": "put",
+                  "ner": "O",
+                  "tag": "VBP",
+                  "word": "put"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "nmod",
+                  "string": "nmod:in(head-3, tap-5)",
+                  "name": "nmod_preposition",
+                  "tag": "nmod:in"
+                },
+                "dep": {
+                  "index": "5",
+                  "lemma": "tap",
+                  "ner": "O",
+                  "tag": "NN",
+                  "word": "tap"
+                },
+                "gov": {
+                  "index": "3",
+                  "lemma": "head",
+                  "ner": "O",
+                  "tag": "NN",
+                  "word": "head"
+                }
+              },
+              {
+                "reln": {
+                  "parent": "mod",
+                  "string": "case(tap-5, in-4)",
+                  "name": "case marker",
+                  "tag": "case"
+                },
+                "dep": {
+                  "index": "4",
+                  "lemma": "in",
+                  "ner": "O",
+                  "tag": "IN",
+                  "word": "in"
+                },
+                "gov": {
+                  "index": "5",
+                  "lemma": "tap",
+                  "ner": "O",
+                  "tag": "NN",
+                  "word": "tap"
+                }
+              }
+            ],
+            "pennTreebankState": {
+              "treeBranchesMap": {
+                "s_node_1_node_2_node_0_node": {
+                  "IN": "in"
+                },
+                "s_node_0_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_1_node_2_node_1_node": {
+                  "NN": "tap"
+                },
+                "s_node_1_node_2_leaf": {
+                  "phrase": "PP"
+                },
+                "s_node_1_node_1_node": {
+                  "NN": "head"
+                },
+                "s_node_2_node": {
+                  "PERIOD": "."
+                },
+                "s_node_1_node_2_node_1_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_0_node": {
+                  "PRP": "I"
+                },
+                "s_node_1_node_0_node": {
+                  "VBD": "put"
+                },
+                "s_node_1_node_1_leaf": {
+                  "phrase": "NP"
+                },
+                "s_node_1_leaf": {
+                  "phrase": "VP"
+                }
+              }
+            }
+          },
+          "punctuationState": {
+            "periodState": {
+              "periodStates": {
+                "INITIAL": "([A-Z]\\.)+[\\.]{0,1}",
+                "ELLIPSIS": "([A-Za-z]*\\.\\.\\.[A-Za-z]*)+[\\\\.|\\\\!|\\\\?]{0,1}",
+                "MARK": ".",
+                "PERIOD": "[a-zA-Z0-9]+\\.$"
+              },
+              "patterns": {
+                "PERIOD": [
+                  "tap."
+                ]
+              }
+            },
+            "sentence": "I put head in tap."
+          },
+          "jazzyState": {
+            "text": "I put head in tap.",
+            "misspelledWords": {}
+          },
+          "dialogState": {
+            "dialog": false,
+            "dialogBegin": false,
+            "dialogEnd": false,
+            "dialogContinue": false
+          },
+          "completeSentence": false
+        }
+      ]
+    }
+  ]
+}
