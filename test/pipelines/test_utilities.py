@@ -21,9 +21,6 @@ def test_get_file_basename():
 
 
 
-'''
-Right now using this to test
-'''
 def test_vector_story_model_plot():
 
     path_model = os.path.realpath('./') + '/test/files/0001.bin'
@@ -37,5 +34,25 @@ def test_vector_story_model_plot():
     utilities.vector_story_model_plot(path_model, path_save)
 
     assert os.path.isfile(path_test_file) == True
+
+'''
+TODD: Write this test with mocks
+'''
+def test_get_file_list_file():
+
+    path_model = os.path.realpath('./') + '/test/files/0001.bin'
+
+    path_list = utilities.get_file_list(path_model)
+
+    assert path_list[0] == path_model
+
+'''
+TODD: Write this test with mocks
+
+def test_get_file_list_dir():
+'''
+
+
+
 
 

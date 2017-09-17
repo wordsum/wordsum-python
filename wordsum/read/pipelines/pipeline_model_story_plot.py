@@ -30,20 +30,10 @@ PATH_SCRIPT=os.path.dirname(os.path.realpath(__file__))
 def process(file, path_model_dump):
     logging.debug("pipeline_plot_story: Beginning.")
 
-    file_list = []
-
-    if os.path.isfile(file):
-        file_list.append(file)
-
-    if os.path.isdir(file):
-        for filename in os.listdir(file):
-                if filename.endswith(".json"):
-                    file_list.append(file + filename)
-
+    file_list = utilities.get_file_list(file)
 
     for f in file_list:
         # Open wordsum file.
-        # TODO: Check for wordsum sha to makes sure data is related by revision and data has some wordsum pattern.
         with open(f) as data_file:
             text_model = json.load(data_file)
 

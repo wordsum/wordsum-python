@@ -54,3 +54,16 @@ def vector_story_model_plot(path_model, path_save):
 
     plot.savefig(path_save + file_name + ".svg")
 
+def get_file_list(file):
+
+    file_list = []
+
+    if os.path.isfile(file):
+        file_list.append(file)
+
+    if os.path.isdir(file):
+        for filename in os.listdir(file):
+            if filename.endswith(".json"):
+                file_list.append(file + filename)
+
+    return file_list
