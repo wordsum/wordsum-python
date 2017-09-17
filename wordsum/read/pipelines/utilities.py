@@ -11,7 +11,7 @@
 # and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
 
 from sklearn.manifold import TSNE
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plot
 import os
 import logging
 import gensim
@@ -29,7 +29,7 @@ def get_file_basename(path_file):
     return file_base
 
 
-def vector_story_model_plot(path_model):
+def vector_story_model_plot(path_model, path_save):
 
     model = gensim.models.Word2Vec.load(path_model)
     vocab = list(model.wv.vocab)
@@ -43,11 +43,14 @@ def vector_story_model_plot(path_model):
 
     df.columns = ['x', 'y', 'word']
 
-    fig = plt.figure()
+    fig = plot.figure()
     ax = fig.add_subplot(1, 1, 1)
 
     ax.scatter(df['x'], df['y'])
     for i, txt in enumerate(df['word']):
         ax.annotate(txt, (df['x'].iloc[i], df['y'].iloc[i]))
-    plt.show()
+
+    file_name = get_file_basename(path_model)
+
+    plot.savefig(path_save + file_name + ".svg")
 

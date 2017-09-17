@@ -20,8 +20,22 @@ def test_get_file_basename():
     assert file_basename == "file"
 
 
+
+'''
+Right now using this to test
+'''
 def test_vector_story_model_plot():
 
-    path_model = os.path.realpath('./') + '/data/models/0001.bin'
+    path_model = os.path.realpath('./') + '/test/files/0001.bin'
+    path_save = os.path.realpath('./') + '/test/files/'
 
-    utilities.vector_story_model_plot(path_model)
+    path_test_file = path_save + "0001.svg"
+
+    if os.path.isfile(path_test_file):
+        os.remove(path_test_file)
+
+    utilities.vector_story_model_plot(path_model, path_save)
+
+    assert os.path.isfile(path_test_file) == True
+
+
