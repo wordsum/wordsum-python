@@ -30,36 +30,49 @@ PATH_SCRIPT=os.path.dirname(os.path.realpath(__file__))
 def process(file, path_model_dump):
     logging.debug("pipeline_plot_story: Beginning.")
 
-    # Open wordsum file.
-    with open(file) as data_file:
-        text_model = json.load(data_file)
+    file_list = []
 
-    # Get only the narrator sentences and leave the dialog.
-    story = etl4vec.get_text_model_narrator_paragraphs(text_model)
+    if os.path.isfile(file):
+        file_list.append(file)
 
-    # Replace punctuation, so we can group words.
-    etl4vec.replace_punctuation_story(story)
+    if os.path.isdir(file):
+        for filename in os.listdir(file):
+                if filename.endswith(".json"):
+                    file_list.append(file + filename)
 
-    # Vector sentences of story now that we have removed punctuations.
-    # This is done after the remove of punctuation like spaces with the em dash.
-    etl4vec.list_sentences_in_story(story)
 
-    # Reduce the lists of lists to a list of lists.
-    story_list = etl4vec.list_story_lists(story)
+    for f in file_list:
+        # Open wordsum file.
+        # TODO: Check for wordsum sha to makes sure data is related by revision and data has some wordsum pattern.
+        with open(f) as data_file:
+            text_model = json.load(data_file)
 
-    # Get the origin file.
-    file_basename = utilities.get_file_basename(file)
+        # Get only the narrator sentences and leave the dialog.
+        story = etl4vec.get_text_model_narrator_paragraphs(text_model)
 
-    # Create the model.
-    model = gensim2vec.train_sentences(story_list)
+        # Replace punctuation, so we can group words.
+        etl4vec.replace_punctuation_story(story)
 
-    # Save the model to binary.
-    gensim2vec.save_model_binary(model, path_model_dump, file_basename)
+        # Vector sentences of story now that we have removed punctuations.
+        # This is done after the remove of punctuation like spaces with the em dash.
+        etl4vec.list_sentences_in_story(story)
 
-    #  Save the text version.
-    gensim2vec.save_model_text(model, path_model_dump, file_basename)
+        # Reduce the lists of lists to a list of lists.
+        story_list = etl4vec.list_story_lists(story)
 
-    return story_list
+        # Get the origin file.
+        file_basename = utilities.get_file_basename(f)
+
+        # Create the model.
+        model = gensim2vec.train_sentences(story_list)
+
+        # Save the model to binary.
+        gensim2vec.save_model_binary(model, path_model_dump, file_basename)
+
+        #  Save the text version.
+        gensim2vec.save_model_text(model, path_model_dump, file_basename)
+
+    #return story_list
 
 
 
