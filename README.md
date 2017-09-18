@@ -6,7 +6,7 @@ The purpose of this tool is to train a machine to read, write, edit and publish 
 It is also to be the python implementation of wordsum-java
 
 ## Models Being Developed:
-1. Using word2vec to model plot. (I have pipeline to visual plot, so setting aside to study while coding 2)
+1. Using word2vec to model plot. (I have the pipeline to visualize plot of narrator, but not character dialog, so I need to know work on 2.)
 
 2. Using a CNN to classify dialog of a character modeled by wordsum.
 
