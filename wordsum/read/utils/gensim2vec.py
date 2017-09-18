@@ -12,6 +12,7 @@
 
 import gensim
 import logging
+import os
 
 
 '''
@@ -39,7 +40,7 @@ save the model locally to later use.
 def save_model_binary(model, path, file):
 
     if not model is None:
-        model.save(path + file + ".bin")
+        model.save(path + os.path.sep + file + ".bin")
     else:
         print("No model to save.")
 
@@ -50,7 +51,7 @@ save the model to text file.
 def save_model_text(model, path, file):
 
     if not model is None:
-        model.wv.save_word2vec_format(fname=path + "/" + file + ".txt", fvocab=None, binary=False)
+        model.wv.save_word2vec_format(fname=path + os.path.sep + file + ".txt", fvocab=None, binary=False)
     else:
         print("No model to save.")
 

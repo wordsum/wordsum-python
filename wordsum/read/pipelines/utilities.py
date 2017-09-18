@@ -64,6 +64,6 @@ def get_file_list(file):
     if os.path.isdir(file):
         for filename in os.listdir(file):
             if filename.endswith(".json"):
-                file_list.append(file + filename)
+                file_list.append(file + os.path.sep + filename)
 
     return file_list

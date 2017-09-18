@@ -32,6 +32,9 @@ def process(file, path_model_dump):
 
     file_list = utilities.get_file_list(file)
 
+    # Make a book list for future use if required.
+    book_list = []
+
     for f in file_list:
         # Open wordsum file.
         with open(f) as data_file:
@@ -62,7 +65,28 @@ def process(file, path_model_dump):
         #  Save the text version.
         gensim2vec.save_model_text(model, path_model_dump, file_basename)
 
-    #return story_list
+        # If it is a directory and many files then assume chapters of sections and collect.
+        if os.path.isdir(file):
+            book_list.append(story_list)
+
+
+    if os.path.isdir(file):
+
+        book_list = etl4vec.list_story_lists(book_list)
+
+        print(os.path.basename(file))
+        print(book_list)
+
+        # Create the model.
+        model = gensim2vec.train_sentences(book_list)
+
+        # Save the model to binary.
+        gensim2vec.save_model_binary(model, path_model_dump, os.path.basename(file))
+
+        #  Save the text version.
+        gensim2vec.save_model_text(model, path_model_dump, os.path.basename(file))
+
+
 
 
 
