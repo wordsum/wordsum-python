@@ -16,7 +16,6 @@ import wordsum.read.utils.spacy
 
 
 def test_get_spacy_en_object():
-    logging.debug("Write object to know.")
 
     test_sentence = "I write a simple sentence"
 
@@ -25,6 +24,54 @@ def test_get_spacy_en_object():
     assert text_spacy_object.text == test_sentence
 
 
+def test_get_spacy_en_object_with_subjective_pronoun():
+
+    test_sentence = "I write a simple sentence"
+
+    text_spacy_object = wordsum.read.utils.spacy.get_spacy_en_object(test_sentence)
+
+    assert text_spacy_object[0].ent_type_ == ""
 
 
+def test_get_spacy_en_object_with_known_person_ner():
 
+    test_sentence = "George says a simple sentence"
+
+    text_spacy_object = wordsum.read.utils.spacy.get_spacy_en_object(test_sentence)
+
+    assert text_spacy_object[0].ent_type_ == "PERSON"
+
+
+def test_get_spacy_en_object_with_known_rind_ner():
+
+    test_sentence = "Rind says a simple sentence"
+
+    text_spacy_object = wordsum.read.utils.spacy.get_spacy_en_object(test_sentence)
+
+    assert text_spacy_object[0].ent_type_ == "PERSON"
+
+
+def test_get_spacy_en_object_with_known_rind_ner_DIALOG_OBJECT_1():
+
+    test_sentence = "Rind says, DIALOG_OBJECT_1"
+
+    text_spacy_object = wordsum.read.utils.spacy.get_spacy_en_object(test_sentence)
+
+    assert text_spacy_object[0].ent_type_ == "PERSON"
+
+
+def test_get_spacy_en_object_with_known_rind_ner_dual_verb_DIALOG_OBJECT_1():
+
+    test_sentence = "Rind pants and says, DIALOG_OBJECT_1"
+
+    text_spacy_object = wordsum.read.utils.spacy.get_spacy_en_object(test_sentence)
+
+    assert text_spacy_object[0].ent_type_ == ""
+
+def test_get_spacy_en_object_with_known_rind_ner_dual_verb_and_words_after_DIALOG_OBJECT_1():
+
+    test_sentence = "Rind pants and says a few times, DIALOG_OBJECT_1"
+
+    text_spacy_object = wordsum.read.utils.spacy.get_spacy_en_object(test_sentence)
+
+    assert text_spacy_object[0].ent_type_ == ""
