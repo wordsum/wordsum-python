@@ -66,17 +66,6 @@ TEST_LISTS_STORY = [[['this', 'leads', 'to', 'a', 'paragraph', 'this', 'leads', 
 TEST_SENTENCE_LIST_COMPARE = ['this', 'leads', 'to', 'a', 'paragraph', 'this', 'leads', 'to', 'and', 'or', 'this']
 
 
-@pytest.fixture
-def test_text_model():
-
-    file_test = os.path.realpath('./') + '/data/train/plot/0001.json'
-
-    with open(file_test) as data_file:
-        test_text_model = json.load(data_file)
-
-
-    return test_text_model
-
 '''
 T E S T   F O R   R E P L A C I N G   P U N C T U A T I O N
 '''

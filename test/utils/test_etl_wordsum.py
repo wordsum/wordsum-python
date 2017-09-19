@@ -1,5 +1,31 @@
 import json
+import os
+import pytest
 import wordsum.read.utils.etl_wordsum as etl_wordsum
+
+
+
+@pytest.fixture
+def test_text_model():
+
+    file_test = os.path.realpath('./') + '/data/train/plot/The_Detective_Store/0001.json'
+
+    with open(file_test) as data_file:
+        test_text_model = json.load(data_file)
+
+
+    return test_text_model
+
+@pytest.fixture
+def test_dialog_model():
+
+    file_test = os.path.realpath('./') + '/data/train/dialog/train_rind_gets_excerpts.json'
+
+    with open(file_test) as data_file:
+        test_dialog_model = json.load(data_file)
+
+
+    return test_dialog_model
 
 
 '''
@@ -51,3 +77,36 @@ def test_get_paragraph_model_dialog_sentences(test_text_model):
     sentences = etl_wordsum.get_paragraph_model_dialog_sentences(test_text_model['paragraphStates'][246])
 
     assert sentences[0] == test_paragraph
+
+
+'''
+T E S T S    T O    G E T    N A R R A T O R    D I A L O G
+'''
+def test_get_paragraph_model_narrator_with_dialog_sentence(test_dialog_model):
+
+    sentence_models = etl_wordsum.get_dialog_connected_narrator_paragraph_model(test_dialog_model['paragraphStates'][1])
+
+    assert sentence_models[0]['dialogState']['originOfDialogFromOrderParagraph'] == 1
+    assert sentence_models[0]['dialogState']['originOfDialogFromOrderParagraph'] == test_dialog_model['paragraphStates'][1]['sentenceStates'][1]['dialogState']['originOfDialogFromOrderParagraph']
+
+
+def test_get_dialog_remainder_connected_narrator_paragraph_model_first(test_dialog_model):
+
+    sentence_model_narrator = etl_wordsum.get_dialog_remainder_connected_narrator_paragraph_model(test_dialog_model['paragraphStates'][1], 1)
+
+    print(sentence_model_narrator)
+
+    assert sentence_model_narrator[0]['sentence'] == "Rind shouts, DIALOG_OBJECT_1"
+
+
+
+def test_get_dialog_remainder_connected_narrator_paragraph_model_narrator_last(test_dialog_model):
+
+    sentence_model_narrator = etl_wordsum.get_dialog_remainder_connected_narrator_paragraph_model(test_dialog_model['paragraphStates'][80], 3)
+
+    print(sentence_model_narrator)
+
+    assert sentence_model_narrator[0]['sentence'] == "DIALOG_OBJECT_1, says Rind holding arms under cloak and looking at Tommy."
+    assert sentence_model_narrator[1]['sentence'] == "I don't know,''"
+
+
