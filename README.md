@@ -100,4 +100,22 @@ TODO: TEST MAC STEPS AGAIN!
 2. pytest test/test_etl4vec.py
 
 ## ToDo:
-1. Test everything...
+1. Fix wordsum-java tagging of narrative with a dialog_object. I could hack around this code to get it working, and I may
+        to focus on CNNs, but the best place to fix is where the model is generated, and right now the place is wordsum-java.
+
+2. Test everything...
+
+
+##Copyright
+
+  Open Story License
+
+  Story: wordsum-python
+  Writer: Kalab J. Oster&trade;
+  Copyright Holders: Kalab J. Oster&trade;
+  copyright &copy; 2017 Kalab J. Oster&trade;
+
+  Permission is granted by the Copyright Holders for humans or other intelligent agents to read, write, edit, publish and critique the Story
+  if the humans or intelligent agents keep this Open Story License with the Story,
+  and if the Story you tell remains free,
+  and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
