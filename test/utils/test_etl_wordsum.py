@@ -82,31 +82,34 @@ def test_get_paragraph_model_dialog_sentences(test_text_model):
 '''
 T E S T S    T O    G E T    N A R R A T O R    D I A L O G
 '''
-def test_get_paragraph_model_narrator_with_dialog_sentence(test_dialog_model):
+def test_get_dialog_object_connected_narrative_paragraph_model(test_dialog_model):
 
-    sentence_models = etl_wordsum.get_dialog_connected_narrator_paragraph_model(test_dialog_model['paragraphStates'][1])
+    sentence_models = etl_wordsum.get_dialog_object_connected_narrative_paragraph_model(test_dialog_model['paragraphStates'][1])
 
     assert sentence_models[0]['dialogState']['originOfDialogFromOrderParagraph'] == 1
     assert sentence_models[0]['dialogState']['originOfDialogFromOrderParagraph'] == test_dialog_model['paragraphStates'][1]['sentenceStates'][1]['dialogState']['originOfDialogFromOrderParagraph']
 
 
-def test_get_dialog_remainder_connected_narrator_paragraph_model_first(test_dialog_model):
+def test_get_narrative_with_dialog_object_paragraph_model_first(test_dialog_model):
 
-    sentence_model_narrator = etl_wordsum.get_dialog_remainder_connected_narrator_paragraph_model(test_dialog_model['paragraphStates'][1], 1)
-
-    print(sentence_model_narrator)
+    sentence_model_narrator = etl_wordsum.get_narrative_with_dialog_object_paragraph_model(test_dialog_model['paragraphStates'][1], 1)
 
     assert sentence_model_narrator[0]['sentence'] == "Rind shouts, DIALOG_OBJECT_1"
 
 
 
-def test_get_dialog_remainder_connected_narrator_paragraph_model_narrator_last(test_dialog_model):
+def test_get_narrative_with_dialog_object_paragraph_model_last(test_dialog_model):
 
-    sentence_model_narrator = etl_wordsum.get_dialog_remainder_connected_narrator_paragraph_model(test_dialog_model['paragraphStates'][80], 3)
-
-    print(sentence_model_narrator)
+    sentence_model_narrator = etl_wordsum.get_narrative_with_dialog_object_paragraph_model(test_dialog_model['paragraphStates'][80], 3)
 
     assert sentence_model_narrator[0]['sentence'] == "DIALOG_OBJECT_1, says Rind holding arms under cloak and looking at Tommy."
     assert sentence_model_narrator[1]['sentence'] == "I don't know,''"
 
 
+def test_get_dialog_connected_dialog_object_paragraph_model_last(test_dialog_model):
+
+    sentence_model_dialog = etl_wordsum.get_dialog_connected_dialog_object_paragraph_model(test_dialog_model['paragraphStates'][1], 1)
+
+    print(sentence_model_dialog)
+
+    assert sentence_model_dialog[0]['sentence'] == "Rind shouts, DIALOG_OBJECT_1"

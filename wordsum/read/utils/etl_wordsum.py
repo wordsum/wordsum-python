@@ -66,10 +66,9 @@ def get_paragraph_model_dialog_sentences(paragraph_model):
     return paragraph
 
 '''
-This will take a paragraph model and get the sentence objects that are are dialog and connected to a non-dialog sentence
- by syntax defined by wordsum.
+This will take a paragraph model and get the sentence objects that have dialog objects.
 '''
-def get_dialog_connected_narrator_paragraph_model(paragraph_model):
+def get_dialog_object_connected_narrative_paragraph_model(paragraph_model):
     logging.debug("Getting get_paragraph_model_narrator_with_dialog_sentence")
     dialog_sentence_obj = []
 
@@ -80,8 +79,10 @@ def get_dialog_connected_narrator_paragraph_model(paragraph_model):
 
     return dialog_sentence_obj
 
-
-def get_dialog_remainder_connected_narrator_paragraph_model(paragraph_model, originOfDialogFromOrderParagraph):
+'''
+This function gets the narrative sentence connected by syntax to the dialog object.
+'''
+def get_narrative_with_dialog_object_paragraph_model(paragraph_model, originOfDialogFromOrderParagraph):
     logging.debug("Getting get_remainder_narrator_connected_with_dialog_sentence")
     sentence_sentence_obj = []
 
@@ -92,8 +93,16 @@ def get_dialog_remainder_connected_narrator_paragraph_model(paragraph_model, ori
 
     return sentence_sentence_obj
 
-
-
-
-def get_narrator_remainder_connected_narrator_paragraph_model(paragraph_model):
+'''
+This functions gets all the dialog of dialog object.
+'''
+def get_dialog_connected_dialog_object_paragraph_model(paragraph_model, originOfDialogFromOrderParagraph):
     logging.debug("Getting get_remainder_narrator_connected_with_dialog_sentence")
+    sentence_sentence_obj = []
+
+    for sentence_model in paragraph_model['sentenceStates']:
+        if sentence_model['orderParagraph'] == originOfDialogFromOrderParagraph:
+
+            sentence_sentence_obj.append(sentence_model)
+
+    return sentence_sentence_obj
