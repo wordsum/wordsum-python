@@ -1,3 +1,15 @@
+'''
+text                string
+narrative_tag       string
+dialog_mark         dialog_mark
+dialog_identifiers  dialog_identifiers
+'''
+
+
+
+
+
+
 from django.db import models
 
 class Sentence(models.Model):
