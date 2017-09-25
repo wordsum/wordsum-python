@@ -13,35 +13,16 @@
 '''
 class Sentence_End(object):
 
-        def __init__(self, narrator_end = "(?<=\\. <)|(?<=\\. >)|(?<=\\. ,,)|(?<=\\. '')|(?<=\\! <)|(?<=\\! >)|(?<=\\! ,,)|(?<=\\! '')|(?<=\\? <)|(?<=\\? >)|(?<=\\? ,,)|(?<=\\? '')",
-                        narrator_end_dialog_begin = "(\\n)|(?<=\\.''\\ )|(?<=\\?''\\ )|(?<=\\!''\\ )|(?<=\\.>\\ )|(?<=\\?>\\ )|(?<=\\!>\\ )|(?<=\\.<\\ )|(?<=\\?<\\ )|(?<=\\!<\\ )",
-                        dialog_end = "(?<=! )|(?<=\\. )|(?<=\\? )"):
+        def __init__(self, pattern =  "(! |\. |\? |.'' |\?''\ |!''\ |\.>\ |\?>\ |!>\ |\.<\ |\?<\ |!<\ |!\" |\.\" |\?\" |, >|, <|, ''|, ,,|, \")"):
 
-                self._narrator_end = narrator_end
-                self._narrator_end_dialog_begin = narrator_end_dialog_begin
-                self._dialog_end = dialog_end
+                self._pattern = pattern
 
 
         @property
-        def narrator_end(self):
-                return self._narrator_end
+        def pattern(self):
+                return self._pattern
 
-        @narrator_end.setter
-        def narrator_end(self, narrator_end):
-                self._narrator_end  = narrator_end
+        @pattern.setter
+        def pattern(self, pattern):
+                self._pattern  = pattern
 
-        @property
-        def narrator_end_dialog_begin(self):
-                return self._narrator_end_dialog_begin
-
-        @narrator_end_dialog_begin.setter
-        def narrator_end_dialog_begin(self, narrator_end_dialog_begin):
-                self._narrator_end_dialog_begin  = narrator_end_dialog_begin
-
-        @property
-        def dialog_end(self):
-                return self._dialog_end
-
-        @dialog_end.setter
-        def dialog_end(self, dialog_end):
-                self._dialog_end  = dialog_end

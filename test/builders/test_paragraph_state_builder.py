@@ -22,6 +22,10 @@ PARAGRAPH_NO_DIALOG = str("The valley filled with smoke smoldering from pine tre
                         " Does she smell like smoke?"
                         " Only her nose knows.")
 
+PARAGRAPH_AUDIO_DIALOG = str("I said, ,,The time has come to stop.''"
+                            " Then I ran for the lake. The killer bees were chasing as I was shouting, ''RUN, SUE!''"
+                            " Sue heard. Sue looked back. ,,What?'' She breathed and thought, <Run. Run fast.>"
+                            " I thought to her, >I will miss you.< And I dived into the river. >|I will never forget.<")
 
 def test_set_paragraph():
 
@@ -31,15 +35,26 @@ def test_set_paragraph():
     state = builder.set_paragraph(state, end, PARAGRAPH_NO_DIALOG)
 
     assert state.text == PARAGRAPH_NO_DIALOG
-    assert end.narrator_end ==   "(?<=! )|(?<=\. )|(?<=\? )"
 
 
-def test_split_paragraph():
+
+def test_split_paragraph_text():
 
     state = paragraph_state.Paragraph_State()
     end = sentence_end.Sentence_End()
 
     state = builder.set_paragraph(state, end, PARAGRAPH_NO_DIALOG)
-    builder.split_paragraph(state)
+    sentences = builder.split_paragraph_text(state)
+
+    assert sentences[0] + sentences[1] == "The valley filled with smoke smoldering from pine trees. "
 
 
+def test_split_paragraph_text_dialog():
+
+    state = paragraph_state.Paragraph_State()
+    end = sentence_end.Sentence_End()
+
+    state = builder.set_paragraph(state, end, PARAGRAPH_AUDIO_DIALOG)
+    sentences = builder.split_paragraph_text(state)
+
+    assert sentences[0] + sentences[1] + sentences[2] + sentences[3] == "I said, ,,The time has come to stop.'' "
