@@ -31,4 +31,15 @@ def test_set_paragraph():
     state = builder.set_paragraph(state, end, PARAGRAPH_NO_DIALOG)
 
     assert state.text == PARAGRAPH_NO_DIALOG
-    assert end.dialog_end ==  "(?<=! )|(?<=\\. )|(?<=\\? )"
+    assert end.narrator_end ==   "(?<=! )|(?<=\. )|(?<=\? )"
+
+
+def test_split_paragraph():
+
+    state = paragraph_state.Paragraph_State()
+    end = sentence_end.Sentence_End()
+
+    state = builder.set_paragraph(state, end, PARAGRAPH_NO_DIALOG)
+    builder.split_paragraph(state)
+
+

@@ -13,6 +13,7 @@
 
 '''
 import logging
+import re
 
 
 def set_paragraph(paragraph_state, sentence_end, text):
@@ -30,3 +31,13 @@ def set_paragraph(paragraph_state, sentence_end, text):
 
     return paragraph_state
 
+def split_paragraph(paragraph_state):
+    logging.debug("split_paragraph into sentences.")
+
+    if paragraph_state.text is None or paragraph_state.sentence_end is None:
+        logging.info("exiting split_paragraph because not text or sentence_end object found.")
+        exit()
+    else:
+        regex = re.compile(r"(! |\. |\? )")
+        for sentence in regex.split(paragraph_state.text):
+            print(sentence)
