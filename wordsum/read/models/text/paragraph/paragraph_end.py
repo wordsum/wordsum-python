@@ -14,17 +14,17 @@
 
 Model for setting expected paragraph end to know where to split.
 '''
-class Paragraph_End:
 
-    def __init__(self):
-        self.pattern = "\n\n"
+class Paragraph_End(object):
 
+    def __init__(self, pattern = "\n\n"):
+        self._pattern = pattern
 
     @property
     def pattern(self):
-        return self.pattern
+        return self._pattern
 
     @pattern.setter
     def pattern(self, pattern):
-        self.pattern = pattern
+        self._pattern = pattern
 
