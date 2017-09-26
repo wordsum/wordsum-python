@@ -92,7 +92,7 @@ class CNN(object):
             correct_predictions = tf.equal(self.predictions, tf.argmax(self.input_y, 1))
 
 
-self.accuracy = tf.reduce_mean(tf.cast(correct_predictions, "float"), name="accuracy")
+        self.accuracy = tf.reduce_mean(tf.cast(correct_predictions, "float"), name="accuracy")
 
 
 
