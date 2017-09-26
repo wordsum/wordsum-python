@@ -44,7 +44,7 @@ def split_paragraph_text(paragraph_state):
         exit()
     else:
 
-        regex = re.compile(paragraph_state.sentence_end.pattern)
+        regex = re.compile(paragraph_state.sentence_end.split)
         # Split into list
         paragraph_array = regex.split(paragraph_state.text)
         # Remove the empty
