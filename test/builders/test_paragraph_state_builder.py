@@ -12,7 +12,7 @@
 # and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
 
 '''
-import wordsum.read.models.text.sentence.sentence_end as sentence_end
+import wordsum.read.models.text.paragraph.paragraph_patterns as paragraph_patterns
 import wordsum.read.models.text.paragraph.paragraph_state as paragraph_state
 import wordsum.read.builders.paragraph_state_builder as builder
 
@@ -57,7 +57,7 @@ MARK_DIALOG_BEGIN_STING = ["I don't know? ,,The some dialog.''",
 def test_set_paragraph():
 
     state = paragraph_state.Paragraph_State()
-    end = sentence_end.Sentence_End()
+    end = paragraph_patterns.Paragraph_Patterns()
 
     state = builder.set_paragraph(state, end, PARAGRAPH_NO_DIALOG)
 
@@ -68,7 +68,7 @@ def test_set_paragraph():
 def test_split_paragraph_text():
 
     state = paragraph_state.Paragraph_State()
-    end = sentence_end.Sentence_End()
+    end = paragraph_patterns.Paragraph_Patterns()
 
     state = builder.set_paragraph(state, end, PARAGRAPH_NO_DIALOG)
     state = builder.split_paragraph_text(state)
@@ -79,7 +79,7 @@ def test_split_paragraph_text():
 def test_split_paragraph_text_dialog():
 
     state = paragraph_state.Paragraph_State()
-    end = sentence_end.Sentence_End()
+    end = paragraph_patterns.Paragraph_Patterns()
 
     state = builder.set_paragraph(state, end, PARAGRAPH_AUDIO_DIALOG)
     state = builder.split_paragraph_text(state)
@@ -89,7 +89,7 @@ def test_split_paragraph_text_dialog():
 def test_split_paragraph_text_dialog_split_begin_end():
 
     state = paragraph_state.Paragraph_State()
-    end = sentence_end.Sentence_End()
+    end = paragraph_patterns.Paragraph_Patterns()
 
     i = -1
 
@@ -104,7 +104,7 @@ def test_split_paragraph_text_dialog_split_begin_end():
 def test_split_paragraph_text_split_end():
 
     state = paragraph_state.Paragraph_State()
-    end = sentence_end.Sentence_End()
+    end = paragraph_patterns.Paragraph_Patterns()
 
     i = -1
 
@@ -120,7 +120,7 @@ def test_split_paragraph_text_split_end():
 def test_mark_dialog_begin_string():
 
     state = paragraph_state.Paragraph_State()
-    end = sentence_end.Sentence_End()
+    end = paragraph_patterns.Paragraph_Patterns()
 
     i = -1
 

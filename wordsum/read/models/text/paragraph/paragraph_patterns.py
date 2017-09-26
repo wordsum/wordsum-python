@@ -17,8 +17,22 @@ Model for setting expected paragraph end to know where to split.
 
 class Paragraph_Patterns(object):
 
-    def __init__(self, end = "\n\n"):
+    def __init__(self, end = "\n\n", pattern = None):
+
+        mark_begin_string = "^''|^\"|^,,|^<|^>|"
+        mark_end_string =  "!''$|!\"$|!<$|!>$|\?''$|\?\"$|\?<$|\?>$|\.''$|\.\"$|\.<$|\.>$|\.$|!$|\?$|"
+        mark_narrator_end_string = "!\s+|\.\s+|\?\s+|"
+        mark_dialog_end_string = "\.''\s+|\?''\s+|!''\s+|\.>\s+|\?>\s+|!>\s+|\.<\s+|\?<\s+|!<\s+|!\"\s+|\.\"\s+|\?\"\s+|"
+        mark_narrator_end_dialog_begin = ",\s+>\||,\s+<\||,\s+>|,\s+<|,\s+''|,\s+,,|,\s+\"|"
+        mark_dialog_begin_string = ",,|''|<\||>\||<|>"
+
+        if pattern is None:
+            self._pattern =  "(" + mark_begin_string +  mark_end_string + mark_narrator_end_string + mark_dialog_end_string + mark_narrator_end_dialog_begin +  mark_dialog_begin_string + ")"
+        else:
+            self._pattern = pattern
+
         self._end = end
+
 
     @property
     def end(self):
@@ -27,4 +41,13 @@ class Paragraph_Patterns(object):
     @end.setter
     def end(self, end):
         self._end = end
+
+    @property
+    def pattern(self):
+        return self._pattern
+
+    @pattern.setter
+    def pattern(self, pattern):
+        self._pattern  = pattern
+
 

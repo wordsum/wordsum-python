@@ -55,3 +55,38 @@ def split_paragraph_text(paragraph_state):
     return paragraph_state
 
 
+'''
+A function to define the punctuation, dialog and narrative objects.
+'''
+def hashmap_paragraph_objects(paragraph_state):
+    logging.debug("create_sentence_states")
+
+
+
+
+    return paragraph_state
+
+
+
+
+'''
+A function to begin to define the sentence states.
+'''
+def create_sentence_states(paragraph_state):
+    logging.debug("create_sentence_states")
+
+
+
+    return paragraph_state
+
+
+'''
+A function to begin to define the sentencce states.
+'''
+def create_sentence_states(paragraph_state):
+    logging.debug("create_sentence_states")
+
+
+
+    return paragraph_state
+

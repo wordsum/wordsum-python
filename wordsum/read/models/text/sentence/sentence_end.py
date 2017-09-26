@@ -13,26 +13,12 @@
 '''
 class Sentence_End(object):
 
-        def __init__(self, pattern = None):
+        def __init__(self, labels = None):
 
-                mark_begin_string = "^''|^\"|^,,|^<|^>|"
-                mark_end_string =  "!''$|!\"$|!<$|!>$|\?''$|\?\"$|\?<$|\?>$|\.''$|\.\"$|\.<$|\.>$|\.$|!$|\?$|"
-                mark_narrator_end_string = "!\s+|\.\s+|\?\s+|"
-                mark_dialog_end_string = "\.''\s+|\?''\s+|!''\s+|\.>\s+|\?>\s+|!>\s+|\.<\s+|\?<\s+|!<\s+|!\"\s+|\.\"\s+|\?\"\s+|"
-                mark_narrator_end_dialog_begin = ",\s+>\||,\s+<\||,\s+>|,\s+<|,\s+''|,\s+,,|,\s+\"|"
-                mark_dialog_begin_string = ",,|''|<\||>\||<|>"
-
-                if pattern is None:
-                        self._pattern =  "(" + mark_begin_string +  mark_end_string + mark_narrator_end_string + mark_dialog_end_string + mark_narrator_end_dialog_begin +  mark_dialog_begin_string + ")"
-                else:
-                        self._pattern = pattern
+                self._labels = labels
 
 
-        @property
-        def pattern(self):
-                return self._pattern
 
-        @pattern.setter
-        def pattern(self, pattern):
-                self._pattern  = pattern
+
+
 
