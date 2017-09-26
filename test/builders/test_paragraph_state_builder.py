@@ -40,7 +40,7 @@ PARAGRAPH_END = ["I don't know?",
                  "I don't know!",
                  "I don't know."]
 
-MARK_DIALOG_BEGIN_STING = ["I don't know? ,,The some dialog.''",
+MARK_DIALOG_BEGIN_STRING = ["I don't know? ,,The some dialog.''",
                            "I don't know? ''The some dialog.''",
                            "I don't know? >|The some dialog.<",
                            "I don't know? <|The some dialog.>",
@@ -52,6 +52,21 @@ MARK_DIALOG_BEGIN_STING = ["I don't know? ,,The some dialog.''",
                            "I don't know. <|The some dialog.>",
                            "I don't know. <The some dialog.>",
                            "I don't know. >The some dialog.<"]
+
+
+NARRATOR_BEGIN_NARRATOR_END_STRING = ["I say, \"I don't know?\"",
+                           "I say, ''The same dialog.''",
+                           "I speak, >|The some dialog.<",
+                           "I thought, <|The some dialog.>",
+                           "I thought, <The some dialog.>",
+                           "I speak, >The some dialog.<",
+                           "I say, ,,The some dialog.''"]
+
+DIALOG_BEGIN_NARRATOR_END_STRING = ["\"I don't know,\" I say.",
+                                      "''The same dialog,'' I say.",
+                                      ">|The some dialog,< I speak.",
+                                      "<|The some dialog,> I thought.",
+                                      "<The some dialog,> I thought."]
 
 
 def test_set_paragraph():
@@ -124,10 +139,42 @@ def test_mark_dialog_begin_string():
 
     i = -1
 
-    for sentence in MARK_DIALOG_BEGIN_STING:
+    for sentence in MARK_DIALOG_BEGIN_STRING:
         state = builder.set_paragraph(state, end, sentence)
         state = builder.split_paragraph_text(state)
 
         i += 1
 
-        assert state.paragraph_array[0] + state.paragraph_array[1] + state.paragraph_array[2] + state.paragraph_array[3] + state.paragraph_array[4] == MARK_DIALOG_BEGIN_STING[i]
+        assert state.paragraph_array[0] + state.paragraph_array[1] + state.paragraph_array[2] + state.paragraph_array[3] + state.paragraph_array[4] == MARK_DIALOG_BEGIN_STRING[i]
+
+
+def test_narrative_continue_to_dialog_string():
+
+    state = paragraph_state.Paragraph_State()
+    end = paragraph_patterns.Paragraph_Patterns()
+
+    i = -1
+
+    for sentence in NARRATOR_BEGIN_NARRATOR_END_STRING:
+        state = builder.set_paragraph(state, end, sentence)
+        state = builder.split_paragraph_text(state)
+
+        i += 1
+
+        assert state.paragraph_array[0] + state.paragraph_array[1] + state.paragraph_array[2] + state.paragraph_array[3] == NARRATOR_BEGIN_NARRATOR_END_STRING[i]
+
+
+def test_dialog_continue_to_narrator_string():
+
+    state = paragraph_state.Paragraph_State()
+    end = paragraph_patterns.Paragraph_Patterns()
+
+    i = -1
+
+    for sentence in DIALOG_BEGIN_NARRATOR_END_STRING:
+        state = builder.set_paragraph(state, end, sentence)
+        state = builder.split_paragraph_text(state)
+
+        i += 1
+
+        assert state.paragraph_array[0] + state.paragraph_array[1] + state.paragraph_array[2] + state.paragraph_array[3] + state.paragraph_array[4] == DIALOG_BEGIN_NARRATOR_END_STRING[i]

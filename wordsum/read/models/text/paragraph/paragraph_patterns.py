@@ -18,16 +18,18 @@ Model for setting expected paragraph end to know where to split.
 class Paragraph_Patterns(object):
 
     def __init__(self, end = "\n\n", split = None):
-
         mark_begin_string = "^''|^\"|^,,|^<|^>|"
         mark_end_string =  "!''$|!\"$|!<$|!>$|\?''$|\?\"$|\?<$|\?>$|\.''$|\.\"$|\.<$|\.>$|\.$|!$|\?$|"
-        mark_narrator_end_string = "!\s+|\.\s+|\?\s+|"
         mark_dialog_end_string = "\.''\s+|\?''\s+|!''\s+|\.>\s+|\?>\s+|!>\s+|\.<\s+|\?<\s+|!<\s+|!\"\s+|\.\"\s+|\?\"\s+|"
-        mark_narrator_end_dialog_begin = ",\s+>\||,\s+<\||,\s+>|,\s+<|,\s+''|,\s+,,|,\s+\"|"
         mark_dialog_begin_string = ",,|''|<\||>\||<|>|\""
+        mark_dialog_continue_to_narrator = ",\"\s+|,''\s+|,>\s+|,<\s+|"
+
+        mark_narrator_end_dialog_begin = ",\s+>\||,\s+<\||,\s+>|,\s+<|,\s+''|,\s+,,|,\s+\"|"
+        mark_narrator_end_string = "!\s+|\.\s+|\?\s+|"
+
 
         if split is None:
-            self._split =  "(" + mark_begin_string +  mark_end_string + mark_narrator_end_string + mark_dialog_end_string + mark_narrator_end_dialog_begin +  mark_dialog_begin_string + ")"
+            self._split =  "(" + mark_dialog_continue_to_narrator + mark_begin_string +  mark_end_string + mark_narrator_end_string + mark_dialog_end_string + mark_narrator_end_dialog_begin +  mark_dialog_begin_string + ")"
         else:
             self._split = split
 
