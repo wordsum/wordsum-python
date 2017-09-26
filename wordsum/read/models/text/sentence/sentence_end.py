@@ -13,9 +13,19 @@
 '''
 class Sentence_End(object):
 
-        def __init__(self, pattern =  "(! |\. |\? |.'' |\?''\ |!''\ |\.>\ |\?>\ |!>\ |\.<\ |\?<\ |!<\ |!\" |\.\" |\?\" |, >|, <|, ''|, ,,|, \")"):
+        def __init__(self, pattern = None):
 
-                self._pattern = pattern
+                mark_begin_string = "^''|^\"|^,,|^<|^>|"
+                mark_end_string =  "!''$|!\"$|!<$|!>$|\?''$|\?\"$|\?<$|\?>$|\.''$|\.\"$|\.<$|\.>$|\.$|!$|\?$|"
+                mark_narrator_end_string = "!\s+|\.\s+|\?\s+|"
+                mark_dialog_end_string = "\.''\s+|\?''\s+|!''\s+|\.>\s+|\?>\s+|!>\s+|\.<\s+|\?<\s+|!<\s+|!\"\s+|\.\"\s+|\?\"\s+|"
+                mark_narrator_end_dialog_begin = ",\s+>\||,\s+<\||,\s+>|,\s+<|,\s+''|,\s+,,|,\s+\"|"
+                mark_dialog_begin_string = ",,|''|<\||>\||<|>"
+
+                if pattern is None:
+                        self._pattern =  "(" + mark_begin_string +  mark_end_string + mark_narrator_end_string + mark_dialog_end_string + mark_narrator_end_dialog_begin +  mark_dialog_begin_string + ")"
+                else:
+                        self._pattern = pattern
 
 
         @property

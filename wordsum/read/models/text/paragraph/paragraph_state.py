@@ -24,8 +24,9 @@ sentence_states     list of sentence__states sentence_states of type list of Sen
 '''
 class Paragraph_State(object):
 
-    def __init__(self, text = None, sentence_states = None, sentence_end = None):
+    def __init__(self, text = None, paragraph_array = None, sentence_states = None, sentence_end = None):
         self._text = text
+        self._paragraph_array = paragraph_array
         self._sentence_states = sentence_states
         self._sentence_end = sentence_end
 
@@ -37,6 +38,14 @@ class Paragraph_State(object):
     @text.setter
     def text(self, text):
         self._text  = text
+
+    @property
+    def paragraph_array(self):
+        return self._paragraph_array
+
+    @paragraph_array.setter
+    def paragraph_array(self, paragraph_array):
+        self._paragraph_array  = paragraph_array
 
     @property
     def sentence_states(self):

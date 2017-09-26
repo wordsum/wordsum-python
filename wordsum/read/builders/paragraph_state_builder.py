@@ -15,7 +15,9 @@
 import logging
 import re
 
-
+'''
+A function to get checck for state and set the two things the object needs to begin.
+'''
 def set_paragraph(paragraph_state, sentence_end, text):
     logging.debug("build_paragraph.")
 
@@ -31,6 +33,9 @@ def set_paragraph(paragraph_state, sentence_end, text):
 
     return paragraph_state
 
+'''
+A function that will split the paragraph by punctuation and put both in an array to later be used to define the words.
+'''
 def split_paragraph_text(paragraph_state):
     logging.debug("split_paragraph into sentences.")
 
@@ -38,7 +43,15 @@ def split_paragraph_text(paragraph_state):
         logging.info("exiting split_paragraph because not text or sentence_end object found.")
         exit()
     else:
-        regex = re.compile(paragraph_state.sentence_end.pattern)
-        sentences = regex.split(paragraph_state.text)
 
-    return sentences
+        regex = re.compile(paragraph_state.sentence_end.pattern)
+        # Split into list
+        paragraph_array = regex.split(paragraph_state.text)
+        # Remove the empty
+        paragraph_array[:] = [item for item in paragraph_array if item != '']
+        # Set the array
+        paragraph_state.paragraph_array = paragraph_array
+
+    return paragraph_state
+
+
