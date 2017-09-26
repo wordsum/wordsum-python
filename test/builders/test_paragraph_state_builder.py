@@ -14,6 +14,7 @@
 '''
 import wordsum.read.models.text.paragraph.paragraph_patterns as paragraph_patterns
 import wordsum.read.models.text.paragraph.paragraph_state as paragraph_state
+import wordsum.read.models.text.paragraph.paragraph_tags as paragraph_tags
 import wordsum.read.builders.paragraph_state_builder as builder
 
 PARAGRAPH_NO_DIALOG = str("The valley filled with smoke smoldering from pine trees."
@@ -29,7 +30,7 @@ PARAGRAPH_AUDIO_DIALOG = str("I said, ,,The time has come to stop.''"
 
 
 PARAGRAPH_DIALOG_BEGIN_END = ["''Where are we going?''",
-                              "\"I began this sentence.\"",
+                              "\"I began this string.\"",
                               ",,What are we thinking?''",
                               ">I don't know.<",
                               "<I don't know.>",
@@ -72,9 +73,10 @@ DIALOG_BEGIN_NARRATOR_END_STRING = ["\"I don't know,\" I say.",
 def test_set_paragraph():
 
     state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
     end = paragraph_patterns.Paragraph_Patterns()
 
-    state = builder.set_paragraph(state, end, PARAGRAPH_NO_DIALOG)
+    state = builder.set_paragraph(state, end, tags, PARAGRAPH_NO_DIALOG)
 
     assert state.text == PARAGRAPH_NO_DIALOG
 
@@ -83,98 +85,120 @@ def test_set_paragraph():
 def test_split_paragraph_text():
 
     state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
     end = paragraph_patterns.Paragraph_Patterns()
 
-    state = builder.set_paragraph(state, end, PARAGRAPH_NO_DIALOG)
+    state = builder.set_paragraph(state, end, tags, PARAGRAPH_NO_DIALOG)
     state = builder.split_paragraph_text(state)
 
-    assert state.paragraph_array[0] + state.paragraph_array[1] == "The valley filled with smoke smoldering from pine trees. "
+    dict_state = list(state.paragraph_dict.items())
+
+    assert dict_state[0][0] + dict_state[1][0] == "The valley filled with smoke smoldering from pine trees. "
 
 
 def test_split_paragraph_text_dialog():
 
     state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
     end = paragraph_patterns.Paragraph_Patterns()
 
-    state = builder.set_paragraph(state, end, PARAGRAPH_AUDIO_DIALOG)
+    state = builder.set_paragraph(state, end, tags, PARAGRAPH_AUDIO_DIALOG)
     state = builder.split_paragraph_text(state)
 
-    assert state.paragraph_array[0] + state.paragraph_array[1] + state.paragraph_array[2] + state.paragraph_array[3] == "I said, ,,The time has come to stop.'' "
+    dict_state = list(state.paragraph_dict.items())
+
+    assert dict_state[0][0] + dict_state[1][0] + dict_state[2][0] + dict_state[3][0] == "I said, ,,The time has come to stop.'' "
 
 def test_split_paragraph_text_dialog_split_begin_end():
 
     state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
     end = paragraph_patterns.Paragraph_Patterns()
 
     i = -1
 
-    for sentence in PARAGRAPH_DIALOG_BEGIN_END:
-        state = builder.set_paragraph(state, end, sentence)
+    for string in PARAGRAPH_DIALOG_BEGIN_END:
+        state = builder.set_paragraph(state, end, tags, string)
         state = builder.split_paragraph_text(state)
+
+        dict_state = list(state.paragraph_dict.items())
 
         i += 1
 
-        assert state.paragraph_array[0] + state.paragraph_array[1] +  state.paragraph_array[2] == PARAGRAPH_DIALOG_BEGIN_END[i]
+        assert dict_state[0][0] + dict_state[1][0] +  dict_state[2][0] == PARAGRAPH_DIALOG_BEGIN_END[i]
 
 def test_split_paragraph_text_split_end():
 
     state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
     end = paragraph_patterns.Paragraph_Patterns()
 
     i = -1
 
-    for sentence in PARAGRAPH_END:
-        state = builder.set_paragraph(state, end, sentence)
+    for string in PARAGRAPH_END:
+        state = builder.set_paragraph(state, end, tags, string)
         state = builder.split_paragraph_text(state)
+
+        dict_state = list(state.paragraph_dict.items())
 
         i += 1
 
-        assert state.paragraph_array[0] + state.paragraph_array[1] == PARAGRAPH_END[i]
+        assert dict_state[0][0] + dict_state[1][0] == PARAGRAPH_END[i]
 
 
 def test_mark_dialog_begin_string():
 
     state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
     end = paragraph_patterns.Paragraph_Patterns()
+
 
     i = -1
 
-    for sentence in MARK_DIALOG_BEGIN_STRING:
-        state = builder.set_paragraph(state, end, sentence)
+    for string in MARK_DIALOG_BEGIN_STRING:
+        state = builder.set_paragraph(state, end, tags, string)
         state = builder.split_paragraph_text(state)
+
+        dict_state = list(state.paragraph_dict.items())
 
         i += 1
 
-        assert state.paragraph_array[0] + state.paragraph_array[1] + state.paragraph_array[2] + state.paragraph_array[3] + state.paragraph_array[4] == MARK_DIALOG_BEGIN_STRING[i]
+        assert dict_state[0][0] + dict_state[1][0] + dict_state[2][0] + dict_state[3][0] + dict_state[4][0] == MARK_DIALOG_BEGIN_STRING[i]
 
 
 def test_narrative_continue_to_dialog_string():
 
     state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
     end = paragraph_patterns.Paragraph_Patterns()
 
     i = -1
 
-    for sentence in NARRATOR_BEGIN_NARRATOR_END_STRING:
-        state = builder.set_paragraph(state, end, sentence)
+    for string in NARRATOR_BEGIN_NARRATOR_END_STRING:
+        state = builder.set_paragraph(state, end, tags, string)
         state = builder.split_paragraph_text(state)
+
+        dict_state = list(state.paragraph_dict.items())
 
         i += 1
 
-        assert state.paragraph_array[0] + state.paragraph_array[1] + state.paragraph_array[2] + state.paragraph_array[3] == NARRATOR_BEGIN_NARRATOR_END_STRING[i]
+        assert dict_state[0][0] + dict_state[1][0] + dict_state[2][0] + dict_state[3][0] == NARRATOR_BEGIN_NARRATOR_END_STRING[i]
 
 
 def test_dialog_continue_to_narrator_string():
 
     state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
     end = paragraph_patterns.Paragraph_Patterns()
 
     i = -1
 
-    for sentence in DIALOG_BEGIN_NARRATOR_END_STRING:
-        state = builder.set_paragraph(state, end, sentence)
+    for string in DIALOG_BEGIN_NARRATOR_END_STRING:
+        state = builder.set_paragraph(state, end, tags, string)
         state = builder.split_paragraph_text(state)
+
+        dict_state = list(state.paragraph_dict.items())
 
         i += 1
 
-        assert state.paragraph_array[0] + state.paragraph_array[1] + state.paragraph_array[2] + state.paragraph_array[3] + state.paragraph_array[4] == DIALOG_BEGIN_NARRATOR_END_STRING[i]
+        assert dict_state[0][0] + dict_state[1][0] + dict_state[2][0] + dict_state[3][0] + dict_state[4][0] == DIALOG_BEGIN_NARRATOR_END_STRING[i]

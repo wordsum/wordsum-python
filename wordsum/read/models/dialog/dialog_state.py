@@ -7,7 +7,7 @@ dialog_pattern      dialog_pattern
 '''
 class Dialog_State:
 
-    def __init__(self,text, narrative_tag, dialog_mark, dialog_meta, dialog_pattern):
+    def __init__(self,text, narrative_tag = None, dialog_mark = None, dialog_meta = None, dialog_pattern = None):
         self.text = text
         self.narrative_tag = narrative_tag
         self.dialog_mark = dialog_mark

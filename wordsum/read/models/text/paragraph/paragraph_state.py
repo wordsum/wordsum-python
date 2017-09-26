@@ -22,12 +22,15 @@ tense	            list of strings	        tense of type list of strings is a lis
 sentence_end        list of patterns         sentence_end of type list of patterns defining end of sentences.
 sentence_states     list of sentence__states sentence_states of type list of SentenceStates is a list of Sentence Model states of the Paragraph Model state.
 '''
+import collections
+
 class Paragraph_State(object):
 
-    def __init__(self, text = None, paragraph_array = None, paragraph_patterns = None, sentence_states = None):
+    def __init__(self, text = None, paragraph_dict = collections.OrderedDict(), paragraph_patterns = None, paragraph_tags = None, sentence_states = None):
         self._text = text
-        self._paragraph_array = paragraph_array
+        self._paragraph_dict = paragraph_dict
         self._paragraph_patterns = paragraph_patterns
+        self._paragraph_tags = paragraph_tags
         self._sentence_states = sentence_states
 
 
@@ -39,13 +42,15 @@ class Paragraph_State(object):
     def text(self, text):
         self._text  = text
 
-    @property
-    def paragraph_array(self):
-        return self._paragraph_array
 
-    @paragraph_array.setter
-    def paragraph_array(self, paragraph_array):
-        self._paragraph_array  = paragraph_array
+    @property
+    def paragraph_dict(self):
+        return self._paragraph_dict
+
+    @paragraph_dict.setter
+    def paragraph_dict(self, paragraph_dict):
+        self._paragraph_dict  = paragraph_dict
+
 
     @property
     def paragraph_patterns(self):
@@ -54,6 +59,16 @@ class Paragraph_State(object):
     @paragraph_patterns.setter
     def paragraph_patterns(self, paragraph_patterns):
         self._paragraph_patterns  = paragraph_patterns
+
+
+    @property
+    def paragraph_tags(self):
+        return self._paragraph_tags
+
+    @paragraph_tags.setter
+    def paragraph_tags(self, paragraph_tags):
+        self._paragraph_tags  = paragraph_tags
+
 
     @property
     def sentence_states(self):

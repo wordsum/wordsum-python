@@ -12,24 +12,27 @@
 # and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
 
 '''
+from collections import OrderedDict
 import logging
 import re
-
+import collections
 '''
 A function to get checck for state and set the two things the object needs to begin.
 '''
-def set_paragraph(paragraph_state, sentence_end, text):
+def set_paragraph(paragraph_state, paragraph_pattern, paragraph_tags, text):
     logging.debug("build_paragraph.")
 
-    if paragraph_state is None or sentence_end is None or text is None:
+    if paragraph_state is None or paragraph_pattern is None or text is None:
         logging.info("build_paragraph is ", paragraph_state)
-        logging.info("paragraph_end is ", sentence_end)
+        logging.info("paragraph_end is ", paragraph_pattern)
         logging.info("text is ", text)
 
     else:
 
-        paragraph_state.sentence_end = sentence_end
+        paragraph_state.paragraph_pattern = paragraph_pattern
         paragraph_state.text = text
+        paragraph_state.paragraph_dict = collections.OrderedDict()
+        paragraph_state.paragraph_tags = paragraph_tags
 
     return paragraph_state
 
@@ -39,21 +42,21 @@ A function that will split the paragraph by punctuation and put both in an array
 def split_paragraph_text(paragraph_state):
     logging.debug("split_paragraph into sentences.")
 
-    if paragraph_state.text is None or paragraph_state.sentence_end is None:
-        logging.info("exiting split_paragraph because not text or sentence_end object found.")
+    if paragraph_state.text is None or paragraph_state.paragraph_pattern is None:
+        logging.info("exiting split_paragraph because not text or paragraph_pattern object found.")
         exit()
     else:
 
-        regex = re.compile(paragraph_state.sentence_end.split)
+        regex = re.compile(paragraph_state.paragraph_pattern.split)
         # Split into list
         paragraph_array = regex.split(paragraph_state.text)
         # Remove the empty
         paragraph_array[:] = [item for item in paragraph_array if item != '']
-        # Set the array
-        paragraph_state.paragraph_array = paragraph_array
+        # Set into dict
+        for i,string in enumerate(paragraph_array):
+            paragraph_state.paragraph_dict.update({string: "NO_TAG"})
 
     return paragraph_state
-
 
 '''
 A function to define the punctuation, dialog and narrative objects.
