@@ -40,7 +40,7 @@ def set_paragraph(paragraph_state, paragraph_pattern, paragraph_tags, text):
 A function that will split the paragraph by punctuation and put both in an array to later be used to define the words.
 '''
 def split_paragraph_text(paragraph_state):
-    logging.debug("split_paragraph into sentences.")
+    logging.debug("split_paragraph_text")
 
     if paragraph_state.text is None or paragraph_state.paragraph_pattern is None or paragraph_state.paragraph_tags is None:
         logging.info("split_paragraph_text: Returning paragraph_state unaltered because no text, tags or paragraph_pattern object found.")
@@ -60,35 +60,14 @@ def split_paragraph_text(paragraph_state):
 '''
 A function to define the punctuation, dialog and narrative objects.
 '''
-def hashmap_paragraph_objects(paragraph_state):
-    logging.debug("create_sentence_states")
+def tag_paragraph_dict_data(paragraph_state):
+    logging.debug("tag_paragraph_dict_data")
 
-
-
-
-    return paragraph_state
-
-
-
-
-'''
-A function to begin to define the sentence states.
-'''
-def create_sentence_states(paragraph_state):
-    logging.debug("create_sentence_states")
+    if paragraph_state.paragraph_dict is None or paragraph_state.paragraph_dict is False:
+        logging.info("tag_paragraph_dict_data: paragraph_state.paragraph_dict is " + paragraph_state.paragraph_dict)
+    else:
+        logging.debug("tag_paragraph_dict_data: paragraph_state.paragraph_dict is " + paragraph_state.paragraph_dict)
 
 
 
     return paragraph_state
-
-
-'''
-A function to begin to define the sentencce states.
-'''
-def create_sentence_states(paragraph_state):
-    logging.debug("create_sentence_states")
-
-
-
-    return paragraph_state
-
