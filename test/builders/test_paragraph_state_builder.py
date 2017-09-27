@@ -202,3 +202,20 @@ def test_dialog_continue_to_narrator_string():
         i += 1
 
         assert dict_state[0][0] + dict_state[1][0] + dict_state[2][0] + dict_state[3][0] + dict_state[4][0] == DIALOG_BEGIN_NARRATOR_END_STRING[i]
+
+
+'''
+T A G G I N G
+'''
+def test_none_paragraph_tag_in_paragraph_state_in_split_paragraph():
+
+    state = paragraph_state.Paragraph_State()
+    tags = None
+    end = paragraph_patterns.Paragraph_Patterns()
+
+    state = builder.set_paragraph(state, end, tags, PARAGRAPH_NO_DIALOG)
+    state = builder.split_paragraph_text(state)
+
+    dict_state = list(state.paragraph_dict.items())
+
+    assert dict_state == []

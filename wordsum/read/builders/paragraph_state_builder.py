@@ -42,9 +42,8 @@ A function that will split the paragraph by punctuation and put both in an array
 def split_paragraph_text(paragraph_state):
     logging.debug("split_paragraph into sentences.")
 
-    if paragraph_state.text is None or paragraph_state.paragraph_pattern is None:
-        logging.info("exiting split_paragraph because not text or paragraph_pattern object found.")
-        exit()
+    if paragraph_state.text is None or paragraph_state.paragraph_pattern is None or paragraph_state.paragraph_tags is None:
+        logging.info("split_paragraph_text: Returning paragraph_state unaltered because no text, tags or paragraph_pattern object found.")
     else:
 
         regex = re.compile(paragraph_state.paragraph_pattern.split)
@@ -54,7 +53,7 @@ def split_paragraph_text(paragraph_state):
         paragraph_array[:] = [item for item in paragraph_array if item != '']
         # Set into dict
         for i,string in enumerate(paragraph_array):
-            paragraph_state.paragraph_dict.update({string: "NO_TAG"})
+            paragraph_state.paragraph_dict.update({string: paragraph_state.paragraph_tags.no_tag})
 
     return paragraph_state
 
