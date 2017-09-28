@@ -14,22 +14,22 @@
 '''
 from collections import OrderedDict
 import logging
-import re
+import regex
 import collections
 '''
 A function to get checck for state and set the two things the object needs to begin.
 '''
-def set_paragraph(paragraph_state, paragraph_pattern, paragraph_tags, text):
+def set_paragraph(paragraph_state, paragraph_patterns, paragraph_tags, text):
     logging.debug("build_paragraph.")
 
-    if paragraph_state is None or paragraph_pattern is None or text is None:
+    if paragraph_state is None or paragraph_patterns is None or text is None:
         logging.info("build_paragraph is ", paragraph_state)
-        logging.info("paragraph_end is ", paragraph_pattern)
+        logging.info("paragraph_end is ", paragraph_patterns)
         logging.info("text is ", text)
 
     else:
 
-        paragraph_state.paragraph_pattern = paragraph_pattern
+        paragraph_state.paragraph_patterns = paragraph_patterns
         paragraph_state.text = text
         paragraph_state.paragraph_dict = collections.OrderedDict()
         paragraph_state.paragraph_tags = paragraph_tags
@@ -42,16 +42,17 @@ A function that will split the paragraph by punctuation and put both in an array
 def split_paragraph_text(paragraph_state):
     logging.debug("split_paragraph_text")
 
-    if paragraph_state.text is None or paragraph_state.paragraph_pattern is None or paragraph_state.paragraph_tags is None:
-        logging.info("split_paragraph_text: Returning paragraph_state unaltered because no text, tags or paragraph_pattern object found.")
+    if paragraph_state.text is None or paragraph_state.paragraph_patterns is None or paragraph_state.paragraph_tags is None:
+        logging.info("split_paragraph_text: Returning paragraph_state unaltered because no text, tags or paragraph_patterns object found.")
     else:
 
-        regex = re.compile(paragraph_state.paragraph_pattern.split)
+        regex_return = regex.compile(paragraph_state.paragraph_patterns.split)
         # Split into list
-        paragraph_array = regex.split(paragraph_state.text)
+        paragraph_array = regex_return.split(paragraph_state.text)
         # Remove the empty
         paragraph_array[:] = [item for item in paragraph_array if item != '']
         # Set into dict
+        # TODO: FIX FOR THIS DOESN'T SAVE SIMILAR KEYS
         for i,string in enumerate(paragraph_array):
             paragraph_state.paragraph_dict.update({string: paragraph_state.paragraph_tags.no_tag})
 
@@ -63,11 +64,51 @@ A function to define the punctuation, dialog and narrative objects.
 def tag_paragraph_dict_data(paragraph_state):
     logging.debug("tag_paragraph_dict_data")
 
-    if paragraph_state.paragraph_dict is None or paragraph_state.paragraph_dict is False:
-        logging.info("tag_paragraph_dict_data: paragraph_state.paragraph_dict is " + paragraph_state.paragraph_dict)
+    if paragraph_state.paragraph_dict is None or paragraph_state.paragraph_dict is False or paragraph_state.paragraph_patterns is None:
+        logging.info("tag_paragraph_dict_data: paragraph_state.paragraph_dict or paragraph_state.paragraph_patterns is None or False." + str(paragraph_state.paragraph_dict))
+        logging.info("paragraph_state.paragraph_dict: " + str(paragraph_state.paragraph_dict))
+        logging.info("paragraph_state.paragraph_patterns: " + str(paragraph_state.paragraph_patterns))
     else:
-        logging.debug("tag_paragraph_dict_data: paragraph_state.paragraph_dict is " + paragraph_state.paragraph_dict)
+        logging.debug("tag_paragraph_dict_data: paragraph_state.paragraph_dict is " + str(paragraph_state.paragraph_dict))
 
 
+        match_begin_dialog = regex.compile('('+ paragraph_state.paragraph_patterns.dialog_beginning_mark + "|" +
+                                        paragraph_state.paragraph_patterns.narrator_continuing_mark_to_dialog  + "|" +
+                                        paragraph_state.paragraph_patterns.dialog_mark_begin + ')')
+
+        match_end_dialog = regex.compile('('+ paragraph_state.paragraph_patterns.dialog_ending_mark + "|" +
+                                      paragraph_state.paragraph_patterns.dialog_mark_end + "|" +
+                                      paragraph_state.paragraph_patterns.dialog_continuing_mark_to_narrator + ')')
+
+        match_end_narrator = regex.compile('('+ paragraph_state.paragraph_patterns.narrator_ending_mark + ')')
+
+        current_word_tag = ""
+
+        ordered_dict =  collections.OrderedDict()
+
+        for key,value in paragraph_state.paragraph_dict.items():
+
+            if match_begin_dialog.match(key):
+
+                ordered_dict[key] = paragraph_state.paragraph_tags.syntax
+
+                current_word_tag = paragraph_state.paragraph_tags.dialog
+
+            elif match_end_dialog.match(key):
+
+                ordered_dict[key] = paragraph_state.paragraph_tags.syntax
+
+                current_word_tag = paragraph_state.paragraph_tags.narrative
+
+            elif match_end_narrator.match(key):
+
+                ordered_dict[key] = paragraph_state.paragraph_tags.syntax
+
+            else:
+
+                ordered_dict[key] = current_word_tag
+
+
+        paragraph_state.paragraph_dict = ordered_dict
 
     return paragraph_state

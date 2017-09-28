@@ -28,25 +28,25 @@ class Paragraph_Patterns(object):
                  split = None):
 
         if dialog_continuing_mark_to_narrator is None:
-            self._dialog_continuing_mark_to_narrator = ",\"\s+|,''\s+|,>\s+|,<\s+|"
+            self._dialog_continuing_mark_to_narrator = ",\"\s+|,''\s+|,>\s+|,<\s+"
         else:
             self._dialog_continuing_mark_to_narrator = dialog_continuing_mark_to_narrator
 
 
         if  dialog_mark_begin is None:
-            self._dialog_mark_begin = "^''|^\"|^,,|^<|^>|"
+            self._dialog_mark_begin = "^''|^\"|^,,|^<|^>"
         else:
             self._dialog_mark_begin =  dialog_mark_begin
 
 
         if  dialog_mark_end is None:
-            self._dialog_mark_end = "!''$|!\"$|!<$|!>$|\?''$|\?\"$|\?<$|\?>$|\.''$|\.\"$|\.<$|\.>$|\.$|!$|\?$|"
+            self._dialog_mark_end = "!''$|!\"$|!<$|!>$|\?''$|\?\"$|\?<$|\?>$|\.''$|\.\"$|\.<$|\.>$|\.$|!$|\?$"
         else:
             self._dialog_mark_end =  dialog_mark_end
 
 
         if  dialog_ending_mark is None:
-            self._dialog_ending_mark = "\.''\s+|\?''\s+|!''\s+|\.>\s+|\?>\s+|!>\s+|\.<\s+|\?<\s+|!<\s+|!\"\s+|\.\"\s+|\?\"\s+|"
+            self._dialog_ending_mark = "\?''\s+|\.''\s+|!''\s+|\.>\s+|\?>\s+|!>\s+|\.<\s+|\?<\s+|!<\s+|!\"\s+|\.\"\s+|\?\"\s+"
         else:
             self._dialog_ending_mark =  dialog_ending_mark
 
@@ -58,20 +58,20 @@ class Paragraph_Patterns(object):
 
 
         if  narrator_continuing_mark_to_dialog is None:
-            self._narrator_continuing_mark_to_dialog = ",\s+>\||,\s+<\||,\s+>|,\s+<|,\s+''|,\s+,,|,\s+\"|"
+            self._narrator_continuing_mark_to_dialog = ",\s+>\||,\s+<\||,\s+>|,\s+<|,\s+''|,\s+,,|,\s+\""
         else:
             self._narrator_continuing_mark_to_dialog =  narrator_continuing_mark_to_dialog
 
 
         if narrator_ending_mark is None:
-            self._narrator_ending_mark = "!\s+|\.\s+|\?\s+|"
+            self._narrator_ending_mark = "!\s+|\.\s+|\?\s+"
         else:
             self._narrator_ending_mark  = narrator_ending_mark
 
 
 
         if split is None:
-            self._split =  "(" + self._narrator_continuing_mark_to_dialog + self._narrator_ending_mark +  self._dialog_continuing_mark_to_narrator + self._dialog_mark_begin + self._dialog_mark_end + self._dialog_ending_mark + self._dialog_beginning_mark + ")"
+            self._split =  "(" + self._narrator_continuing_mark_to_dialog + "|" + self._narrator_ending_mark + "|" + self._dialog_continuing_mark_to_narrator + "|" + self._dialog_mark_begin + "|" + self._dialog_mark_end + "|" + self._dialog_ending_mark + "|" + self._dialog_beginning_mark + ")"
         else:
             self._split = split
 

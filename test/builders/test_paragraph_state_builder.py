@@ -16,6 +16,7 @@ import wordsum.read.models.text.paragraph.paragraph_patterns as paragraph_patter
 import wordsum.read.models.text.paragraph.paragraph_state as paragraph_state
 import wordsum.read.models.text.paragraph.paragraph_tags as paragraph_tags
 import wordsum.read.builders.paragraph_state_builder as builder
+import collections
 
 PARAGRAPH_NO_DIALOG = str("The valley filled with smoke smoldering from pine trees."
                           " She teleported from the mountain!"
@@ -23,8 +24,9 @@ PARAGRAPH_NO_DIALOG = str("The valley filled with smoke smoldering from pine tre
                         " Does she smell like smoke?"
                         " Only her nose knows.")
 
-PARAGRAPH_AUDIO_DIALOG = str(",,What.'' I said, ,,The time has come to stop.''"
-                            " Then I ran for the lake. The killer bees were chasing as I was shouting, ''RUN, SUE!''"
+PARAGRAPH_REPEAT_ENDING = str("I wake. I stand. I code. I lay. I sleep.")
+
+PARAGRAPH_AUDIO_DIALOG = str(",,What.'' I said, ,,The time has come to stop!'' Then I ran for the lake. The killer bees were chasing as I was shouting, ''RUN, SUE!''"
                             " Sue heard. Sue looked back. ,,What?'' She breathed and thought, <Run. Run fast.>"
                             " I thought to her, >I will miss you.< And I dived into the river. >|I will never forget.<")
 
@@ -70,13 +72,24 @@ DIALOG_BEGIN_NARRATOR_END_STRING = ["\"I don't know,\" I say.",
                                       "<The some dialog,> I thought."]
 
 PARRAGRAPH_SPLIT_NO_TAG = [(',,', 'NO_TAG'), ('What', 'NO_TAG'), (".'' ", 'NO_TAG'), ('I said', 'NO_TAG'), 
-                           (', ,,', 'NO_TAG'), ('The time has come to stop', 'NO_TAG'), ('Then I ran for the lake', 'NO_TAG'), 
+                           (', ,,', 'NO_TAG'), ('The time has come to stop', 'NO_TAG'), (".'' ", 'NO_TAG'), ('Then I ran for the lake', 'NO_TAG'),
                            ('. ', 'NO_TAG'), ('The killer bees were chasing as I was shouting', 'NO_TAG'), (", ''", 'NO_TAG'), 
                            ('RUN, SUE', 'NO_TAG'), ("!'' ", 'NO_TAG'), ('Sue heard', 'NO_TAG'), ('Sue looked back', 'NO_TAG'), 
                            ("?'' ", 'NO_TAG'), ('She breathed and thought', 'NO_TAG'), (', <', 'NO_TAG'), ('Run', 'NO_TAG'), 
                            ('Run fast', 'NO_TAG'), ('.> ', 'NO_TAG'), ('I thought to her', 'NO_TAG'), (', >', 'NO_TAG'), 
                            ('I will miss you', 'NO_TAG'), ('.< ', 'NO_TAG'), ('And I dived into the river', 'NO_TAG'), 
                            ('>|', 'NO_TAG'), ('I will never forget', 'NO_TAG'), ('.<', 'NO_TAG')]
+
+PARAGRAPH_TAGGED = [(',,', 'SYNTAX_OBJECT_'), ('What', 'DIALOG_OBJECT_'), (".'' ", 'SYNTAX_OBJECT_'), ('I said', 'NARRATIVE_OBJECT_'),
+                    (', ,,', 'SYNTAX_OBJECT_'), ('The time has come to stop', 'DIALOG_OBJECT_'), (".'' ", 'SYNTAX_OBJECT_'),
+                    ('Then I ran for the lake', 'NARRATIVE_OBJECT_'), ('. ', 'SYNTAX_OBJECT_'),
+                    ('The killer bees were chasing as I was shouting', 'NARRATIVE_OBJECT_'), (", ''", 'SYNTAX_OBJECT_'),
+                    ('RUN, SUE', 'DIALOG_OBJECT_'), ("!'' ", 'SYNTAX_OBJECT_'), ('Sue heard', 'NARRATIVE_OBJECT_'),
+                    ('Sue looked back', 'NARRATIVE_OBJECT_'), ("?'' ", 'SYNTAX_OBJECT_'), ('She breathed and thought', 'NARRATIVE_OBJECT_'),
+                    (', <', 'SYNTAX_OBJECT_'), ('Run', 'DIALOG_OBJECT_'), ('Run fast', 'DIALOG_OBJECT_'), ('.> ', 'SYNTAX_OBJECT_'),
+                    ('I thought to her', 'NARRATIVE_OBJECT_'), (', >', 'SYNTAX_OBJECT_'), ('I will miss you', 'DIALOG_OBJECT_'),
+                    ('.< ', 'SYNTAX_OBJECT_'), ('And I dived into the river', 'NARRATIVE_OBJECT_'), ('>|', 'SYNTAX_OBJECT_'),
+                    ('I will never forget', 'DIALOG_OBJECT_'), ('.<', 'SYNTAX_OBJECT_')]
 
 def test_set_paragraph():
 
@@ -88,7 +101,17 @@ def test_set_paragraph():
 
     assert state.text == PARAGRAPH_NO_DIALOG
 
+def test_set_split_paragraph_same_ending_and_capture():
 
+    state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
+    end = paragraph_patterns.Paragraph_Patterns()
+
+    builder.set_paragraph(state, end, tags, PARAGRAPH_REPEAT_ENDING)
+
+    builder.split_paragraph_text(state)
+
+    assert state.text == PARAGRAPH_NO_DIALOG
 
 def test_split_paragraph_text():
 
@@ -230,11 +253,27 @@ def test_none_paragraph_tag_in_paragraph_state_in_split_paragraph():
 
 
 
-def test_tag_paragraph_dict_data():
+def test_no_tag_paragraph_dict_with_tagged_dict():
+
+    state =  paragraph_state.Paragraph_State(paragraph_patterns = paragraph_patterns.Paragraph_Patterns(),
+                                    paragraph_tags = paragraph_tags.Paragraph_Tags(),
+                                    sentence_states = None)
+
+    state.paragraph_dict.update(PARRAGRAPH_SPLIT_NO_TAG)
+
+
+    builder.tag_paragraph_dict_data(state)
+
+    assert collections.OrderedDict(PARAGRAPH_TAGGED) == state.paragraph_dict
+
+def test_paragraph_dict_with_tagged_dict():
 
     state = paragraph_state.Paragraph_State()
-    state.paragraph_dict = PARRAGRAPH_SPLIT_NO_TAG
+    tags = paragraph_tags.Paragraph_Tags()
+    end = paragraph_patterns.Paragraph_Patterns()
 
-    builder.tag_paragraph_dict_data(paragraph_state)
+    builder.set_paragraph(state, end, tags, PARAGRAPH_AUDIO_DIALOG)
+    builder.split_paragraph_text(state)
+    builder.tag_paragraph_dict_data(state)
 
-
+    assert collections.OrderedDict(PARAGRAPH_TAGGED) == state.paragraph_dict
