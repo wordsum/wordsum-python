@@ -31,7 +31,7 @@ def set_paragraph(paragraph_state, paragraph_patterns, paragraph_tags, text):
 
         paragraph_state.paragraph_patterns = paragraph_patterns
         paragraph_state.text = text
-        paragraph_state.paragraph_dict = collections.OrderedDict()
+        paragraph_state.paragraph_dict = []
         paragraph_state.paragraph_tags = paragraph_tags
 
     return paragraph_state
@@ -51,10 +51,10 @@ def split_paragraph_text(paragraph_state):
         paragraph_array = regex_return.split(paragraph_state.text)
         # Remove the empty
         paragraph_array[:] = [item for item in paragraph_array if item != '']
-        # Set into dict
-        # TODO: FIX FOR THIS DOESN'T SAVE SIMILAR KEYS
+        # Set into list of ordered dicts to save position.
         for i,string in enumerate(paragraph_array):
-            paragraph_state.paragraph_dict.update({string: paragraph_state.paragraph_tags.no_tag})
+            paragraph_state.paragraph_dict.append(collections.OrderedDict([(string, paragraph_state.paragraph_tags.no_tag)]))
+
 
     return paragraph_state
 
@@ -84,31 +84,37 @@ def tag_paragraph_dict_data(paragraph_state):
 
         current_word_tag = ""
 
-        ordered_dict =  collections.OrderedDict()
+        ordered_list = []
 
-        for key,value in paragraph_state.paragraph_dict.items():
+        for ordered_loop_dict in paragraph_state.paragraph_dict:
 
-            if match_begin_dialog.match(key):
+            for key,value in ordered_loop_dict.items():
 
-                ordered_dict[key] = paragraph_state.paragraph_tags.syntax
+                ordered_dict =  collections.OrderedDict()
 
-                current_word_tag = paragraph_state.paragraph_tags.dialog
+                if match_begin_dialog.match(key):
 
-            elif match_end_dialog.match(key):
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax
 
-                ordered_dict[key] = paragraph_state.paragraph_tags.syntax
+                    current_word_tag = paragraph_state.paragraph_tags.dialog
 
-                current_word_tag = paragraph_state.paragraph_tags.narrative
+                elif match_end_dialog.match(key):
 
-            elif match_end_narrator.match(key):
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax
 
-                ordered_dict[key] = paragraph_state.paragraph_tags.syntax
+                    current_word_tag = paragraph_state.paragraph_tags.narrative
 
-            else:
+                elif match_end_narrator.match(key):
 
-                ordered_dict[key] = current_word_tag
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax
+
+                else:
+
+                    ordered_dict[key] = current_word_tag
+
+                ordered_list.append(ordered_dict)
 
 
-        paragraph_state.paragraph_dict = ordered_dict
+        paragraph_state.paragraph_dict = ordered_list
 
     return paragraph_state

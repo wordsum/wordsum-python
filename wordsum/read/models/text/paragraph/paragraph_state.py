@@ -22,11 +22,9 @@ tense	            list of strings	        tense of type list of strings is a lis
 sentence_end        list of patterns         sentence_end of type list of patterns defining end of sentences.
 sentence_states     list of sentence__states sentence_states of type list of SentenceStates is a list of Sentence Model states of the Paragraph Model state.
 '''
-import collections
-
 class Paragraph_State(object):
 
-    def __init__(self, text = None, paragraph_dict = collections.OrderedDict(), paragraph_patterns = None, paragraph_tags = None, sentence_states = None):
+    def __init__(self, text = None, paragraph_dict = [], paragraph_patterns = None, paragraph_tags = None, sentence_states = None):
         self._text = text
         self._paragraph_dict = paragraph_dict
         self._paragraph_patterns = paragraph_patterns

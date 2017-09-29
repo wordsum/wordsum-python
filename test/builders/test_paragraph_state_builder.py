@@ -71,25 +71,42 @@ DIALOG_BEGIN_NARRATOR_END_STRING = ["\"I don't know,\" I say.",
                                       "<|The some dialog,> I thought.",
                                       "<The some dialog,> I thought."]
 
-PARRAGRAPH_SPLIT_NO_TAG = [(',,', 'NO_TAG'), ('What', 'NO_TAG'), (".'' ", 'NO_TAG'), ('I said', 'NO_TAG'), 
-                           (', ,,', 'NO_TAG'), ('The time has come to stop', 'NO_TAG'), (".'' ", 'NO_TAG'), ('Then I ran for the lake', 'NO_TAG'),
-                           ('. ', 'NO_TAG'), ('The killer bees were chasing as I was shouting', 'NO_TAG'), (", ''", 'NO_TAG'), 
-                           ('RUN, SUE', 'NO_TAG'), ("!'' ", 'NO_TAG'), ('Sue heard', 'NO_TAG'), ('Sue looked back', 'NO_TAG'), 
-                           ("?'' ", 'NO_TAG'), ('She breathed and thought', 'NO_TAG'), (', <', 'NO_TAG'), ('Run', 'NO_TAG'), 
-                           ('Run fast', 'NO_TAG'), ('.> ', 'NO_TAG'), ('I thought to her', 'NO_TAG'), (', >', 'NO_TAG'), 
-                           ('I will miss you', 'NO_TAG'), ('.< ', 'NO_TAG'), ('And I dived into the river', 'NO_TAG'), 
-                           ('>|', 'NO_TAG'), ('I will never forget', 'NO_TAG'), ('.<', 'NO_TAG')]
 
-PARAGRAPH_TAGGED = [(',,', 'SYNTAX_OBJECT_'), ('What', 'DIALOG_OBJECT_'), (".'' ", 'SYNTAX_OBJECT_'), ('I said', 'NARRATIVE_OBJECT_'),
-                    (', ,,', 'SYNTAX_OBJECT_'), ('The time has come to stop', 'DIALOG_OBJECT_'), (".'' ", 'SYNTAX_OBJECT_'),
-                    ('Then I ran for the lake', 'NARRATIVE_OBJECT_'), ('. ', 'SYNTAX_OBJECT_'),
-                    ('The killer bees were chasing as I was shouting', 'NARRATIVE_OBJECT_'), (", ''", 'SYNTAX_OBJECT_'),
-                    ('RUN, SUE', 'DIALOG_OBJECT_'), ("!'' ", 'SYNTAX_OBJECT_'), ('Sue heard', 'NARRATIVE_OBJECT_'),
-                    ('Sue looked back', 'NARRATIVE_OBJECT_'), ("?'' ", 'SYNTAX_OBJECT_'), ('She breathed and thought', 'NARRATIVE_OBJECT_'),
-                    (', <', 'SYNTAX_OBJECT_'), ('Run', 'DIALOG_OBJECT_'), ('Run fast', 'DIALOG_OBJECT_'), ('.> ', 'SYNTAX_OBJECT_'),
-                    ('I thought to her', 'NARRATIVE_OBJECT_'), (', >', 'SYNTAX_OBJECT_'), ('I will miss you', 'DIALOG_OBJECT_'),
-                    ('.< ', 'SYNTAX_OBJECT_'), ('And I dived into the river', 'NARRATIVE_OBJECT_'), ('>|', 'SYNTAX_OBJECT_'),
-                    ('I will never forget', 'DIALOG_OBJECT_'), ('.<', 'SYNTAX_OBJECT_')]
+PARAGRAPH_TAGGED = [collections.OrderedDict([(',,', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('What', 'DIALOG_OBJECT_')]),
+                    collections.OrderedDict([(".'' ", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('I said', 'NARRATIVE_OBJECT_')]),
+                    collections.OrderedDict([(', ,,', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('The time has come to stop', 'DIALOG_OBJECT_')]),
+                    collections.OrderedDict([("!'' ", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('Then I ran for the lake', 'NARRATIVE_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('The killer bees were chasing as I was shouting', 'NARRATIVE_OBJECT_')]),
+                    collections.OrderedDict([(", ''", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('RUN, SUE', 'DIALOG_OBJECT_')]),
+                    collections.OrderedDict([("!'' ", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('Sue heard', 'NARRATIVE_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('Sue looked back', 'NARRATIVE_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([(',,', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('What', 'DIALOG_OBJECT_')]),
+                    collections.OrderedDict([("?'' ", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('She breathed and thought', 'NARRATIVE_OBJECT_')]),
+                    collections.OrderedDict([(', <', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('Run', 'DIALOG_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('Run fast', 'DIALOG_OBJECT_')]),
+                    collections.OrderedDict([('.> ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('I thought to her', 'NARRATIVE_OBJECT_')]),
+                    collections.OrderedDict([(', >', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('I will miss you', 'DIALOG_OBJECT_')]),
+                    collections.OrderedDict([('.< ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('And I dived into the river', 'NARRATIVE_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('>|', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('I will never forget', 'DIALOG_OBJECT_')]),
+                    collections.OrderedDict([('.<', 'SYNTAX_OBJECT_')])]
 
 def test_set_paragraph():
 
@@ -111,7 +128,7 @@ def test_set_split_paragraph_same_ending_and_capture():
 
     builder.split_paragraph_text(state)
 
-    assert state.text == PARAGRAPH_NO_DIALOG
+    assert state.text == PARAGRAPH_REPEAT_ENDING
 
 def test_split_paragraph_text():
 
@@ -122,9 +139,8 @@ def test_split_paragraph_text():
     builder.set_paragraph(state, end, tags, PARAGRAPH_NO_DIALOG)
     builder.split_paragraph_text(state)
 
-    dict_state = list(state.paragraph_dict.items())
-
-    assert dict_state[0][0] + dict_state[1][0] == "The valley filled with smoke smoldering from pine trees. "
+    assert list(state.paragraph_dict[0].items())[0][0] + \
+           list(state.paragraph_dict[1].items())[0][0]  == "The valley filled with smoke smoldering from pine trees. "
 
 
 def test_split_paragraph_text_dialog():
@@ -136,9 +152,11 @@ def test_split_paragraph_text_dialog():
     builder.set_paragraph(state, end, tags, PARAGRAPH_AUDIO_DIALOG)
     builder.split_paragraph_text(state)
 
-    dict_state = list(state.paragraph_dict.items())
-    
-    assert dict_state[0][0] + dict_state[1][0] + dict_state[2][0] + dict_state[3][0] == ",,What.'' I said"
+
+    assert  list(state.paragraph_dict[0].items())[0][0] + \
+            list(state.paragraph_dict[1].items())[0][0] + \
+            list(state.paragraph_dict[2].items())[0][0] + \
+            list(state.paragraph_dict[3].items())[0][0] == ",,What.'' I said"
 
 def test_split_paragraph_text_dialog_split_begin_end():
 
@@ -152,11 +170,11 @@ def test_split_paragraph_text_dialog_split_begin_end():
         builder.set_paragraph(state, end, tags, string)
         builder.split_paragraph_text(state)
 
-        dict_state = list(state.paragraph_dict.items())
-
         i += 1
 
-        assert dict_state[0][0] + dict_state[1][0] +  dict_state[2][0] == PARAGRAPH_DIALOG_BEGIN_END[i]
+        assert list(state.paragraph_dict[0].items())[0][0] + \
+               list(state.paragraph_dict[1].items())[0][0] + \
+               list(state.paragraph_dict[2].items())[0][0] == PARAGRAPH_DIALOG_BEGIN_END[i]
 
 def test_split_paragraph_text_split_end():
 
@@ -170,11 +188,11 @@ def test_split_paragraph_text_split_end():
         builder.set_paragraph(state, end, tags, string)
         builder.split_paragraph_text(state)
 
-        dict_state = list(state.paragraph_dict.items())
 
         i += 1
 
-        assert dict_state[0][0] + dict_state[1][0] == PARAGRAPH_END[i]
+        assert list(state.paragraph_dict[0].items())[0][0] + \
+               list(state.paragraph_dict[1].items())[0][0] == PARAGRAPH_END[i]
 
 
 def test_mark_dialog_begin_string():
@@ -190,11 +208,13 @@ def test_mark_dialog_begin_string():
         builder.set_paragraph(state, end, tags, string)
         builder.split_paragraph_text(state)
 
-        dict_state = list(state.paragraph_dict.items())
-
         i += 1
 
-        assert dict_state[0][0] + dict_state[1][0] + dict_state[2][0] + dict_state[3][0] + dict_state[4][0] == MARK_DIALOG_BEGIN_STRING[i]
+        assert list(state.paragraph_dict[0].items())[0][0] + \
+               list(state.paragraph_dict[1].items())[0][0] + \
+               list(state.paragraph_dict[2].items())[0][0] + \
+               list(state.paragraph_dict[3].items())[0][0] + \
+               list(state.paragraph_dict[4].items())[0][0] == MARK_DIALOG_BEGIN_STRING[i]
 
 
 def test_narrative_continue_to_dialog_string():
@@ -209,11 +229,12 @@ def test_narrative_continue_to_dialog_string():
         builder.set_paragraph(state, end, tags, string)
         builder.split_paragraph_text(state)
 
-        dict_state = list(state.paragraph_dict.items())
-
         i += 1
 
-        assert dict_state[0][0] + dict_state[1][0] + dict_state[2][0] + dict_state[3][0] == NARRATOR_BEGIN_NARRATOR_END_STRING[i]
+        assert list(state.paragraph_dict[0].items())[0][0] + \
+               list(state.paragraph_dict[1].items())[0][0] + \
+               list(state.paragraph_dict[2].items())[0][0] + \
+               list(state.paragraph_dict[3].items())[0][0] == NARRATOR_BEGIN_NARRATOR_END_STRING[i]
 
 
 def test_dialog_continue_to_narrator_string():
@@ -228,11 +249,13 @@ def test_dialog_continue_to_narrator_string():
         builder.set_paragraph(state, end, tags, string)
         builder.split_paragraph_text(state)
 
-        dict_state = list(state.paragraph_dict.items())
-
         i += 1
 
-        assert dict_state[0][0] + dict_state[1][0] + dict_state[2][0] + dict_state[3][0] + dict_state[4][0] == DIALOG_BEGIN_NARRATOR_END_STRING[i]
+        assert list(state.paragraph_dict[0].items())[0][0] + \
+               list(state.paragraph_dict[1].items())[0][0] + \
+               list(state.paragraph_dict[2].items())[0][0] + \
+               list(state.paragraph_dict[3].items())[0][0] + \
+               list(state.paragraph_dict[4].items())[0][0] == DIALOG_BEGIN_NARRATOR_END_STRING[i]
 
 
 '''
@@ -247,24 +270,7 @@ def test_none_paragraph_tag_in_paragraph_state_in_split_paragraph():
     builder.set_paragraph(state, end, tags, PARAGRAPH_NO_DIALOG)
     builder.split_paragraph_text(state)
 
-    dict_state = list(state.paragraph_dict.items())
-
-    assert dict_state == []
-
-
-
-def test_no_tag_paragraph_dict_with_tagged_dict():
-
-    state =  paragraph_state.Paragraph_State(paragraph_patterns = paragraph_patterns.Paragraph_Patterns(),
-                                    paragraph_tags = paragraph_tags.Paragraph_Tags(),
-                                    sentence_states = None)
-
-    state.paragraph_dict.update(PARRAGRAPH_SPLIT_NO_TAG)
-
-
-    builder.tag_paragraph_dict_data(state)
-
-    assert collections.OrderedDict(PARAGRAPH_TAGGED) == state.paragraph_dict
+    assert state.paragraph_dict == []
 
 def test_paragraph_dict_with_tagged_dict():
 
@@ -276,4 +282,5 @@ def test_paragraph_dict_with_tagged_dict():
     builder.split_paragraph_text(state)
     builder.tag_paragraph_dict_data(state)
 
-    assert collections.OrderedDict(PARAGRAPH_TAGGED) == state.paragraph_dict
+    print(str(PARAGRAPH_TAGGED))
+    assert PARAGRAPH_TAGGED == list(state.paragraph_dict)
