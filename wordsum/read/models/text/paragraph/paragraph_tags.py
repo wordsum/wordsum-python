@@ -26,7 +26,7 @@ class Paragraph_Tags:
             self._dialog = dialog
 
         if syntax is None:
-            self._syntax = "SYNTAX_OBJECT_"
+            self._syntax = "PUNCTUATION_OBJECT_"
         else:
             self._syntax = syntax
 

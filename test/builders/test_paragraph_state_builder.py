@@ -72,41 +72,41 @@ DIALOG_BEGIN_NARRATOR_END_STRING = ["\"I don't know,\" I say.",
                                       "<The some dialog,> I thought."]
 
 
-PARAGRAPH_TAGGED = [collections.OrderedDict([(',,', 'SYNTAX_OBJECT_')]),
+PARAGRAPH_TAGGED = [collections.OrderedDict([(',,', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('What', 'DIALOG_OBJECT_')]),
-                    collections.OrderedDict([(".'' ", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([(".'' ", 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('I said', 'NARRATIVE_OBJECT_')]),
-                    collections.OrderedDict([(', ,,', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([(', ,,', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('The time has come to stop', 'DIALOG_OBJECT_')]),
-                    collections.OrderedDict([("!'' ", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([("!'' ", 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('Then I ran for the lake', 'NARRATIVE_OBJECT_')]),
-                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('The killer bees were chasing as I was shouting', 'NARRATIVE_OBJECT_')]),
-                    collections.OrderedDict([(", ''", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([(", ''", 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('RUN, SUE', 'DIALOG_OBJECT_')]),
-                    collections.OrderedDict([("!'' ", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([("!'' ", 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('Sue heard', 'NARRATIVE_OBJECT_')]),
-                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('Sue looked back', 'NARRATIVE_OBJECT_')]),
-                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
-                    collections.OrderedDict([(',,', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'PUNCTUATION_OBJECT_')]),
+                    collections.OrderedDict([(',,', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('What', 'DIALOG_OBJECT_')]),
-                    collections.OrderedDict([("?'' ", 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([("?'' ", 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('She breathed and thought', 'NARRATIVE_OBJECT_')]),
-                    collections.OrderedDict([(', <', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([(', <', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('Run', 'DIALOG_OBJECT_')]),
-                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('Run fast', 'DIALOG_OBJECT_')]),
-                    collections.OrderedDict([('.> ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('.> ', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('I thought to her', 'NARRATIVE_OBJECT_')]),
-                    collections.OrderedDict([(', >', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([(', >', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('I will miss you', 'DIALOG_OBJECT_')]),
-                    collections.OrderedDict([('.< ', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('.< ', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('And I dived into the river', 'NARRATIVE_OBJECT_')]),
-                    collections.OrderedDict([('. ', 'SYNTAX_OBJECT_')]),
-                    collections.OrderedDict([('>|', 'SYNTAX_OBJECT_')]),
+                    collections.OrderedDict([('. ', 'PUNCTUATION_OBJECT_')]),
+                    collections.OrderedDict([('>|', 'PUNCTUATION_OBJECT_')]),
                     collections.OrderedDict([('I will never forget', 'DIALOG_OBJECT_')]),
-                    collections.OrderedDict([('.<', 'SYNTAX_OBJECT_')])]
+                    collections.OrderedDict([('.<', 'PUNCTUATION_OBJECT_')])]
 
 def test_set_paragraph():
 
@@ -271,6 +271,7 @@ def test_none_paragraph_tag_in_paragraph_state_in_split_paragraph():
     builder.split_paragraph_text(state)
 
     assert state.paragraph_dict == []
+
 
 def test_paragraph_dict_with_tagged_dict():
 
