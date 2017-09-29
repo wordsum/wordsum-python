@@ -18,6 +18,7 @@ the story.
 '''
 import wordsum.read.utils.gensim2vec as gensim2vec
 import wordsum.read.utils.etl4vec as etl4vec
+import wordsum.read.utils.etl_wordsum as etl_wordsum
 import logging
 import json
 import os
@@ -41,7 +42,7 @@ def process(file, path_model_dump):
             text_model = json.load(data_file)
 
         # Get only the narrator sentences and leave the dialog.
-        story = etl4vec.get_text_model_narrator_paragraphs(text_model)
+        story = etl_wordsum.get_text_model_narrator_paragraphs(text_model)
 
         # Replace punctuation, so we can group words.
         etl4vec.replace_punctuation_story(story)
