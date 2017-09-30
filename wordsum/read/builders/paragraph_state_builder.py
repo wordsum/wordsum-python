@@ -31,7 +31,7 @@ def set_paragraph(paragraph_state, paragraph_patterns, paragraph_tags, text):
 
         paragraph_state.paragraph_patterns = paragraph_patterns
         paragraph_state.text = text
-        paragraph_state.paragraph_dict = []
+        paragraph_state.paragraph_list_dict = []
         paragraph_state.paragraph_tags = paragraph_tags
 
     return paragraph_state
@@ -53,7 +53,7 @@ def split_paragraph_text(paragraph_state):
         paragraph_array[:] = [item for item in paragraph_array if item != '']
         # Set into list of ordered dicts to save position.
         for i,string in enumerate(paragraph_array):
-            paragraph_state.paragraph_dict.append(collections.OrderedDict([(string, paragraph_state.paragraph_tags.no_tag)]))
+            paragraph_state.paragraph_list_dict.append(collections.OrderedDict([(string, paragraph_state.paragraph_tags.no_tag)]))
 
 
     return paragraph_state
@@ -61,15 +61,15 @@ def split_paragraph_text(paragraph_state):
 '''
 A function to define the punctuation, dialog and narrative objects.
 '''
-def tag_paragraph_dict_data(paragraph_state):
-    logging.debug("tag_paragraph_dict_data")
+def tag_paragraph_list_dict_data(paragraph_state):
+    logging.debug("tag_paragraph_list_dict_data")
 
-    if paragraph_state.paragraph_dict is None or paragraph_state.paragraph_dict is False or paragraph_state.paragraph_patterns is None:
-        logging.info("tag_paragraph_dict_data: paragraph_state.paragraph_dict or paragraph_state.paragraph_patterns is None or False." + str(paragraph_state.paragraph_dict))
-        logging.info("paragraph_state.paragraph_dict: " + str(paragraph_state.paragraph_dict))
+    if paragraph_state.paragraph_list_dict is None or paragraph_state.paragraph_list_dict is False or paragraph_state.paragraph_patterns is None:
+        logging.info("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict or paragraph_state.paragraph_patterns is None or False." + str(paragraph_state.paragraph_list_dict))
+        logging.info("paragraph_state.paragraph_list_dict: " + str(paragraph_state.paragraph_list_dict))
         logging.info("paragraph_state.paragraph_patterns: " + str(paragraph_state.paragraph_patterns))
     else:
-        logging.debug("tag_paragraph_dict_data: paragraph_state.paragraph_dict is " + str(paragraph_state.paragraph_dict))
+        logging.debug("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict is " + str(paragraph_state.paragraph_list_dict))
 
 
         match_begin_dialog = regex.compile('('+ paragraph_state.paragraph_patterns.dialog_beginning_mark + "|" +
@@ -86,7 +86,7 @@ def tag_paragraph_dict_data(paragraph_state):
 
         ordered_list = []
 
-        for ordered_loop_dict in paragraph_state.paragraph_dict:
+        for ordered_loop_dict in paragraph_state.paragraph_list_dict:
 
             for key,value in ordered_loop_dict.items():
 
@@ -115,6 +115,6 @@ def tag_paragraph_dict_data(paragraph_state):
                 ordered_list.append(ordered_dict)
 
 
-        paragraph_state.paragraph_dict = ordered_list
+        paragraph_state.paragraph_list_dict = ordered_list
 
     return paragraph_state

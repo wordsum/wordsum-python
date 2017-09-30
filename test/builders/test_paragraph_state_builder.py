@@ -139,8 +139,8 @@ def test_split_paragraph_text():
     builder.set_paragraph(state, end, tags, PARAGRAPH_NO_DIALOG)
     builder.split_paragraph_text(state)
 
-    assert list(state.paragraph_dict[0].items())[0][0] + \
-           list(state.paragraph_dict[1].items())[0][0]  == "The valley filled with smoke smoldering from pine trees. "
+    assert list(state.paragraph_list_dict[0].items())[0][0] + \
+           list(state.paragraph_list_dict[1].items())[0][0]  == "The valley filled with smoke smoldering from pine trees. "
 
 
 def test_split_paragraph_text_dialog():
@@ -153,10 +153,10 @@ def test_split_paragraph_text_dialog():
     builder.split_paragraph_text(state)
 
 
-    assert  list(state.paragraph_dict[0].items())[0][0] + \
-            list(state.paragraph_dict[1].items())[0][0] + \
-            list(state.paragraph_dict[2].items())[0][0] + \
-            list(state.paragraph_dict[3].items())[0][0] == ",,What.'' I said"
+    assert  list(state.paragraph_list_dict[0].items())[0][0] + \
+            list(state.paragraph_list_dict[1].items())[0][0] + \
+            list(state.paragraph_list_dict[2].items())[0][0] + \
+            list(state.paragraph_list_dict[3].items())[0][0] == ",,What.'' I said"
 
 def test_split_paragraph_text_dialog_split_begin_end():
 
@@ -172,9 +172,9 @@ def test_split_paragraph_text_dialog_split_begin_end():
 
         i += 1
 
-        assert list(state.paragraph_dict[0].items())[0][0] + \
-               list(state.paragraph_dict[1].items())[0][0] + \
-               list(state.paragraph_dict[2].items())[0][0] == PARAGRAPH_DIALOG_BEGIN_END[i]
+        assert list(state.paragraph_list_dict[0].items())[0][0] + \
+               list(state.paragraph_list_dict[1].items())[0][0] + \
+               list(state.paragraph_list_dict[2].items())[0][0] == PARAGRAPH_DIALOG_BEGIN_END[i]
 
 def test_split_paragraph_text_split_end():
 
@@ -191,8 +191,8 @@ def test_split_paragraph_text_split_end():
 
         i += 1
 
-        assert list(state.paragraph_dict[0].items())[0][0] + \
-               list(state.paragraph_dict[1].items())[0][0] == PARAGRAPH_END[i]
+        assert list(state.paragraph_list_dict[0].items())[0][0] + \
+               list(state.paragraph_list_dict[1].items())[0][0] == PARAGRAPH_END[i]
 
 
 def test_mark_dialog_begin_string():
@@ -210,11 +210,11 @@ def test_mark_dialog_begin_string():
 
         i += 1
 
-        assert list(state.paragraph_dict[0].items())[0][0] + \
-               list(state.paragraph_dict[1].items())[0][0] + \
-               list(state.paragraph_dict[2].items())[0][0] + \
-               list(state.paragraph_dict[3].items())[0][0] + \
-               list(state.paragraph_dict[4].items())[0][0] == MARK_DIALOG_BEGIN_STRING[i]
+        assert list(state.paragraph_list_dict[0].items())[0][0] + \
+               list(state.paragraph_list_dict[1].items())[0][0] + \
+               list(state.paragraph_list_dict[2].items())[0][0] + \
+               list(state.paragraph_list_dict[3].items())[0][0] + \
+               list(state.paragraph_list_dict[4].items())[0][0] == MARK_DIALOG_BEGIN_STRING[i]
 
 
 def test_narrative_continue_to_dialog_string():
@@ -231,10 +231,10 @@ def test_narrative_continue_to_dialog_string():
 
         i += 1
 
-        assert list(state.paragraph_dict[0].items())[0][0] + \
-               list(state.paragraph_dict[1].items())[0][0] + \
-               list(state.paragraph_dict[2].items())[0][0] + \
-               list(state.paragraph_dict[3].items())[0][0] == NARRATOR_BEGIN_NARRATOR_END_STRING[i]
+        assert list(state.paragraph_list_dict[0].items())[0][0] + \
+               list(state.paragraph_list_dict[1].items())[0][0] + \
+               list(state.paragraph_list_dict[2].items())[0][0] + \
+               list(state.paragraph_list_dict[3].items())[0][0] == NARRATOR_BEGIN_NARRATOR_END_STRING[i]
 
 
 def test_dialog_continue_to_narrator_string():
@@ -251,11 +251,11 @@ def test_dialog_continue_to_narrator_string():
 
         i += 1
 
-        assert list(state.paragraph_dict[0].items())[0][0] + \
-               list(state.paragraph_dict[1].items())[0][0] + \
-               list(state.paragraph_dict[2].items())[0][0] + \
-               list(state.paragraph_dict[3].items())[0][0] + \
-               list(state.paragraph_dict[4].items())[0][0] == DIALOG_BEGIN_NARRATOR_END_STRING[i]
+        assert list(state.paragraph_list_dict[0].items())[0][0] + \
+               list(state.paragraph_list_dict[1].items())[0][0] + \
+               list(state.paragraph_list_dict[2].items())[0][0] + \
+               list(state.paragraph_list_dict[3].items())[0][0] + \
+               list(state.paragraph_list_dict[4].items())[0][0] == DIALOG_BEGIN_NARRATOR_END_STRING[i]
 
 
 '''
@@ -270,10 +270,10 @@ def test_none_paragraph_tag_in_paragraph_state_in_split_paragraph():
     builder.set_paragraph(state, end, tags, PARAGRAPH_NO_DIALOG)
     builder.split_paragraph_text(state)
 
-    assert state.paragraph_dict == []
+    assert state.paragraph_list_dict == []
 
 
-def test_paragraph_dict_with_tagged_dict():
+def test_paragraph_list_dict_with_tagged_dict():
 
     state = paragraph_state.Paragraph_State()
     tags = paragraph_tags.Paragraph_Tags()
@@ -281,7 +281,7 @@ def test_paragraph_dict_with_tagged_dict():
 
     builder.set_paragraph(state, end, tags, PARAGRAPH_AUDIO_DIALOG)
     builder.split_paragraph_text(state)
-    builder.tag_paragraph_dict_data(state)
+    builder.tag_paragraph_list_dict_data(state)
 
     print(str(PARAGRAPH_TAGGED))
-    assert PARAGRAPH_TAGGED == list(state.paragraph_dict)
+    assert PARAGRAPH_TAGGED == list(state.paragraph_list_dict)
