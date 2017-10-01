@@ -118,3 +118,19 @@ def tag_paragraph_list_dict_data(paragraph_state):
         paragraph_state.paragraph_list_dict = ordered_list
 
     return paragraph_state
+
+
+def enumerate_tag_paragraph_list_dict_data():
+    logging.debug("create_sentence_states")
+
+
+def create_sentence_states(paragraph_state):
+    logging.debug("create_sentence_states")
+
+    if paragraph_state.paragraph_list_dict is None or paragraph_state.paragraph_list_dict is False:
+        logging.info("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict or paragraph_state.paragraph_patterns is None or False." + str(paragraph_state.paragraph_list_dict))
+    else:
+        logging.debug("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict is " + str(paragraph_state.paragraph_list_dict))
+
+        # Declare the list that will be
+        sentence_states = []

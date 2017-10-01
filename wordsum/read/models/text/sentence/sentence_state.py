@@ -9,3 +9,11 @@ punctuation_state	PunctuationState	punctuationState of type PunctuationState is 
 spellcheck_state	SpellcheckState	    spellcheckState of type SpellcheckState is a Spellcheck Model state of the sentenceText.
 dialog_state	    DialogState	        dialogState of type DialogState is a Dialog Model state of the sentenceText.
 '''
+class Sentence_State(object):
+
+    def __init__(self, text = None, punctuation = None, tag = None, nlp_state = None, dictionary = None):
+        self._text = text
+        self._punctuation = punctuation
+        self._tag = tag
+        self._nlp_state = nlp_state
+        self._dictionary =  dictionary
