@@ -120,8 +120,28 @@ def tag_paragraph_list_dict_data(paragraph_state):
     return paragraph_state
 
 
-def enumerate_tag_paragraph_list_dict_data():
+def enumerate_tag_paragraph_list_dict_data(paragraph_state):
     logging.debug("create_sentence_states")
+
+    if paragraph_state.paragraph_list_dict is None or \
+                    paragraph_state.paragraph_list_dict is False or \
+                    paragraph_state.paragraph_tags is None or \
+                    paragraph_state.paragraph_patterns is None:
+
+        logging.info("paragraph_state.paragraph_list_dict: " + str(paragraph_state.paragraph_list_dict))
+        logging.info("paragraph_state.paragraph_patterns: " + str(paragraph_state.paragraph_patterns))
+        logging.info("paragraph_state.paragraph_tags: " + str(paragraph_state.paragraph_tags))
+        logging.info("paragraph_state.paragraph_list_dict or paragraph_state.paragraph_patterns is None or False." + str(paragraph_state.paragraph_list_dict))
+    else:
+        logging.debug("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict is " + str(paragraph_state.paragraph_list_dict))
+
+
+
+
+
+
+    return paragraph_state
+
 
 
 def create_sentence_states(paragraph_state):
