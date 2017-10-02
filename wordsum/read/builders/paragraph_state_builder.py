@@ -152,9 +152,6 @@ def tag_paragraph_list_dict_data(paragraph_state):
     return paragraph_state
 
 
-def append_dialog_objec_to_narrator(paragraph_state):
-    logging.debug("append_dialog_objec_to_narrator")
-
 def create_sentence_states(paragraph_state):
     logging.debug("create_sentence_states")
 
