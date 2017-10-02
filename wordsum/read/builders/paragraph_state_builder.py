@@ -62,65 +62,6 @@ def split_paragraph_text(paragraph_state):
 A function to define the punctuation, dialog and narrative objects.
 '''
 def tag_paragraph_list_dict_data(paragraph_state):
-    logging.debug("tag_paragraph_list_dict_data")
-
-    if paragraph_state.paragraph_list_dict is None or paragraph_state.paragraph_list_dict is False or paragraph_state.paragraph_patterns is None:
-        logging.info("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict or paragraph_state.paragraph_patterns is None or False." + str(paragraph_state.paragraph_list_dict))
-        logging.info("paragraph_state.paragraph_list_dict: " + str(paragraph_state.paragraph_list_dict))
-        logging.info("paragraph_state.paragraph_patterns: " + str(paragraph_state.paragraph_patterns))
-    else:
-        logging.debug("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict is " + str(paragraph_state.paragraph_list_dict))
-
-
-        match_begin_dialog = regex.compile('('+ paragraph_state.paragraph_patterns.dialog_beginning_mark + "|" +
-                                        paragraph_state.paragraph_patterns.narrator_continuing_mark_to_dialog  + "|" +
-                                        paragraph_state.paragraph_patterns.dialog_mark_begin + ')')
-
-        match_end_dialog = regex.compile('('+ paragraph_state.paragraph_patterns.dialog_ending_mark + "|" +
-                                      paragraph_state.paragraph_patterns.dialog_mark_end + "|" +
-                                      paragraph_state.paragraph_patterns.dialog_continuing_mark_to_narrator + ')')
-
-        match_end_narrator = regex.compile('('+ paragraph_state.paragraph_patterns.narrator_ending_mark + ')')
-
-        current_word_tag = ""
-
-        ordered_list = []
-
-        for ordered_loop_dict in paragraph_state.paragraph_list_dict:
-
-            for key,value in ordered_loop_dict.items():
-
-                ordered_dict =  collections.OrderedDict()
-
-                if match_begin_dialog.match(key):
-
-                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax
-
-                    current_word_tag = paragraph_state.paragraph_tags.dialog
-
-                elif match_end_dialog.match(key):
-
-                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax
-
-                    current_word_tag = paragraph_state.paragraph_tags.narrative
-
-                elif match_end_narrator.match(key):
-
-                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax
-
-                else:
-
-                    ordered_dict[key] = current_word_tag
-
-                ordered_list.append(ordered_dict)
-
-
-        paragraph_state.paragraph_list_dict = ordered_list
-
-    return paragraph_state
-
-
-def enumerate_tag_paragraph_list_dict_data(paragraph_state):
     logging.debug("create_sentence_states")
 
     if paragraph_state.paragraph_list_dict is None or \
@@ -136,7 +77,77 @@ def enumerate_tag_paragraph_list_dict_data(paragraph_state):
         logging.debug("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict is " + str(paragraph_state.paragraph_list_dict))
 
 
+        match_begin_dialog = regex.compile('('+ paragraph_state.paragraph_patterns.dialog_beginning_mark + "|" +
+                                           paragraph_state.paragraph_patterns.dialog_mark_begin + ')')
 
+
+        match_dialog_continuing_mark_to_narrator = regex.compile('(' + paragraph_state.paragraph_patterns.dialog_continuing_mark_to_narrator + ')')
+
+
+        match_end_dialog = regex.compile('('+ paragraph_state.paragraph_patterns.dialog_ending_mark + "|" +
+                                         paragraph_state.paragraph_patterns.dialog_mark_end + ')')
+
+        match_narrator_continuing_mark_to_dialog = regex.compile('(' + paragraph_state.paragraph_patterns.narrator_continuing_mark_to_dialog + ')')
+
+        match_end_narrator = regex.compile('('+ paragraph_state.paragraph_patterns.narrator_ending_mark + ')')
+
+        current_word_tag = ""
+
+        ordered_list = []
+
+        enumerate_value = 1
+
+        for ordered_loop_dict in paragraph_state.paragraph_list_dict:
+
+            for key,value in ordered_loop_dict.items():
+
+                ordered_dict =  collections.OrderedDict()
+
+                if match_begin_dialog.match(key):
+
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax  + str(enumerate_value)
+
+                    current_word_tag = paragraph_state.paragraph_tags.dialog
+
+                elif match_dialog_continuing_mark_to_narrator.match(key):
+
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax
+
+                    current_word_tag = paragraph_state.paragraph_tags.narrative
+
+                elif match_end_dialog.match(key):
+
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax + str(enumerate_value)
+
+                    enumerate_value = enumerate_value + 1
+
+                    current_word_tag = paragraph_state.paragraph_tags.narrative
+
+                elif match_narrator_continuing_mark_to_dialog.match(key):
+
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax  + str(enumerate_value)
+
+                    current_word_tag = paragraph_state.paragraph_tags.dialog
+
+                elif match_end_narrator.match(key):
+
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax + str(enumerate_value)
+
+                    # I may make this conditional if not dialog to keep all the dialog related in a narrators talk in
+                    # one block.
+                    # if current_word_tag.find(paragraph_state.paragraph_tags.dialog) is True:
+                    #   enumerate_value = enumerate_value
+                    # else:
+                    enumerate_value = enumerate_value + 1
+
+                else:
+
+                    ordered_dict[key] = current_word_tag + str(enumerate_value)
+
+                ordered_list.append(ordered_dict)
+
+
+        paragraph_state.paragraph_list_dict = ordered_list
 
 
 
