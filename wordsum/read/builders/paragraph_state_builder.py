@@ -91,7 +91,8 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
         match_end_narrator = regex.compile('('+ paragraph_state.paragraph_patterns.narrator_ending_mark + ')')
 
-        current_word_tag = ""
+        # Default to narrator because we will know if it is dialog by the mark.
+        current_word_tag = paragraph_state.paragraph_tags.narrative
 
         ordered_list = []
 
@@ -111,7 +112,7 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
                 elif match_dialog_continuing_mark_to_narrator.match(key):
 
-                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax   + str(enumerate_value)
 
                     current_word_tag = paragraph_state.paragraph_tags.narrative
 
@@ -146,14 +147,13 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
                 ordered_list.append(ordered_dict)
 
-
         paragraph_state.paragraph_list_dict = ordered_list
-
-
 
     return paragraph_state
 
 
+def append_dialog_objec_to_narrator(paragraph_state):
+    logging.debug("append_dialog_objec_to_narrator")
 
 def create_sentence_states(paragraph_state):
     logging.debug("create_sentence_states")

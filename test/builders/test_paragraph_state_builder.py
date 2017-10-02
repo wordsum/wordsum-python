@@ -30,6 +30,8 @@ PARAGRAPH_AUDIO_DIALOG = str(",,What.'' I said, ,,The time has come to stop!'' T
                             " Sue heard. Sue looked back. ,,What?'' She breathed and thought, <Run. Run fast.>"
                             " I thought to her, >I will miss you.< And I dived into the river. >|I will never forget.<")
 
+PARAGRAPHS_CONTINUE_DIALOG = str("She sat before the computer and thought, <I have wrote this before,> while saying to John, ,,I can help you,'' then stood and throught, <I need a more challenging job.")
+
 
 PARAGRAPH_DIALOG_BEGIN_patterns = ["''Where are we going?''",
                               "\"I began this string.\"",
@@ -118,6 +120,19 @@ PARAGRAPH_TAGGED = [collections.OrderedDict([(',,', 'PUNCTUATION_OBJECT_1')]),
                     collections.OrderedDict([('>|', 'PUNCTUATION_OBJECT_12')]),
                     collections.OrderedDict([('I will never forget', 'DIALOG_OBJECT_12')]),
                     collections.OrderedDict([('.<', 'PUNCTUATION_OBJECT_12')])]
+
+PARAGRAPHS_CONTINUE_DIALOG_LIST_DICT = [collections.OrderedDict([('She sat before the computer and thought', 'NARRATIVE_OBJECT_1')]),
+                                        collections.OrderedDict([(', <', 'PUNCTUATION_OBJECT_1')]),
+                                        collections.OrderedDict([('I have wrote this before', 'DIALOG_OBJECT_1')]),
+                                        collections.OrderedDict([(',> ', 'PUNCTUATION_OBJECT_1')]),
+                                        collections.OrderedDict([('while saying to John', 'NARRATIVE_OBJECT_1')]),
+                                        collections.OrderedDict([(', ,,', 'PUNCTUATION_OBJECT_1')]),
+                                        collections.OrderedDict([('I can help you', 'DIALOG_OBJECT_1')]),
+                                        collections.OrderedDict([(",'' ", 'PUNCTUATION_OBJECT_1')]),
+                                        collections.OrderedDict([('then stood and throught', 'NARRATIVE_OBJECT_1')]),
+                                        collections.OrderedDict([(', <', 'PUNCTUATION_OBJECT_1')]),
+                                        collections.OrderedDict([('I need a more challenging job', 'DIALOG_OBJECT_1')]),
+                                        collections.OrderedDict([('.', 'PUNCTUATION_OBJECT_1')])]
 
 
 def test_set_paragraph():
@@ -295,3 +310,15 @@ def test_enumerate_tag_paragraph_list_dict_data():
     builder.tag_paragraph_list_dict_data(state)
 
     assert PARAGRAPH_TAGGED == state.paragraph_list_dict
+
+def test_enumerate_tag_paragraph_list_dict_data_nested_dialog():
+
+    state = paragraph_state.Paragraph_State()
+    tags = paragraph_tags.Paragraph_Tags()
+    patterns = paragraph_patterns.Paragraph_Patterns()
+
+    builder.set_paragraph(state, patterns, tags, PARAGRAPHS_CONTINUE_DIALOG)
+    builder.split_paragraph_text(state)
+    builder.tag_paragraph_list_dict_data(state)
+    print(state.paragraph_list_dict)
+    assert PARAGRAPHS_CONTINUE_DIALOG_LIST_DICT == state.paragraph_list_dict
