@@ -58,6 +58,11 @@ def test_get_spacy_en_object_with_known_rind_ner_DIALOG_OBJECT_1():
     text_spacy_object = wordsum.read.utils.spacy.get_spacy_en_object(test_sentence)
 
     assert text_spacy_object[0].ent_type_ == "PERSON"
+    assert text_spacy_object[0].dep_ == "nsubj"
+    assert text_spacy_object[0].text == "Rind"
+    assert text_spacy_object[0].lemma_ == "rind"
+    assert text_spacy_object[0].pos_ == "PROPN"
+    assert text_spacy_object[0].tag_ == "NNP"
 
 
 def test_get_spacy_en_object_with_known_rind_ner_dual_verb_DIALOG_OBJECT_1():
@@ -67,6 +72,11 @@ def test_get_spacy_en_object_with_known_rind_ner_dual_verb_DIALOG_OBJECT_1():
     text_spacy_object = wordsum.read.utils.spacy.get_spacy_en_object(test_sentence)
 
     assert text_spacy_object[0].ent_type_ == "PERSON"
+    assert text_spacy_object[0].dep_ == "compound"
+    assert text_spacy_object[0].text == "Rind"
+    assert text_spacy_object[0].lemma_ == "rind"
+    assert text_spacy_object[0].pos_ == "PROPN"
+    assert text_spacy_object[0].tag_ == "NNP"
 
 def test_get_spacy_en_object_with_rind_but_verb_pants_also_noun():
 
@@ -80,3 +90,5 @@ def test_get_spacy_en_object_with_rind_but_verb_pants_also_noun():
     assert text_spacy_object[0].lemma_ == "rind"
     assert text_spacy_object[0].pos_ == "ADJ"
     assert text_spacy_object[0].tag_ == "JJ"
+
+
