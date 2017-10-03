@@ -12,5 +12,10 @@
 # and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
 
 '''
+import logging
+import wordsum.read.models.text.sentence.sentence_state as sentence_state
+
+def get_word_count(sentence_state):
+    logging.debug("get_word_count")
 
 

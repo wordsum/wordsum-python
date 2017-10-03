@@ -29,3 +29,57 @@ class Sentence_State(object):
         self._tense	= tense
         self._nlp_state	= nlp_state
         self._dictionary = dictionary
+
+
+    @property
+    def text_list_dict(self):
+        return self._text_list_dict
+
+    @text_list_dict.setter
+    def text_list_dict(self, text_list_dict):
+        self._text_list_dict  = text_list_dict
+
+
+    @property
+    def order(self):
+        return self._order
+
+    @order.setter
+    def order(self, order):
+        self._order  = order
+
+
+    @property
+    def word_count(self):
+        return self._word_count
+
+    @word_count.setter
+    def word_count(self, word_count):
+        self._word_count  = word_count
+
+
+    @property
+    def tense(self):
+        return self._tense
+
+    @tense.setter
+    def tense(self, tense):
+        self._tense  = tense
+
+
+    @property
+    def nlp_state(self):
+        return self._nlp_state
+
+    @nlp_state.setter
+    def nlp_state(self, nlp_state):
+        self._nlp_state  = nlp_state
+
+
+    @property
+    def definition(self):
+        return self._definition
+
+    @definition.setter
+    def definition(self, definition):
+        self._definition  = definition
