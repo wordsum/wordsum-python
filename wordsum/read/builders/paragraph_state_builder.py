@@ -95,9 +95,9 @@ def tag_paragraph_list_dict_data(paragraph_state):
         # Default to narrator because we will know if it is dialog by the mark.
         current_word_tag = paragraph_state.paragraph_tags.narrative
 
-        ordered_list = []
-
         base_tag = {}
+
+        base_list = []
 
         enumerate_value = 1
 
@@ -113,15 +113,15 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
                     ordered_dict[key] = paragraph_state.paragraph_tags.syntax  + str(enumerate_value)
 
-                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+                    base_list.append(ordered_dict)
 
                     current_word_tag = paragraph_state.paragraph_tags.dialog
 
                 elif match_dialog_continuing_mark_to_narrator.match(key):
 
-                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax   + str(enumerate_value)
+                    ordered_dict[key] = paragraph_state.paragraph_tags.syntax + str(enumerate_value)
 
-                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+                    base_list.append(ordered_dict)
 
                     current_word_tag = paragraph_state.paragraph_tags.narrative
 
@@ -129,7 +129,11 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
                     ordered_dict[key] = paragraph_state.paragraph_tags.syntax + str(enumerate_value)
 
-                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+                    base_list.append(ordered_dict)
+
+                    base_tag[paragraph_state._paragraph_tags.base + str(enumerate_value)] = base_list
+
+                    base_list = []
 
                     enumerate_value = enumerate_value + 1
 
@@ -139,7 +143,7 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
                     ordered_dict[key] = paragraph_state.paragraph_tags.syntax  + str(enumerate_value)
 
-                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+                    base_list.append(ordered_dict)
 
                     current_word_tag = paragraph_state.paragraph_tags.dialog
 
@@ -147,7 +151,11 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
                     ordered_dict[key] = paragraph_state.paragraph_tags.syntax + str(enumerate_value)
 
-                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+                    base_list.append(ordered_dict)
+
+                    base_tag[paragraph_state._paragraph_tags.base + str(enumerate_value)] = base_list
+
+                    base_list = []
 
                     enumerate_value = enumerate_value + 1
 
@@ -155,11 +163,9 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
                     ordered_dict[key] = current_word_tag + str(enumerate_value)
 
-                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+                    base_list.append(ordered_dict)
 
-                ordered_list.append(ordered_dict)
-
-        paragraph_state.paragraph_list_dict = ordered_list
+        paragraph_state.paragraph_list_dict = base_tag
 
     return paragraph_state
 
@@ -174,12 +180,3 @@ def create_sentence_states(paragraph_state):
 
         # The beginning int to grab objects and define the block of sentence states.
         int = 0
-
-        for dict in paragraph_state.paragraph_list_dict:
-
-            for key, value in dict.items():
-
-                pattern = re.compile("^([A-Z]+)_" + str(int))
-
-                if pattern.match(value):
-                    print(value)
