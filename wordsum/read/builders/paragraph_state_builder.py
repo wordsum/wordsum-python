@@ -16,6 +16,7 @@ from collections import OrderedDict
 import logging
 import regex
 import collections
+import re
 '''
 A function to get checck for state and set the two things the object needs to begin.
 '''
@@ -96,11 +97,15 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
         ordered_list = []
 
+        base_tag = {}
+
         enumerate_value = 1
 
         for ordered_loop_dict in paragraph_state.paragraph_list_dict:
 
             for key,value in ordered_loop_dict.items():
+
+                #paragraph_state.paragraph_tags.base +   + str(enumerate_value)
 
                 ordered_dict =  collections.OrderedDict()
 
@@ -108,17 +113,23 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
                     ordered_dict[key] = paragraph_state.paragraph_tags.syntax  + str(enumerate_value)
 
+                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+
                     current_word_tag = paragraph_state.paragraph_tags.dialog
 
                 elif match_dialog_continuing_mark_to_narrator.match(key):
 
                     ordered_dict[key] = paragraph_state.paragraph_tags.syntax   + str(enumerate_value)
 
+                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+
                     current_word_tag = paragraph_state.paragraph_tags.narrative
 
                 elif match_end_dialog.match(key):
 
                     ordered_dict[key] = paragraph_state.paragraph_tags.syntax + str(enumerate_value)
+
+                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
 
                     enumerate_value = enumerate_value + 1
 
@@ -128,22 +139,23 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
                     ordered_dict[key] = paragraph_state.paragraph_tags.syntax  + str(enumerate_value)
 
+                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+
                     current_word_tag = paragraph_state.paragraph_tags.dialog
 
                 elif match_end_narrator.match(key):
 
                     ordered_dict[key] = paragraph_state.paragraph_tags.syntax + str(enumerate_value)
 
-                    # I may make this conditional if not dialog to keep all the dialog related in a narrators talk in
-                    # one block.
-                    # if current_word_tag.find(paragraph_state.paragraph_tags.dialog) is True:
-                    #   enumerate_value = enumerate_value
-                    # else:
+                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
+
                     enumerate_value = enumerate_value + 1
 
                 else:
 
                     ordered_dict[key] = current_word_tag + str(enumerate_value)
+
+                    base_tag[paragraph_state.paragraph_tags.base + str(enumerate_value)] = ordered_dict[key]
 
                 ordered_list.append(ordered_dict)
 
@@ -160,5 +172,14 @@ def create_sentence_states(paragraph_state):
     else:
         logging.debug("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict is " + str(paragraph_state.paragraph_list_dict))
 
-        # Declare the list that will be
-        sentence_states = []
+        # The beginning int to grab objects and define the block of sentence states.
+        int = 0
+
+        for dict in paragraph_state.paragraph_list_dict:
+
+            for key, value in dict.items():
+
+                pattern = re.compile("^([A-Z]+)_" + str(int))
+
+                if pattern.match(value):
+                    print(value)

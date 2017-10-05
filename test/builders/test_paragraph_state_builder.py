@@ -121,6 +121,16 @@ PARAGRAPH_TAGGED = [collections.OrderedDict([(',,', 'PUNCTUATION_OBJECT_1')]),
                     collections.OrderedDict([('I will never forget', 'DIALOG_OBJECT_12')]),
                     collections.OrderedDict([('.<', 'PUNCTUATION_OBJECT_12')])]
 
+
+PARAGRAPH_TAGGED_LIST = [{'OBJECT_1':  (collections.OrderedDict([(',,', 'PUNCTUATION_OBJECT_1')]),
+                                        collections.OrderedDict([('What', 'DIALOG_OBJECT_1')]),
+                                        collections.OrderedDict([(".'' ", 'PUNCTUATION_OBJECT_1')]))},
+
+                         {'OBJECT_2':  (collections.OrderedDict([('I said', 'NARRATIVE_OBJECT_2')]),
+                                        collections.OrderedDict([(', ,,', 'PUNCTUATION_OBJECT_2')]),
+                                        collections.OrderedDict([('The time has come to stop', 'DIALOG_OBJECT_2')]),
+                                        collections.OrderedDict([("!'' ", 'PUNCTUATION_OBJECT_2')]))}]
+
 PARAGRAPHS_CONTINUE_DIALOG_LIST_DICT = [collections.OrderedDict([('She sat before the computer and thought', 'NARRATIVE_OBJECT_1')]),
                                         collections.OrderedDict([(', <', 'PUNCTUATION_OBJECT_1')]),
                                         collections.OrderedDict([('I have wrote this before', 'DIALOG_OBJECT_1')]),
@@ -320,5 +330,17 @@ def test_enumerate_tag_paragraph_list_dict_data_nested_dialog():
     builder.set_paragraph(state, patterns, tags, PARAGRAPHS_CONTINUE_DIALOG)
     builder.split_paragraph_text(state)
     builder.tag_paragraph_list_dict_data(state)
-    print(state.paragraph_list_dict)
+
+    assert PARAGRAPHS_CONTINUE_DIALOG_LIST_DICT == state.paragraph_list_dict
+
+
+def test_create_sentence_states_dialog_begin():
+
+    state = paragraph_state.Paragraph_State()
+    state.paragraph_list_dict = PARAGRAPH_TAGGED
+
+    builder.create_sentence_states(state)
+
+
+
     assert PARAGRAPHS_CONTINUE_DIALOG_LIST_DICT == state.paragraph_list_dict

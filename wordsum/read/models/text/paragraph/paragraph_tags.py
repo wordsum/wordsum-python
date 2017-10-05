@@ -13,7 +13,12 @@
 '''
 class Paragraph_Tags:
 
-    def __init__(self, narrative=None, dialog=None, syntax=None, no_tag=None):
+    def __init__(self, base=None, narrative=None, dialog=None, syntax=None, no_tag=None):
+
+        if base is None:
+            self._base = "OBJECT_"
+        else:
+            self._base = base
 
         if narrative is None:
             self._narrative = "NARRATIVE_OBJECT_"
@@ -34,6 +39,15 @@ class Paragraph_Tags:
             self._no_tag = "NO_TAG"
         else:
             self._no_tag = no_tag
+
+    @property
+    def base(self):
+        return self._base
+
+    @base.setter
+    def base(self, base):
+        self._base = base
+
 
     @property
     def narrative(self):
