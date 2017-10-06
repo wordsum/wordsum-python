@@ -12,3 +12,14 @@
 # and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
 
 '''
+import logging
+
+def create(sentence_state = None):
+
+    if sentence_state.text_list_dict is None:
+        logging.debug("sentence_state.text_list_dict is None")
+    else:
+        logging.debug("processing")
+
+
+    return sentence_state

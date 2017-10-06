@@ -12,11 +12,11 @@
 # and if another writer writes or edits the Story then the writer's name needs to be appended to the end of the Writer list of this Open Story License.
 
 '''
-from collections import OrderedDict
 import logging
 import regex
 import collections
-import re
+import wordsum.read.builders.sentence_state_builder as sentence_state_builder
+import wordsum.read.models.text.sentence.sentence_state as sentence_state
 '''
 A function to get checck for state and set the two things the object needs to begin.
 '''
@@ -178,5 +178,13 @@ def create_sentence_states(paragraph_state):
     else:
         logging.debug("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict is " + str(paragraph_state.paragraph_list_dict))
 
-        # The beginning int to grab objects and define the block of sentence states.
-        int = 0
+        sentence_states = []
+
+        for key, array in paragraph_state.paragraph_list_dict.items():
+            for item in array:
+                for text, tag in item.items():
+                    print(text,tag)
+                    if tag is paragraph_state.paragraph_tags.syntax:
+                        logging.debug("tag for nothing")
+                    else:
+                        sentence_state = sentence_state.Sentence_State()
