@@ -313,12 +313,16 @@ def test_enumerate_tag_paragraph_list_dict_data_nested_dialog():
 
     assert PARAGRAPHS_CONTINUE_DIALOG_LIST_DICT == state.paragraph_list_dict
 
-
+'''
+Underconstruction
 def test_create_sentence_states_dialog_begin():
 
     state = paragraph_state.Paragraph_State()
+    state.paragraph_tags = paragraph_tags.Paragraph_Tags()
+    state.paragraph_patterns = paragraph_patterns.Paragraph_Patterns()
     state.paragraph_list_dict = PARAGRAPH_TAGGED
 
     builder.create_sentence_states(state)
 
     assert PARAGRAPHS_CONTINUE_DIALOG_LIST_DICT == state.paragraph_list_dict
+'''

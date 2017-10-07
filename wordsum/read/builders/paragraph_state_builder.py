@@ -169,7 +169,15 @@ def tag_paragraph_list_dict_data(paragraph_state):
 
     return paragraph_state
 
+'''
+A function to create the sentence_list_dicts with dialog marks.
 
+this function needs to work to separate dialog from narrative in sentences where they are both.
+ Then it will make the the sentence states.
+
+ This is one wayy of making sentence states from the array above. I may move the logic that creates the states.
+
+'''
 def create_sentence_states(paragraph_state):
     logging.debug("create_sentence_states")
 
@@ -178,13 +186,66 @@ def create_sentence_states(paragraph_state):
     else:
         logging.debug("tag_paragraph_list_dict_data: paragraph_state.paragraph_list_dict is " + str(paragraph_state.paragraph_list_dict))
 
+        match_begin = regex.compile('('+ paragraph_state.paragraph_patterns.dialog_beginning_mark + "|" +
+                                           paragraph_state.paragraph_patterns.dialog_mark_begin + ')')
+
+        match_end = regex.compile('('+ paragraph_state.paragraph_patterns.dialog_ending_mark + "|" +
+                                         paragraph_state.paragraph_patterns.dialog_mark_end +
+                                         paragraph_state.paragraph_patterns.narrator_ending_mark + ')')
+
+        match_dialog_continuing_to_narrator = regex.compile('(' + paragraph_state.paragraph_patterns.dialog_continuing_mark_to_narrator + ')')
+        match_narrator_continuing_to_dialog = regex.compile('(' + paragraph_state.paragraph_patterns.narrator_continuing_mark_to_dialog + ')')
+
+
         sentence_states = []
 
+        regex_punct = regex.compile(paragraph_state.paragraph_tags.syntax + "*")
+        regex_dialog = regex.compile(paragraph_state.paragraph_tags.dialog + "*")
+        regex_narrator = regex.compile(paragraph_state.paragraph_tags.narrative + "*")
+
         for key, array in paragraph_state.paragraph_list_dict.items():
+
+            sentence_list_dict = []
+            item_i = 0
+
             for item in array:
+
                 for text, tag in item.items():
-                    print(text,tag)
-                    if tag is paragraph_state.paragraph_tags.syntax:
-                        logging.debug("tag for nothing")
-                    else:
-                        sentence_state = sentence_state.Sentence_State()
+
+                    item_i = item_i + 1
+
+                    # Use the marks to determine and find the narrative object to add  some dialog object.
+                    if regex_punct.match(tag):
+
+                        if regex.match(match_begin, text):
+                            sentence_list_dict.append({text,tag})
+
+                        if regex.match(match_end, text):
+                            sentence_list_dict.append({text,tag})
+
+                        if regex.match(match_dialog_continuing_to_narrator, text):
+                            sentence_list_dict.append({text,tag})
+                            item.items(item_i)
+
+                            state = sentence_state.Sentence_State()
+                            state.text_list_dict = sentence_list_dict
+                            sentence_states.append(state)
+
+                        if regex.match(match_narrator_continuing_to_dialog, text):
+                            sentence_states.append(state)
+                            state = sentence_state.Sentence_State()
+                            sentence_list_dict.append({text,tag})
+
+
+                    elif regex_narrator.match(tag):
+                        sentence_list_dict.append({text,tag})
+                    elif regex_dialog.match(tag):
+                        sentence_list_dict.append({text,tag})
+
+            state = sentence_state.Sentence_State()
+            state.text_list_dict = sentence_list_dict
+            sentence_states.append(state)
+
+
+        return sentence_states
+
