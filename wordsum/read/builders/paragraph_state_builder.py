@@ -210,6 +210,8 @@ def create_sentence_states(paragraph_state):
 
             for item in array:
 
+                state = sentence_state.Sentence_State()
+
                 for text, tag in item.items():
 
                     item_i = item_i + 1
@@ -225,16 +227,18 @@ def create_sentence_states(paragraph_state):
 
                         if regex.match(match_dialog_continuing_to_narrator, text):
                             sentence_list_dict.append({text,tag})
-                            item.items(item_i)
+                            #item.items(item_i)
 
                             state = sentence_state.Sentence_State()
                             state.text_list_dict = sentence_list_dict
                             sentence_states.append(state)
+                            sentence_list_dict = []
 
                         if regex.match(match_narrator_continuing_to_dialog, text):
                             sentence_states.append(state)
                             state = sentence_state.Sentence_State()
                             sentence_list_dict.append({text,tag})
+                            sentence_list_dict = []
 
 
                     elif regex_narrator.match(tag):
